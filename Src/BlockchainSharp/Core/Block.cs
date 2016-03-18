@@ -15,5 +15,7 @@
         }
 
         public long Number { get { return this.number; } }
+
+        public bool IsGenesis { get { return this.number == 0; } }
     }
 }
