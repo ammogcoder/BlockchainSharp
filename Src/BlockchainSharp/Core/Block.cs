@@ -17,5 +17,10 @@
         public long Number { get { return this.number; } }
 
         public bool IsGenesis { get { return this.number == 0; } }
+
+        public bool HasParent(Block parent)
+        {
+            return parent.Number == this.number - 1;
+        }
     }
 }

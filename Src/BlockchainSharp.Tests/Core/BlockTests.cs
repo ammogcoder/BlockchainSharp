@@ -27,5 +27,18 @@
             Assert.IsTrue(block0.IsGenesis);
             Assert.IsFalse(block42.IsGenesis);
         }
+
+        [TestMethod]
+        public void HasParent()
+        {
+            Block block0 = new Block(0);
+            Block block1 = new Block(1);
+            Block block42 = new Block(42);
+
+            Assert.IsTrue(block1.HasParent(block0));
+            Assert.IsFalse(block0.HasParent(block1));
+            Assert.IsFalse(block1.HasParent(block1));
+            Assert.IsFalse(block42.HasParent(block1));
+        }
     }
 }
