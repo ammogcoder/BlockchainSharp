@@ -7,5 +7,13 @@
 
     public class Blockchain
     {
+        public long number;
+
+        public Blockchain(Block block)
+        {
+            this.number = block.Number;
+        }
+
+        public long BestBlockNumber { get { return this.number; } }
     }
 }
