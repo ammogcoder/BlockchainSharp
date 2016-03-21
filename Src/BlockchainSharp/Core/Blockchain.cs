@@ -11,6 +11,9 @@
 
         public Blockchain(Block block)
         {
+            if (!block.IsGenesis)
+                throw new ArgumentException("Initial block should be genesis");
+
             this.number = block.Number;
         }
 
