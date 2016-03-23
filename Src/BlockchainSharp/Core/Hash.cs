@@ -16,6 +16,11 @@
             random.NextBytes(this.bytes);
         }
 
+        public Hash(byte[] bytes)
+        {
+            this.bytes = bytes;
+        }
+
         public byte[] Bytes { get { return this.bytes; } }
     }
 }
