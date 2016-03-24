@@ -35,5 +35,17 @@
                 Assert.AreEqual("Initial block should be genesis", ex.Message);
             }
         }
+
+        [TestMethod]
+        public void AddGenesisChildBlock()
+        {
+            Block genesis = new Block(0, null);
+            Block block = new Block(1, genesis.Hash);
+
+            BlockChain chain = new BlockChain(genesis);
+
+            Assert.IsTrue(chain.TryToAdd(block));
+            Assert.AreEqual(1, chain.BestBlockNumber);
+        }
     }
 }

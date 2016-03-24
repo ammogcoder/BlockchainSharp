@@ -18,5 +18,11 @@
         }
 
         public long BestBlockNumber { get { return this.blocks.Last().Number; } }
+
+        public bool TryToAdd(Block block)
+        {
+            this.blocks.Add(block);
+            return true;
+        }
     }
 }
