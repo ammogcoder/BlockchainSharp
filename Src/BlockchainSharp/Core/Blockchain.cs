@@ -27,5 +27,13 @@
             this.blocks.Add(block);
             return true;
         }
+
+        public Block GetBlock(int n)
+        {
+            if (n < 0 || n >= this.blocks.Count)
+                return null;
+
+            return this.blocks[n];
+        }
     }
 }

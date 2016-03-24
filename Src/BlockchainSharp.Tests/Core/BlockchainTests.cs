@@ -71,5 +71,40 @@
             Assert.IsFalse(chain.TryToAdd(block));
             Assert.AreEqual(0, chain.BestBlockNumber);
         }
+
+        [TestMethod]
+        public void GetBlockByNumber()
+        {
+            IList<Block> blocks = new List<Block>();
+            Block parent = null;
+            BlockChain chain = null;
+
+            for (int k = 0; k < 10; k++)
+            {
+                Block block = new Block(k, parent != null ? parent.Hash : null);
+                blocks.Add(block);
+                parent = block;
+
+                if (chain == null)
+                    chain = new BlockChain(block);
+                else
+                    Assert.IsTrue(chain.TryToAdd(block));
+            }
+
+            Assert.AreEqual(9, chain.BestBlockNumber);
+
+            for (int k = 0; k < 10; k++)
+            {
+                Block block = chain.GetBlock(k);
+
+                Assert.IsNotNull(block);
+                Assert.AreEqual(blocks[k], block);
+                Assert.AreEqual(k, block.Number);
+            }
+
+            Assert.IsNull(chain.GetBlock(10));
+            Assert.IsNull(chain.GetBlock(-1));
+        }
     }
 }
+
