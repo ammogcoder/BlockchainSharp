@@ -29,6 +29,20 @@
         }
 
         [TestMethod]
+        public void GenesisHasNoParent()
+        {
+            try
+            {
+                new Block(0, new Hash());
+                Assert.Fail();
+            }
+            catch (Exception ex) {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+                Assert.AreEqual("Genesis block should have no parent", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void HasParent()
         {
             Block block0 = new Block(0, null);

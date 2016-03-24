@@ -13,6 +13,9 @@
 
         public Block(long number, Hash parentHash)
         {
+            if (number == 0 && parentHash != null)
+                throw new InvalidOperationException("Genesis block should have no parent");
+
             this.number = number;
             this.parentHash = parentHash;
             this.hash = new Hash();
