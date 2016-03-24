@@ -7,16 +7,16 @@
 
     public class BlockChain
     {
-        public long number;
+        private IList<Block> blocks = new List<Block>();
 
         public BlockChain(Block block)
         {
             if (!block.IsGenesis)
                 throw new ArgumentException("Initial block should be genesis");
 
-            this.number = block.Number;
+            this.blocks.Add(block);
         }
 
-        public long BestBlockNumber { get { return this.number; } }
+        public long BestBlockNumber { get { return this.blocks.Last().Number; } }
     }
 }
