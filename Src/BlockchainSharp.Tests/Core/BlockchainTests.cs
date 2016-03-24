@@ -8,13 +8,13 @@
     using BlockchainSharp.Core;
 
     [TestClass]
-    public class BlockchainTests
+    public class BlockChainTests
     {
         [TestMethod]
         public void CreateWithInitialBlock()
         {
             Block block = new Block(0, null);
-            Blockchain blockchain = new Blockchain(block);
+            BlockChain blockchain = new BlockChain(block);
 
             Assert.AreEqual(0, blockchain.BestBlockNumber);
         }
@@ -26,7 +26,7 @@
 
             try
             {
-                new Blockchain(block);
+                new BlockChain(block);
                 Assert.Fail();
             }
             catch (Exception ex)

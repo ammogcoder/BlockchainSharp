@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Text;
 
-    public class Blockchain
+    public class BlockChain
     {
         public long number;
 
-        public Blockchain(Block block)
+        public BlockChain(Block block)
         {
             if (!block.IsGenesis)
                 throw new ArgumentException("Initial block should be genesis");
