@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Core\Block.cs" />
     <Compile Include="Core\BlockChain.cs" />
+    <Compile Include="Core\BlockProcessor.cs" />
     <Compile Include="Core\Hash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\BlockChainTests.cs" />
+    <Compile Include="Core\BlockProcessorTests.cs" />
     <Compile Include="Core\BlockTests.cs" />
     <Compile Include="Core\HashTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
