@@ -18,5 +18,10 @@
             blocks.Insert(0, block);
             return true;
         }
+
+        public Block GetBlock(int number)
+        {
+            return this.blocks.FirstOrDefault(b => b.Number == number);
+        }
     }
 }
