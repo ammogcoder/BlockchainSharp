@@ -42,6 +42,31 @@
         }
 
         [TestMethod]
+        public void AddBlockToLastInEmptyBranch()
+        {
+            BlockBranch branch = new BlockBranch();
+            Block block = new Block(42, new Hash());
+
+            Assert.IsTrue(branch.TryToAddLast(block));
+
+            Assert.AreEqual(block, branch.GetBlock(42));
+        }
+
+        [TestMethod]
+        public void RejectBlockToLast()
+        {
+            BlockBranch branch = new BlockBranch();
+            Block block = new Block(42, new Hash());
+            Block block2 = new Block(43, new Hash());
+
+            Assert.IsTrue(branch.TryToAddFirst(block));
+            Assert.IsFalse(branch.TryToAddLast(block2));
+
+            Assert.AreEqual(block, branch.GetBlock(42));
+            Assert.IsNull(branch.GetBlock(43));
+        }
+
+        [TestMethod]
         public void GetBlockByNumber()
         {
             BlockBranch branch = new BlockBranch();

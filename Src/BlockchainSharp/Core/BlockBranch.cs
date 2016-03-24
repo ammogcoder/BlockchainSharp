@@ -31,6 +31,15 @@
 
         public bool TryToAddLast(Block block)
         {
+            if (this.blocks.Count == 0)
+            {
+                this.blocks.Add(block);
+                return true;
+            }
+
+            if (!block.HasParent(this.blocks.Last()))
+                return false;
+
             this.blocks.Add(block);
             return true;
         }
