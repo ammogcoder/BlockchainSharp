@@ -49,6 +49,7 @@
     <Compile Include="Core\BlockProcessorTests.cs" />
     <Compile Include="Core\BlockTests.cs" />
     <Compile Include="Core\HashTests.cs" />
+    <Compile Include="Core\BlockBranchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
