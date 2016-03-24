@@ -15,7 +15,17 @@
 
         public bool TryToAddFirst(Block block)
         {
+            if (blocks.Count == 0)
+            {
+                blocks.Insert(0, block);
+                return true;
+            }
+
+            if (!blocks.First().HasParent(block))
+                return false;
+
             blocks.Insert(0, block);
+
             return true;
         }
 

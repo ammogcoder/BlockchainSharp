@@ -17,6 +17,17 @@
         }
 
         [TestMethod]
+        public void RejectAddFirstBlock()
+        {
+            BlockBranch branch = new BlockBranch();
+            Block block = new Block(42, new Hash());
+            Block block2 = new Block(41, new Hash());
+
+            Assert.IsTrue(branch.TryToAddFirst(block));
+            Assert.IsFalse(branch.TryToAddFirst(block2));
+        }
+
+        [TestMethod]
         public void GetBlockByNumber()
         {
             BlockBranch branch = new BlockBranch();
