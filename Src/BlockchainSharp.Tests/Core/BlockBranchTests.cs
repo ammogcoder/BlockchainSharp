@@ -28,6 +28,20 @@
         }
 
         [TestMethod]
+        public void AddBlockToLast()
+        {
+            BlockBranch branch = new BlockBranch();
+            Block block = new Block(42, new Hash());
+            Block block2 = new Block(43, block.Hash);
+
+            Assert.IsTrue(branch.TryToAddFirst(block));
+            Assert.IsTrue(branch.TryToAddLast(block2));
+
+            Assert.AreEqual(block, branch.GetBlock(42));
+            Assert.AreEqual(block2, branch.GetBlock(43));
+        }
+
+        [TestMethod]
         public void GetBlockByNumber()
         {
             BlockBranch branch = new BlockBranch();
