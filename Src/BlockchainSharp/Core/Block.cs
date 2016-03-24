@@ -8,19 +8,31 @@
     public class Block
     {
         private long number;
+        private Hash hash;
+        private Hash parentHash;
 
-        public Block(long number)
+        public Block(long number, Hash parentHash)
         {
             this.number = number;
+            this.parentHash = parentHash;
+            this.hash = new Hash();
         }
 
         public long Number { get { return this.number; } }
 
-        public bool IsGenesis { get { return this.number == 0; } }
+        public Hash Hash { get { return this.hash; } }
+
+        public bool IsGenesis { get { return this.number == 0 && this.parentHash == null; } }
 
         public bool HasParent(Block parent)
         {
-            return parent.Number == this.number - 1;
+            if (parent == null && this.parentHash == null)
+                return true;
+
+            if (parent == null)
+                return false;
+
+            return parent.Number == this.number - 1 && parent.Hash.Equals(this.parentHash);
         }
     }
 }

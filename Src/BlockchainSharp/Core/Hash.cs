@@ -28,6 +28,9 @@
             if (obj == null)
                 return false;
 
+            if (this == obj)
+                return true;
+
             if (!(obj is Hash))
                 return false;
 

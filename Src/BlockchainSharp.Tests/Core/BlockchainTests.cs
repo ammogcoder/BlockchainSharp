@@ -13,7 +13,7 @@
         [TestMethod]
         public void CreateWithInitialBlock()
         {
-            Block block = new Block(0);
+            Block block = new Block(0, null);
             Blockchain blockchain = new Blockchain(block);
 
             Assert.AreEqual(0, blockchain.BestBlockNumber);
@@ -22,7 +22,7 @@
         [TestMethod]
         public void RejectNonGenesisInitialBlock()
         {
-            Block block = new Block(1);
+            Block block = new Block(1, null);
 
             try
             {
