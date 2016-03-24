@@ -47,5 +47,29 @@
             Assert.IsTrue(chain.TryToAdd(block));
             Assert.AreEqual(1, chain.BestBlockNumber);
         }
+
+        [TestMethod]
+        public void RejectBlockWithDifferentParent()
+        {
+            Block genesis = new Block(0, null);
+            Block block = new Block(1, new Hash());
+
+            BlockChain chain = new BlockChain(genesis);
+
+            Assert.IsFalse(chain.TryToAdd(block));
+            Assert.AreEqual(0, chain.BestBlockNumber);
+        }
+
+        [TestMethod]
+        public void RejectBlockWithInvalidNumber()
+        {
+            Block genesis = new Block(0, null);
+            Block block = new Block(2, genesis.Hash);
+
+            BlockChain chain = new BlockChain(genesis);
+
+            Assert.IsFalse(chain.TryToAdd(block));
+            Assert.AreEqual(0, chain.BestBlockNumber);
+        }
     }
 }
