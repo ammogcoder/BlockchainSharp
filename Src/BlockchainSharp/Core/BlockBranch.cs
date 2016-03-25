@@ -61,5 +61,10 @@
 
             return block;
         }
+
+        public bool HasGenesis()
+        {
+            return this.blocks.Count > 0 && this.blocks[0].IsGenesis;
+        }
     }
 }

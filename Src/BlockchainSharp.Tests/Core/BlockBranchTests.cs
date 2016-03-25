@@ -14,6 +14,19 @@
             Block block = new Block(42, new Hash());
 
             Assert.IsTrue(branch.TryToAddFirst(block));
+            Assert.IsFalse(branch.HasGenesis());
+        }
+
+        [TestMethod]
+        public void HasGenesis()
+        {
+            BlockBranch branch = new BlockBranch();
+
+            Assert.IsFalse(branch.HasGenesis());
+
+            branch.TryToAddFirst(new Block(0, null));
+
+            Assert.IsTrue(branch.HasGenesis());
         }
 
         [TestMethod]
