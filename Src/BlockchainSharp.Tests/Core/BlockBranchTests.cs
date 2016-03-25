@@ -133,5 +133,25 @@
             Assert.IsNull(branch.GetBlock(41));
             Assert.IsNull(branch.GetBlock(43));
         }
+
+        [TestMethod]
+        public void ToBlockChain()
+        {
+            BlockBranch branch = new BlockBranch();
+            Block genesis = new Block(0, null);
+            Block block1 = new Block(1, genesis.Hash);
+            Block block2 = new Block(2, block1.Hash);
+
+            branch.TryToAddFirst(genesis);
+            branch.TryToAddLast(block1);
+            branch.TryToAddLast(block2);
+
+            BlockChain chain = branch.ToBlockChain(1);
+
+            Assert.IsNotNull(chain);
+            Assert.AreEqual(1, chain.BestBlockNumber);
+            Assert.AreEqual(genesis, chain.GetBlock(0));
+            Assert.AreEqual(block1, chain.GetBlock(1));
+        }
     }
 }

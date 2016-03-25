@@ -97,5 +97,15 @@
 
             return false;
         }
+
+        public BlockChain ToBlockChain(int nblock)
+        {
+            BlockChain chain = new BlockChain(this.blocks[0]);
+
+            for (var k = 1; k <= nblock; k++)
+                chain.TryToAdd(this.blocks[k]);
+
+            return chain;
+        }
     }
 }
