@@ -14,12 +14,15 @@
 
         public void Process(Block block)
         {
-            if (this.chain == null)
-                this.chain = new BlockChain(block);
-            else
-                this.chain.TryToAdd(block);
-
             int nprocessed = 0;
+
+            if (this.chain == null)
+            {
+                this.chain = new BlockChain(block);
+                nprocessed++;
+            }
+            else if (this.chain.TryToAdd(block))
+                nprocessed++;
 
             foreach (var branch in this.branches)
                 if (branch.TryToAddFirst(block))
