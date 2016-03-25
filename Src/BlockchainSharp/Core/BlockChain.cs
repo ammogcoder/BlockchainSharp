@@ -35,5 +35,15 @@
 
             return this.blocks[n];
         }
+
+        public Block GetBlock(int n, Hash hash)
+        {
+            Block block = this.GetBlock(n);
+
+            if (block == null || !block.Hash.Equals(hash))
+                return null;
+
+            return block;
+        }
     }
 }
