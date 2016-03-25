@@ -100,12 +100,34 @@
 
         public BlockChain ToBlockChain(int nblock)
         {
-            BlockChain chain = new BlockChain(this.blocks[0]);
+            if (this.parent != null)
+            {
+                BlockChain chain = this.parent.ToBlockChain(nblock);
 
-            for (var k = 1; k <= nblock; k++)
-                chain.TryToAdd(this.blocks[k]);
+                foreach (Block block in this.blocks)
+                    if (block.Number > nblock)
+                        break;
+                    else
+                        chain.TryToAdd(block);
 
-            return chain;
+                return chain;
+            }
+            else
+            {
+                BlockChain chain = new BlockChain(this.blocks[0]);
+
+                for (var k = 1; k < this.blocks.Count; k++)
+                {
+                    Block block = this.blocks[k];
+
+                    if (block.Number > nblock)
+                        break;
+
+                    chain.TryToAdd(block);
+                }
+
+                return chain;
+            }
         }
     }
 }

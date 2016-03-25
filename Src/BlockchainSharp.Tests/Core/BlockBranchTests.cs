@@ -153,5 +153,32 @@
             Assert.AreEqual(genesis, chain.GetBlock(0));
             Assert.AreEqual(block1, chain.GetBlock(1));
         }
+
+        [TestMethod]
+        public void ConnectedBranchToBlockChain()
+        {
+            BlockBranch branch1 = new BlockBranch();
+            BlockBranch branch2 = new BlockBranch();
+
+            Block genesis = new Block(0, null);
+            Block block1 = new Block(1, genesis.Hash);
+            Block block2 = new Block(2, block1.Hash);
+            Block block3 = new Block(3, block2.Hash);
+
+            branch1.TryToAddFirst(genesis);
+            branch1.TryToAddLast(block1);
+            branch2.TryToAddLast(block2);
+            branch2.TryToAddLast(block3);
+
+            branch2.TryToConnect(branch1);
+
+            BlockChain chain = branch2.ToBlockChain(2);
+
+            Assert.IsNotNull(chain);
+            Assert.AreEqual(2, chain.BestBlockNumber);
+            Assert.AreEqual(genesis, chain.GetBlock(0));
+            Assert.AreEqual(block1, chain.GetBlock(1));
+            Assert.AreEqual(block2, chain.GetBlock(2));
+        }
     }
 }
