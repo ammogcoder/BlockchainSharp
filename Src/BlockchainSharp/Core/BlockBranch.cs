@@ -7,11 +7,13 @@
 
     public class BlockBranch
     {
-        private IList<Block> blocks = new List<Block>();
+        protected IList<Block> blocks = new List<Block>();
 
         public BlockBranch()
         {
         }
+
+        public long BestBlockNumber { get { return this.blocks.Last().Number; } }
 
         public bool TryToAddFirst(Block block)
         {
@@ -41,12 +43,23 @@
                 return false;
 
             this.blocks.Add(block);
+
             return true;
         }
 
-        public Block GetBlock(int number)
+        public virtual Block GetBlock(int number)
         {
             return this.blocks.FirstOrDefault(b => b.Number == number);
+        }
+
+        public Block GetBlock(int n, Hash hash)
+        {
+            Block block = this.GetBlock(n);
+
+            if (block == null || !block.Hash.Equals(hash))
+                return null;
+
+            return block;
         }
     }
 }

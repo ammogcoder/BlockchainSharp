@@ -5,10 +5,8 @@
     using System.Linq;
     using System.Text;
 
-    public class BlockChain
+    public class BlockChain : BlockBranch
     {
-        private IList<Block> blocks = new List<Block>();
-
         public BlockChain(Block block)
         {
             if (!block.IsGenesis)
@@ -17,33 +15,17 @@
             this.blocks.Add(block);
         }
 
-        public long BestBlockNumber { get { return this.blocks.Last().Number; } }
-
         public bool TryToAdd(Block block)
         {
-            if (!block.HasParent(this.blocks.Last()))
-                return false;
-
-            this.blocks.Add(block);
-            return true;
+            return this.TryToAddLast(block);
         }
 
-        public Block GetBlock(int n)
+        public override Block GetBlock(int n)
         {
             if (n < 0 || n >= this.blocks.Count)
                 return null;
 
             return this.blocks[n];
-        }
-
-        public Block GetBlock(int n, Hash hash)
-        {
-            Block block = this.GetBlock(n);
-
-            if (block == null || !block.Hash.Equals(hash))
-                return null;
-
-            return block;
         }
     }
 }
