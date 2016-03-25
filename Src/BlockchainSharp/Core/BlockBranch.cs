@@ -29,7 +29,9 @@
             if (branch.blocks.Count == 0)
                 return false;
 
-            if (!this.blocks[0].HasParent(branch.blocks.Last()))
+            Block pblock = branch.GetBlock(this.blocks[0].Number - 1, this.blocks[0].ParentHash);
+
+            if (pblock == null)
                 return false;
 
             this.parent = branch;
@@ -69,12 +71,12 @@
             return true;
         }
 
-        public virtual Block GetBlock(int number)
+        public virtual Block GetBlock(long number)
         {
             return this.blocks.FirstOrDefault(b => b.Number == number);
         }
 
-        public Block GetBlock(int n, Hash hash)
+        public Block GetBlock(long n, Hash hash)
         {
             Block block = this.GetBlock(n);
 
@@ -98,11 +100,11 @@
             return false;
         }
 
-        public BlockChain ToBlockChain(int nblock)
+        public BlockChain ToBlockChain(long nblock)
         {
             if (this.parent != null)
             {
-                BlockChain chain = this.parent.ToBlockChain(nblock);
+                BlockChain chain = this.parent.ToBlockChain(this.blocks[0].Number - 1);
 
                 foreach (Block block in this.blocks)
                     if (block.Number > nblock)

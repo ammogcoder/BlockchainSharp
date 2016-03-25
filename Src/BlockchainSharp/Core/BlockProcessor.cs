@@ -33,6 +33,27 @@
                 branch.TryToAddFirst(block);
                 this.branches.Add(branch);
             }
+
+            foreach (var branch in this.branches)
+            {
+                if (branch.IsConnected())
+                    continue;
+
+                if (branch.TryToConnect(this.chain))
+                    continue;
+
+                foreach (var branch2 in this.branches)
+                    branch.TryToConnect(branch2);
+            }
+
+            foreach (var branch in this.branches)
+            {
+                if (!branch.HasGenesis())
+                    continue;
+
+                if (branch.BestBlockNumber > this.chain.BestBlockNumber)
+                    this.chain = branch.ToBlockChain(branch.BestBlockNumber);
+            }
         }
     }
 }

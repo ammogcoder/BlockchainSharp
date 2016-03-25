@@ -66,5 +66,27 @@
             Assert.AreEqual(genesis, processor.BlockChain.GetBlock(0));
             Assert.AreEqual(block, processor.BlockChain.GetBlock(1));
         }
+
+        [TestMethod]
+        public void ProcessTwoBlocksAndOneUncles()
+        {
+            Block genesis = new Block(0, null);
+            Block block = new Block(1, genesis.Hash);
+            Block uncle1 = new Block(1, genesis.Hash);
+            Block uncle2 = new Block(2, uncle1.Hash);
+
+            BlockProcessor processor = new BlockProcessor();
+
+            processor.Process(genesis);
+            processor.Process(block);
+            processor.Process(uncle1);
+            processor.Process(uncle2);
+
+            Assert.IsNotNull(processor.BlockChain);
+            Assert.AreEqual(2, processor.BlockChain.BestBlockNumber);
+            Assert.AreEqual(genesis, processor.BlockChain.GetBlock(0));
+            Assert.AreEqual(uncle1, processor.BlockChain.GetBlock(1));
+            Assert.AreEqual(uncle2, processor.BlockChain.GetBlock(2));
+        }
     }
 }

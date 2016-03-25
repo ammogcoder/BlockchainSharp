@@ -25,6 +25,8 @@
 
         public Hash Hash { get { return this.hash; } }
 
+        public Hash ParentHash { get { return this.parentHash; } }
+
         public bool IsGenesis { get { return this.number == 0 && this.parentHash == null; } }
 
         public bool HasParent(Block parent)

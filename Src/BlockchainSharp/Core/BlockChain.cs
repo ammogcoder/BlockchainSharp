@@ -20,12 +20,12 @@
             return this.TryToAddLast(block);
         }
 
-        public override Block GetBlock(int n)
+        public override Block GetBlock(long n)
         {
             if (n < 0 || n >= this.blocks.Count)
                 return null;
 
-            return this.blocks[n];
+            return this.blocks[(int)n];
         }
     }
 }
