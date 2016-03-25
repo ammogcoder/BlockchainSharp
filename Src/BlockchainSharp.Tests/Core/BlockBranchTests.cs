@@ -55,6 +55,23 @@
         }
 
         [TestMethod]
+        public void ConnectedBranchHasGenesis()
+        {
+            BlockBranch branch1 = new BlockBranch();
+            BlockBranch branch2 = new BlockBranch();
+
+            Block genesis = new Block(0, null);
+            Block block = new Block(1, genesis.Hash);
+
+            branch1.TryToAddFirst(genesis);
+            branch2.TryToAddFirst(block);
+
+            Assert.IsTrue(branch2.TryToConnect(branch1));
+            Assert.IsTrue(branch2.IsConnected());
+            Assert.IsTrue(branch2.HasGenesis());
+        }
+
+        [TestMethod]
         public void RejectAddFirstBlock()
         {
             BlockBranch branch = new BlockBranch();

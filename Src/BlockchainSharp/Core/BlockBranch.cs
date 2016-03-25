@@ -86,7 +86,16 @@
 
         public bool HasGenesis()
         {
-            return this.blocks.Count > 0 && this.blocks[0].IsGenesis;
+            if (this.blocks.Count == 0)
+                return false;
+
+            if (this.blocks[0].IsGenesis)
+                return true;
+
+            if (this.parent != null)
+                return this.parent.HasGenesis();
+
+            return false;
         }
     }
 }
