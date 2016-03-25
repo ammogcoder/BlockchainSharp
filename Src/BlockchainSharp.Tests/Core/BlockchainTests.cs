@@ -14,7 +14,7 @@
         public void CreateWithInitialBlock()
         {
             Block block = new Block(0, null);
-            BlockChain blockchain = new BlockChain(block);
+            BlockChain2 blockchain = new BlockChain2(block);
 
             Assert.AreEqual(0, blockchain.BestBlockNumber);
         }
@@ -26,7 +26,7 @@
 
             try
             {
-                new BlockChain(block);
+                new BlockChain2(block);
                 Assert.Fail();
             }
             catch (Exception ex)
@@ -42,7 +42,7 @@
             Block genesis = new Block(0, null);
             Block block = new Block(1, genesis.Hash);
 
-            BlockChain chain = new BlockChain(genesis);
+            BlockChain2 chain = new BlockChain2(genesis);
 
             Assert.IsTrue(chain.TryToAdd(block));
             Assert.AreEqual(1, chain.BestBlockNumber);
@@ -54,7 +54,7 @@
             Block genesis = new Block(0, null);
             Block block = new Block(1, new Hash());
 
-            BlockChain chain = new BlockChain(genesis);
+            BlockChain2 chain = new BlockChain2(genesis);
 
             Assert.IsFalse(chain.TryToAdd(block));
             Assert.AreEqual(0, chain.BestBlockNumber);
@@ -66,7 +66,7 @@
             Block genesis = new Block(0, null);
             Block block = new Block(2, genesis.Hash);
 
-            BlockChain chain = new BlockChain(genesis);
+            BlockChain2 chain = new BlockChain2(genesis);
 
             Assert.IsFalse(chain.TryToAdd(block));
             Assert.AreEqual(0, chain.BestBlockNumber);
@@ -77,7 +77,7 @@
         {
             IList<Block> blocks = new List<Block>();
             Block parent = null;
-            BlockChain chain = null;
+            BlockChain2 chain = null;
 
             for (int k = 0; k < 10; k++)
             {
@@ -86,7 +86,7 @@
                 parent = block;
 
                 if (chain == null)
-                    chain = new BlockChain(block);
+                    chain = new BlockChain2(block);
                 else
                     Assert.IsTrue(chain.TryToAdd(block));
             }
