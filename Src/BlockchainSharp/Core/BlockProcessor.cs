@@ -7,14 +7,14 @@
 
     public class BlockProcessor
     {
-        private BlockChain2 chain;
+        private BlockChain chain;
 
-        public BlockChain2 BlockChain { get { return this.chain; } }
+        public BlockChain BlockChain { get { return this.chain; } }
 
         public void Process(Block block)
         {
             if (this.chain == null)
-                this.chain = new BlockChain2(block);
+                this.chain = new BlockChain(block);
             else
                 this.chain.TryToAdd(block);
         }

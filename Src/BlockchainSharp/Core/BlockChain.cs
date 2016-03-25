@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Text;
 
-    public class BlockChain2
+    public class BlockChain
     {
         private IList<Block> blocks = new List<Block>();
 
-        public BlockChain2(Block block)
+        public BlockChain(Block block)
         {
             if (!block.IsGenesis)
                 throw new ArgumentException("Initial block should be genesis");
