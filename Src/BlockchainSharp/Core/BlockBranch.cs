@@ -8,12 +8,34 @@
     public class BlockBranch
     {
         protected IList<Block> blocks = new List<Block>();
+        private BlockBranch parent = null;
 
         public BlockBranch()
         {
         }
 
         public long BestBlockNumber { get { return this.blocks.Last().Number; } }
+
+        public bool IsConnected()
+        {
+            return this.parent != null;
+        }
+
+        public bool TryToConnect(BlockBranch branch)
+        {
+            if (this.blocks.Count == 0)
+                return false;
+
+            if (branch.blocks.Count == 0)
+                return false;
+
+            if (!this.blocks[0].HasParent(branch.blocks.Last()))
+                return false;
+
+            this.parent = branch;
+
+            return true;
+        }
 
         public bool TryToAddFirst(Block block)
         {

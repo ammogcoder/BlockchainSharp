@@ -30,6 +30,31 @@
         }
 
         [TestMethod]
+        public void TryToConnectEmptyBranches()
+        {
+            BlockBranch branch = new BlockBranch();
+
+            Assert.IsFalse(branch.IsConnected());
+            Assert.IsFalse(branch.TryToConnect(branch));
+            Assert.IsFalse(branch.IsConnected());    
+        }
+
+        [TestMethod]
+        public void TryToConnectDisconenctedBranches()
+        {
+            BlockBranch branch1 = new BlockBranch();
+            BlockBranch branch2 = new BlockBranch();
+
+            branch1.TryToAddFirst(new Block(40, new Hash()));
+            branch2.TryToAddFirst(new Block(42, new Hash()));
+
+            Assert.IsFalse(branch1.IsConnected());
+            Assert.IsFalse(branch2.IsConnected());
+            Assert.IsFalse(branch1.TryToConnect(branch2));
+            Assert.IsFalse(branch1.IsConnected());
+        }
+
+        [TestMethod]
         public void RejectAddFirstBlock()
         {
             BlockBranch branch = new BlockBranch();
