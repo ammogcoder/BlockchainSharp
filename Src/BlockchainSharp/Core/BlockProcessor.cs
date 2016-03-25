@@ -49,14 +49,22 @@
                     branch.TryToConnect(branch2);
             }
 
+            IList<BlockBranch> toremove = new List<BlockBranch>();
+
             foreach (var branch in this.branches)
             {
                 if (!branch.HasGenesis())
                     continue;
 
                 if (branch.BestBlockNumber > this.chain.BestBlockNumber)
+                {
                     this.chain = branch.ToBlockChain(branch.BestBlockNumber);
+                    toremove.Add(branch);
+                }
             }
+
+            foreach (var branch in toremove)
+                this.branches.Remove(branch);
         }
     }
 }
