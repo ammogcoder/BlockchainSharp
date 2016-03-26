@@ -16,6 +16,8 @@
 
         public long BestBlockNumber { get { return this.blocks.Last().Number; } }
 
+        public Block BestBlock { get { return this.blocks.Last(); } }
+
         public bool IsConnected()
         {
             return this.parent != null;
