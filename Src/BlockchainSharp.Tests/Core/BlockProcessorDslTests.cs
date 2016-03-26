@@ -32,5 +32,18 @@
                 "top b1"
             });
         }
+
+        [TestMethod]
+        public void SendTwoBlocks()
+        {
+            var processor = new BlockProcessor();
+            var dsl = new BlockProcessorDsl(processor);
+
+            dsl.Run(new string[] {
+                "chain g0 b1 b2",
+                "send b1 b2",
+                "top b2"
+            });
+        }
     }
 }
