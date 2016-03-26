@@ -19,5 +19,18 @@
             Assert.IsTrue(processor.BlockChain.BestBlock.IsGenesis);
             Assert.AreEqual(0, processor.BlockChain.BestBlockNumber);
         }
+
+        [TestMethod]
+        public void SendBlock()
+        {
+            var processor = new BlockProcessor();
+            var dsl = new BlockProcessorDsl(processor);
+
+            dsl.Run(new string[] {
+                "chain g0 b1",
+                "send b1",
+                "top b1"
+            });
+        }
     }
 }

@@ -17,6 +17,7 @@
             this.processor = processor;
             Block genesis = new Block(0, null);
             this.processor.Process(genesis);
+            blocks["g0"] = genesis;
         }
 
         public void Run(string[] commands)
@@ -54,10 +55,21 @@
 
         private void RunChain(IEnumerable<string> bnames)
         {
+            var pname = bnames.First();
+            var parent = this.blocks[pname];
+
+            foreach (var bname in bnames.Skip(1)) 
+            {
+                var block = new Block(parent.Number + 1, parent.Hash);
+                this.blocks[bname] = block;
+                parent = block;
+            }
         }
 
         private void RunSend(IEnumerable<string> bnames)
         {
+            foreach (var bname in bnames)
+                this.processor.Process(this.blocks[bname]);
         }
 
         private void RunTop(string bname)
