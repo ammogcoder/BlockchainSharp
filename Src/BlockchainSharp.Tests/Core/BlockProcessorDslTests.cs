@@ -45,5 +45,33 @@
                 "top b2"
             });
         }
+
+        [TestMethod]
+        public void SendTwoBlocksInReversedOrder()
+        {
+            var processor = new BlockProcessor();
+            var dsl = new BlockProcessorDsl(processor);
+
+            dsl.Run(new string[] {
+                "chain g0 b1 b2",
+                "send b2 b1",
+                "top b2"
+            });
+        }
+
+        [TestMethod]
+        public void SendTwoBlocksAndTwoUncles()
+        {
+            var processor = new BlockProcessor();
+            var dsl = new BlockProcessorDsl(processor);
+
+            dsl.Run(new string[] {
+                "chain g0 b1 b2",
+                "chain b1 c2 c3",
+                "send b1 b2",
+                "send c2 c3",
+                "top c3"
+            });
+        }
     }
 }
