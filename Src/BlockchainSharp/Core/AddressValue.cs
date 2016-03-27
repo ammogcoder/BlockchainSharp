@@ -13,6 +13,9 @@
 
         public AddressValue(Address address, BigInteger value)
         {
+            if (address == null)
+                throw new ArgumentNullException("address");
+
             this.address = address;
             this.value = value;
         }

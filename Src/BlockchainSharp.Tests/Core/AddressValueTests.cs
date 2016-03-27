@@ -19,5 +19,22 @@
             Assert.AreEqual(address, av.Address);
             Assert.AreEqual(value, av.Value);
         }
+
+        [TestMethod]
+        public void CannotCreateWithNullAddress()
+        {
+            BigInteger value = new BigInteger(100);
+
+            try
+            {
+                new AddressValue(null, value);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ArgumentNullException));
+                Assert.AreEqual("address", ((ArgumentNullException)ex).ParamName);
+            }
+        }
     }
 }
