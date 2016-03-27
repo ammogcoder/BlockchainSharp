@@ -47,6 +47,7 @@
     <Compile Include="Core\BlockBranch.cs" />
     <Compile Include="Core\BlockChain.cs" />
     <Compile Include="Core\BlockProcessor.cs" />
+    <Compile Include="Core\Address.cs" />
     <Compile Include="Core\Hash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
