@@ -36,5 +36,23 @@
                 Assert.AreEqual("address", ((ArgumentNullException)ex).ParamName);
             }
         }
+
+        [TestMethod]
+        public void CannotCreateWithNegativeValue()
+        {
+            BigInteger value = new BigInteger(-100);
+            Address address = new Address();
+
+            try
+            {
+                new AddressValue(address, value);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ArgumentOutOfRangeException));
+                Assert.AreEqual("value", ((ArgumentOutOfRangeException)ex).ParamName);
+            }
+        }
     }
 }

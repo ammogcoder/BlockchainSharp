@@ -16,6 +16,9 @@
             if (address == null)
                 throw new ArgumentNullException("address");
 
+            if (value.CompareTo(0) < 0)
+                throw new ArgumentOutOfRangeException("value", "It should be non negative");
+
             this.address = address;
             this.value = value;
         }
