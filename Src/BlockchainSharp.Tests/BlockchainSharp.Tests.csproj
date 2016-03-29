@@ -54,6 +54,7 @@
     <Compile Include="Core\BlockBranchTests.cs" />
     <Compile Include="Core\BlockProcessorDslTests.cs" />
     <Compile Include="Core\AddressValueTests.cs" />
+    <Compile Include="Core\TransactionTests.cs" />
     <Compile Include="Dsl\BlockProcessorDsl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
