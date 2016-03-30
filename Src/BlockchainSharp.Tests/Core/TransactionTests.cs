@@ -21,5 +21,27 @@
             Assert.AreEqual(new BigInteger(100), transaction.TotalFrom);
             Assert.AreEqual(new BigInteger(90), transaction.TotalTo);
         }
+
+        [TestMethod]
+        public void RejectTransactionWithTotalToGreaterThanTotalFromTotals()
+        {
+            try
+            {
+                new Transaction(new AddressValue[] {
+                    new AddressValue(new Address(), new BigInteger(100))
+                }, new AddressValue[] {
+                    new AddressValue(new Address(), new BigInteger(50)),
+                    new AddressValue(new Address(), new BigInteger(60))
+                });
+
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+                Assert.AreEqual("Transaction outputs are greater than inputs", ex.Message);
+            }
+
+        }
     }
 }

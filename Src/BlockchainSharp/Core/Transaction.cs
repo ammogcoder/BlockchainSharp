@@ -15,6 +15,9 @@
         {
             this.from = new List<AddressValue>(from);
             this.to = new List<AddressValue>(to);
+
+            if (this.TotalFrom.CompareTo(this.TotalTo) < 0)
+                throw new InvalidOperationException("Transaction outputs are greater than inputs");
         }
 
         public BigInteger TotalFrom { get {
