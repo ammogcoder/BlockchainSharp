@@ -8,34 +8,34 @@
 
     public class Transaction
     {
-        private IList<AddressValue> from;
-        private IList<AddressValue> to;
+        private IList<AddressValue> inputs;
+        private IList<AddressValue> outputs;
 
-        public Transaction(IEnumerable<AddressValue> from, IEnumerable<AddressValue> to)
+        public Transaction(IEnumerable<AddressValue> inputs, IEnumerable<AddressValue> outputs)
         {
-            this.from = new List<AddressValue>(from);
-            this.to = new List<AddressValue>(to);
+            this.inputs = new List<AddressValue>(inputs);
+            this.outputs = new List<AddressValue>(outputs);
 
-            if (this.TotalFrom.CompareTo(this.TotalTo) < 0)
+            if (this.InputsTotal.CompareTo(this.OutputsTotal) < 0)
                 throw new InvalidOperationException("Transaction outputs are greater than inputs");
         }
 
-        public BigInteger TotalFrom { get {
+        public BigInteger InputsTotal { get {
             BigInteger result = BigInteger.Zero;
 
-            foreach (var av in this.from)
+            foreach (var av in this.inputs)
                 result = BigInteger.Add(result, av.Value);
 
             return result;
         } }
 
-        public BigInteger TotalTo
+        public BigInteger OutputsTotal
         {
             get
             {
                 BigInteger result = BigInteger.Zero;
 
-                foreach (var av in this.to)
+                foreach (var av in this.outputs)
                     result = BigInteger.Add(result, av.Value);
 
                 return result;

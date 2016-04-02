@@ -18,12 +18,12 @@
                 new AddressValue(new Address(), new BigInteger(40))
             });
 
-            Assert.AreEqual(new BigInteger(100), transaction.TotalFrom);
-            Assert.AreEqual(new BigInteger(90), transaction.TotalTo);
+            Assert.AreEqual(new BigInteger(100), transaction.InputsTotal);
+            Assert.AreEqual(new BigInteger(90), transaction.OutputsTotal);
         }
 
         [TestMethod]
-        public void RejectTransactionWithTotalToGreaterThanTotalFromTotals()
+        public void RejectTransactionWithOutputTotalsGreaterThanInputTotals()
         {
             try
             {
