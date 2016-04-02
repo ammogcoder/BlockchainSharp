@@ -12,7 +12,7 @@
             if (!block.IsGenesis)
                 throw new ArgumentException("Initial block should be genesis");
 
-            this.blocks.Add(block);
+            this.Blocks.Add(block);
         }
 
         public bool TryToAdd(Block block)
@@ -22,10 +22,10 @@
 
         public override Block GetBlock(long n)
         {
-            if (n < 0 || n >= this.blocks.Count)
+            if (n < 0 || n >= this.Blocks.Count)
                 return null;
 
-            return this.blocks[(int)n];
+            return this.Blocks[(int)n];
         }
     }
 }

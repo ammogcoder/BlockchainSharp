@@ -7,7 +7,7 @@
 
     public class BlockBranch
     {
-        protected IList<Block> blocks = new List<Block>();
+        private IList<Block> blocks = new List<Block>();
         private BlockBranch parent = null;
 
         public BlockBranch()
@@ -17,6 +17,8 @@
         public long BestBlockNumber { get { return this.blocks.Last().Number; } }
 
         public Block BestBlock { get { return this.blocks.Last(); } }
+
+        protected IList<Block> Blocks { get { return this.blocks; } }
 
         public bool IsConnected()
         {

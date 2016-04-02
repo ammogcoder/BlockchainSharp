@@ -20,14 +20,18 @@
                 throw new InvalidOperationException("Transaction outputs are greater than inputs");
         }
 
-        public BigInteger InputsTotal { get {
-            BigInteger result = BigInteger.Zero;
+        public BigInteger InputsTotal
+        { 
+            get 
+            {
+                BigInteger result = BigInteger.Zero;
 
-            foreach (var av in this.inputs)
-                result = BigInteger.Add(result, av.Value);
+                foreach (var av in this.inputs)
+                    result = BigInteger.Add(result, av.Value);
 
-            return result;
-        } }
+                return result;
+            }
+        }
 
         public BigInteger OutputsTotal
         {

@@ -36,7 +36,8 @@
                 new Block(0, new Hash());
                 Assert.Fail();
             }
-            catch (Exception ex) {
+            catch (Exception ex) 
+            {
                 Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
                 Assert.AreEqual("Genesis block should have no parent", ex.Message);
             }

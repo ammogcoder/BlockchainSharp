@@ -11,12 +11,16 @@
         [TestMethod]
         public void CreateTransactionWithTotals()
         {
-            Transaction transaction = new Transaction(new AddressValue[] {
-                new AddressValue(new Address(), new BigInteger(100))
-            }, new AddressValue[] {
-                new AddressValue(new Address(), new BigInteger(50)),
-                new AddressValue(new Address(), new BigInteger(40))
-            });
+            Transaction transaction = new Transaction(
+                new AddressValue[] 
+                {
+                    new AddressValue(new Address(), new BigInteger(100))
+                },
+                new AddressValue[] 
+                {
+                    new AddressValue(new Address(), new BigInteger(50)),
+                    new AddressValue(new Address(), new BigInteger(40))
+                });
 
             Assert.AreEqual(new BigInteger(100), transaction.InputsTotal);
             Assert.AreEqual(new BigInteger(90), transaction.OutputsTotal);
@@ -27,12 +31,16 @@
         {
             try
             {
-                new Transaction(new AddressValue[] {
-                    new AddressValue(new Address(), new BigInteger(100))
-                }, new AddressValue[] {
-                    new AddressValue(new Address(), new BigInteger(50)),
-                    new AddressValue(new Address(), new BigInteger(60))
-                });
+                new Transaction(
+                    new AddressValue[] 
+                    {
+                        new AddressValue(new Address(), new BigInteger(100))
+                    }, 
+                    new AddressValue[] 
+                    {
+                        new AddressValue(new Address(), new BigInteger(50)),
+                        new AddressValue(new Address(), new BigInteger(60))
+                    });
 
                 Assert.Fail();
             }
@@ -41,7 +49,6 @@
                 Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
                 Assert.AreEqual("Transaction outputs are greater than inputs", ex.Message);
             }
-
         }
     }
 }

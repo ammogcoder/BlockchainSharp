@@ -17,7 +17,7 @@
             this.processor = processor;
             Block genesis = new Block(0, null);
             this.processor.Process(genesis);
-            blocks["g0"] = genesis;
+            this.blocks["g0"] = genesis;
         }
 
         public void Run(string[] commands)
