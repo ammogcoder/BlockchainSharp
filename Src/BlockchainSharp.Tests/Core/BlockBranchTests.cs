@@ -33,9 +33,13 @@
         public void TryToConnectEmptyBranches()
         {
             BlockBranch branch = new BlockBranch();
+            BlockBranch branch1 = new BlockBranch();
+            branch1.TryToAddFirst(new Block(40, new Hash()));
 
             Assert.IsFalse(branch.IsConnected());
             Assert.IsFalse(branch.TryToConnect(branch));
+            Assert.IsFalse(branch.TryToConnect(branch1));
+            Assert.IsFalse(branch1.TryToConnect(branch));
             Assert.IsFalse(branch.IsConnected());    
         }
 
