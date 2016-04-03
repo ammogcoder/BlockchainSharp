@@ -45,6 +45,27 @@
         }
 
         [TestMethod]
+        public void EncodeBytesShortLength()
+        {
+            for (var k = 2; k < 56; k++)
+            {
+                var bytes = new byte[k];
+
+                for (int j = 0; j < k; j++)
+                    bytes[j] = (byte)j;
+
+                var result = Rlp.Encode(bytes);
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(k + 1, result.Length);
+                Assert.AreEqual(0x80 + k, result[0]);
+
+                for (var j = 0; j < k; j++)
+                    Assert.AreEqual(j, result[j + 1]);
+            }
+        }
+
+        [TestMethod]
         public void EncodeEmptyByteArray()
         {
             var result = Rlp.Encode(new byte[0]);
