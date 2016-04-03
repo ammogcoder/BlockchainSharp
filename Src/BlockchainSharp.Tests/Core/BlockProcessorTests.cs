@@ -68,7 +68,7 @@
         }
 
         [TestMethod]
-        public void ProcessTwoBlocksAndOneUncles()
+        public void ProcessTwoBlocksAndTwoUncles()
         {
             Block genesis = new Block(0, null);
             Block block = new Block(1, genesis.Hash);
