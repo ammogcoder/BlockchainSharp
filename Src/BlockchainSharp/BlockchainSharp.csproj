@@ -52,6 +52,7 @@
     <Compile Include="Core\Address.cs" />
     <Compile Include="Core\Hash.cs" />
     <Compile Include="Core\Transaction.cs" />
+    <Compile Include="Encoding\Rlp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tries\Trie.cs" />
   </ItemGroup>
