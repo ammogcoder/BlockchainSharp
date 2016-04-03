@@ -51,21 +51,21 @@
 
             if (position == key.Length - 1)
             {
-                newleafs[position] = value;
+                newleafs[offset] = value;
 
                 return new Trie<T>(newleafs);
             }
 
             if (this.leafs[position] != null)
             {
-                newleafs[position] = ((Trie<T>)this.leafs[position]).Put(key, position + 1, value);
+                newleafs[offset] = ((Trie<T>)this.leafs[position]).Put(key, position + 1, value);
 
                 return new Trie<T>(newleafs);
             }
 
             var newtrie = new Trie<T>();
 
-            newleafs[position] = newtrie.Put(key, position + 1, value);
+            newleafs[offset] = newtrie.Put(key, position + 1, value);
 
             return new Trie<T>(newleafs);
         }
