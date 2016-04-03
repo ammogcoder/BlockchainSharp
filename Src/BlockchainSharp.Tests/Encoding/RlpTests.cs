@@ -18,6 +18,33 @@
         }
 
         [TestMethod]
+        public void EncodeSingleLowBytes()
+        {
+            for (var k = 0; k < 128; k++)
+            {
+                var result = Rlp.Encode(new byte[] { (byte)k });
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(1, result.Length);
+                Assert.AreEqual(k, result[0]);
+            }
+        }
+
+        [TestMethod]
+        public void EncodeSingleHighBytes()
+        {
+            for (var k = 128; k < 256; k++)
+            {
+                var result = Rlp.Encode(new byte[] { (byte)k });
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(2, result.Length);
+                Assert.AreEqual(0x81, result[0]);
+                Assert.AreEqual(k, result[1]);
+            }
+        }
+
+        [TestMethod]
         public void EncodeEmptyByteArray()
         {
             var result = Rlp.Encode(new byte[0]);
