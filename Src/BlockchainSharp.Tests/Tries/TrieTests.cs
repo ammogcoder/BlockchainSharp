@@ -48,6 +48,24 @@
             Assert.AreEqual("foo", trie3.Get("012"));
             Assert.AreEqual("bar", trie3.Get("abc"));
         }
+
+        [TestMethod]
+        public void ReplaceValue()
+        {
+            Trie<string> trie = new Trie<string>();
+
+            var trie2 = trie.Put("012", "foo");
+            var trie3 = trie2.Put("012", "bar");
+
+            Assert.IsNotNull(trie2);
+            Assert.AreNotSame(trie2, trie);
+            Assert.IsNull(trie.Get("012"));
+            Assert.AreEqual("foo", trie2.Get("012"));
+
+            Assert.IsNotNull(trie3);
+            Assert.AreNotSame(trie3, trie2);
+            Assert.AreEqual("bar", trie3.Get("012"));
+        }
     }
 }
 
