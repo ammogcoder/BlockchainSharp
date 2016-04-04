@@ -17,11 +17,25 @@
             if (bytes.Length == 1 && bytes[0] < 0x80)
                 return bytes;
 
-            var result = new byte[bytes.Length + 1];
+            byte[] result;
 
-            result[0] = (byte)(bytes.Length + 128);
+            if (bytes.Length < 56)
+            {
+                result = new byte[bytes.Length + 1];
 
-            Array.Copy(bytes, 0, result, 1, bytes.Length);
+                result[0] = (byte)(bytes.Length + 128);
+
+                Array.Copy(bytes, 0, result, 1, bytes.Length);
+
+                return result;
+            }
+
+            result = new byte[bytes.Length + 2];
+
+            result[0] = (byte)(183 + 1);
+            result[1] = (byte)bytes.Length;
+
+            Array.Copy(bytes, 0, result, 2, bytes.Length);
 
             return result;
         }
