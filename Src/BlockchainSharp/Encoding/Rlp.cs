@@ -30,12 +30,25 @@
                 return result;
             }
 
-            result = new byte[bytes.Length + 2];
+            if (bytes.Length < 256)
+            {
+                result = new byte[bytes.Length + 2];
 
-            result[0] = (byte)(183 + 1);
-            result[1] = (byte)bytes.Length;
+                result[0] = (byte)(183 + 1);
+                result[1] = (byte)bytes.Length;
 
-            Array.Copy(bytes, 0, result, 2, bytes.Length);
+                Array.Copy(bytes, 0, result, 2, bytes.Length);
+
+                return result;
+            }
+
+            result = new byte[bytes.Length + 3];
+
+            result[0] = (byte)(183 + 2);
+            result[1] = (byte)(bytes.Length / 256);
+            result[2] = (byte)(bytes.Length % 256);
+
+            Array.Copy(bytes, 0, result, 3, bytes.Length);
 
             return result;
         }
