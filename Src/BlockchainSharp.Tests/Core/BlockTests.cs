@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Numerics;
     using System.Text;
     using BlockchainSharp.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -56,6 +57,26 @@
             Assert.IsFalse(block0.HasParent(block1));
             Assert.IsFalse(block1.HasParent(block1));
             Assert.IsFalse(block42.HasParent(block1));
+        }
+
+        [TestMethod]
+        public void CreateBlockWithTransaction()
+        {
+            Address from = new Address();
+            Address to = new Address();
+            AddressValue input = new AddressValue(from, new BigInteger(2));
+            AddressValue output = new AddressValue(to, new BigInteger(1));
+            Transaction transaction = new Transaction(new AddressValue[] { input }, new AddressValue[] { output });
+
+            Block block = new Block(0, null, new Transaction[] { transaction });
+
+            Assert.IsNotNull(block.Transactions);
+            Assert.AreEqual(1, block.Transactions.Count());
+
+            Transaction result = block.Transactions.First();
+
+            Assert.AreEqual(new BigInteger(2), result.InputsTotal);
+            Assert.AreEqual(new BigInteger(1), result.OutputsTotal);
         }
     }
 }

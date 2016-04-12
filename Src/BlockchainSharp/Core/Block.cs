@@ -10,6 +10,7 @@
         private long number;
         private Hash hash;
         private Hash parentHash;
+        private IList<Transaction> transactions;
 
         public Block(long number, Hash parentHash)
         {
@@ -20,6 +21,14 @@
             this.parentHash = parentHash;
             this.hash = new Hash();
         }
+
+        public Block(long number, Hash parentHash, IEnumerable<Transaction> transactions)
+            : this(number, parentHash)
+        {
+            this.transactions = new List<Transaction>(transactions);
+        }
+
+        public IEnumerable<Transaction> Transactions { get { return this.transactions; } }
 
         public long Number { get { return this.number; } }
 
