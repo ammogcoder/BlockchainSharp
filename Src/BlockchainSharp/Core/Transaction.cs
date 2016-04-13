@@ -20,6 +20,10 @@
                 throw new InvalidOperationException("Transaction outputs are greater than inputs");
         }
 
+        public IEnumerable<AddressValue> Inputs { get { return this.inputs; } }
+
+        public IEnumerable<AddressValue> Outputs { get { return this.outputs; } }
+
         public BigInteger InputsTotal
         { 
             get 

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Numerics;
+    using System.Linq;
     using BlockchainSharp.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,6 +22,12 @@
                     new AddressValue(new Address(), new BigInteger(50)),
                     new AddressValue(new Address(), new BigInteger(40))
                 });
+
+            Assert.IsNotNull(transaction.Inputs);
+            Assert.AreEqual(1, transaction.Inputs.Count());
+
+            Assert.IsNotNull(transaction.Outputs);
+            Assert.AreEqual(2, transaction.Outputs.Count());
 
             Assert.AreEqual(new BigInteger(100), transaction.InputsTotal);
             Assert.AreEqual(new BigInteger(90), transaction.OutputsTotal);
