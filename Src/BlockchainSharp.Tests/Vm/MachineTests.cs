@@ -149,8 +149,8 @@
         {
             BytecodeCompiler compiler = new BytecodeCompiler();
 
-            for (byte k = 0; k < 17; k++)
-                compiler.Compile(Bytecodes.Push1, k);
+            for (int k = 0; k < 17; k++)
+                compiler.Push(k);
 
             compiler.CompileAdjust(Bytecodes.Swap1, nswap - 1);
 

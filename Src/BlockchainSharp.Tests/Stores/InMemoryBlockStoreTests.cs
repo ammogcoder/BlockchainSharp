@@ -1,13 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BlockchainSharp.Stores;
-using BlockchainSharp.Core;
-
-namespace BlockchainSharp.Tests.Stores
+﻿namespace BlockchainSharp.Tests.Stores
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using BlockchainSharp.Core;
+    using BlockchainSharp.Stores;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class InMemoryBlockStoreTests
     {
