@@ -48,6 +48,11 @@
                     this.data[k] = 0xff;
         }
 
+        public DataWord(BigInteger value)
+            : this(value.ToByteArray(), true)
+        {
+        }
+
         private DataWord(byte[] bytes, bool inverse)
         {
             this.data = new byte[32];
@@ -57,11 +62,6 @@
             if ((bytes[bytes.Length - 1] & 0x80) != 0)
                 for (int k = bytes.Length; k < 32; k++)
                     this.data[k] = 0xff;
-        }
-
-        public DataWord(BigInteger value)
-            : this(value.ToByteArray(), true)
-        {
         }
 
         public static DataWord Zero { get { return zero; } }

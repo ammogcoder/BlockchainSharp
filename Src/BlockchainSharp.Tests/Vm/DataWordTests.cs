@@ -59,11 +59,11 @@
         {
             var dw1 = new DataWord(1);
             var dw2 = new DataWord(2);
-            var dw1b = new DataWord(1);
+            var dw3 = new DataWord(1);
 
             Assert.AreEqual(dw1, dw1);
-            Assert.AreEqual(dw1, dw1b);
-            Assert.AreEqual(dw1b, dw1);
+            Assert.AreEqual(dw1, dw3);
+            Assert.AreEqual(dw3, dw1);
 
             Assert.IsFalse(dw1.Equals(null));
 
@@ -72,7 +72,7 @@
             Assert.AreNotEqual(dw1, 42);
             Assert.AreNotEqual(dw1, dw2);
 
-            Assert.AreEqual(dw1.GetHashCode(), dw1b.GetHashCode());
+            Assert.AreEqual(dw1.GetHashCode(), dw3.GetHashCode());
         }
 
         [TestMethod]

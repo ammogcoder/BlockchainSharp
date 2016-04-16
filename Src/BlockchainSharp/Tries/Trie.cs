@@ -29,6 +29,14 @@
             return this.Get(key, 0);
         }
 
+        private static int GetOffset(char ch)
+        {
+            if (ch >= '0' && ch <= '9')
+                return ch - '0';
+
+            return ch - 'a' + 10;
+        }
+
         private T Get(string key, int position)
         {
             var offset = GetOffset(key[position]);
@@ -68,14 +76,6 @@
             newleafs[offset] = newtrie.Put(key, position + 1, value);
 
             return new Trie<T>(newleafs);
-        }
-
-        private static int GetOffset(char ch)
-        {
-            if (ch >= '0' && ch <= '9')
-                return ch - '0';
-
-            return ch - 'a' + 10;
         }
     }
 }

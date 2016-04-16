@@ -1,8 +1,8 @@
 ﻿namespace BlockchainSharp.Tests.Core
 {
     using System;
-    using System.Numerics;
     using System.Linq;
+    using System.Numerics;
     using BlockchainSharp.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

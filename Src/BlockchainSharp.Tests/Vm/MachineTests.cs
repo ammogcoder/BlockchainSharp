@@ -1,10 +1,10 @@
 ﻿namespace BlockchainSharp.Tests.Vm
 {
     using System;
-    using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Collections.Generic;
+    using System.Linq;
     using BlockchainSharp.Vm;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class MachineTests
@@ -100,7 +100,7 @@
 
         private static void PushPop(byte[] bytes)
         {
-            IList<Byte> bs = new List<byte>();
+            IList<byte> bs = new List<byte>();
 
             bs.Add((byte)(Bytecodes.Push1 + bytes.Length - 1));
 
@@ -117,7 +117,7 @@
 
         private static void PushDupPop(uint times)
         {
-            IList<Byte> bytes = new List<byte>();
+            IList<byte> bytes = new List<byte>();
 
             for (int k = 0; k < times; k++)
             {
