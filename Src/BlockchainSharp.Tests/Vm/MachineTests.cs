@@ -133,16 +133,13 @@
 
         private static void PushPop(byte[] bytes)
         {
-            IList<byte> bs = new List<byte>();
+            BytecodeCompiler compiler = new BytecodeCompiler();
 
-            bs.Add((byte)(Bytecodes.Push1 + bytes.Length - 1));
-
-            foreach (byte b in bytes)
-                bs.Add(b);
+            compiler.CompileAdjust(Bytecodes.Push1, bytes.Length - 1, bytes);
 
             Machine machine = new Machine();
 
-            machine.Execute(bs.ToArray());
+            machine.Execute(compiler.ToBytes());
 
             Assert.AreEqual(1, machine.Stack.Size);
             Assert.AreEqual(new DataWord(bytes), machine.Stack.Pop());
