@@ -99,6 +99,30 @@
             }
         }
 
+        [TestMethod]
+        public void IsZero()
+        {
+            IList<byte> bytes = new List<byte>();
+
+            bytes.Add((byte)Bytecodes.Push1);
+            bytes.Add((byte)2);
+            bytes.Add((byte)Bytecodes.IsZero);
+            bytes.Add((byte)Bytecodes.Push1);
+            bytes.Add((byte)0);
+            bytes.Add((byte)Bytecodes.IsZero);
+
+            Machine machine = new Machine();
+
+            machine.Execute(bytes.ToArray());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(2, stack.Size);
+            Assert.AreEqual(DataWord.Zero, stack.ElementAt(1));
+            Assert.AreEqual(DataWord.One, stack.ElementAt(0));
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];

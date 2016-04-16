@@ -27,6 +27,13 @@
 
                 switch (bytecode)
                 {
+                    case (byte)Bytecodes.IsZero:
+                        var top = this.stack.Pop();
+                        if (DataWord.Zero.Equals(top))
+                            this.stack.Push(DataWord.One);
+                        else
+                            this.stack.Push(DataWord.Zero);
+                        break;
                     case (byte)Bytecodes.Push1:
                     case (byte)Bytecodes.Push2:
                     case (byte)Bytecodes.Push3:
