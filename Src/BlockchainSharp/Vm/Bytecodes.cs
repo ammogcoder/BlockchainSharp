@@ -50,6 +50,23 @@
         Dup13 = 0x8c,
         Dup14 = 0x8d,
         Dup15 = 0x8e,
-        Dup16 = 0x8f
+        Dup16 = 0x8f,
+
+        Swap1 = 0x90,
+        Swap2 = 0x091,
+        Swap3 = 0x092,
+        Swap4 = 0x093,
+        Swap5 = 0x094,
+        Swap6 = 0x095,
+        Swap7 = 0x096,
+        Swap8 = 0x097,
+        Swap9 = 0x098,
+        Swap10 = 0x099,
+        Swap11 = 0x09a,
+        Swap12 = 0x09b,
+        Swap13 = 0x09c,
+        Swap14 = 0x09d,
+        Swap15 = 0x09e,
+        Swap16 = 0x09f
     }
 }
