@@ -102,18 +102,16 @@
         [TestMethod]
         public void IsZero()
         {
-            IList<byte> bytes = new List<byte>();
+            BytecodeCompiler compiler = new BytecodeCompiler();
 
-            bytes.Add((byte)Bytecodes.Push1);
-            bytes.Add((byte)2);
-            bytes.Add((byte)Bytecodes.IsZero);
-            bytes.Add((byte)Bytecodes.Push1);
-            bytes.Add((byte)0);
-            bytes.Add((byte)Bytecodes.IsZero);
+            compiler.Compile(Bytecodes.Push1, 2);
+            compiler.Compile(Bytecodes.IsZero);
+            compiler.Compile(Bytecodes.Push1, 0);
+            compiler.Compile(Bytecodes.IsZero);
 
             Machine machine = new Machine();
 
-            machine.Execute(bytes.ToArray());
+            machine.Execute(compiler.ToBytes());
 
             var stack = machine.Stack;
 
@@ -152,19 +150,16 @@
 
         private static Machine PushSwap(int nswap)
         {
-            IList<byte> bytes = new List<byte>();
+            BytecodeCompiler compiler = new BytecodeCompiler();
 
-            for (int k = 0; k < 17; k++)
-            {
-                bytes.Add((byte)Bytecodes.Push1);
-                bytes.Add((byte)k);
-            }
+            for (byte k = 0; k < 17; k++)
+                compiler.Compile(Bytecodes.Push1, k);
 
-            bytes.Add((byte)(Bytecodes.Swap1 + nswap - 1));
+            compiler.CompileAdjust(Bytecodes.Swap1, nswap - 1);
 
             Machine machine = new Machine();
 
-            machine.Execute(bytes.ToArray());
+            machine.Execute(compiler.ToBytes());
 
             return machine;
         }
