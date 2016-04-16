@@ -88,6 +88,17 @@
             Assert.AreEqual(0, machine.Stack.Size);
         }
 
+        [TestMethod]
+        public void PushesAndSwap()
+        {
+            for (int k = 1; k <= 16; k++)
+            {
+                Machine machine = PushSwap(k);
+                Assert.AreEqual(new DataWord(16), machine.Stack.ElementAt(k));
+                Assert.AreEqual(new DataWord(16 - k), machine.Stack.Top());
+            }
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];
@@ -113,6 +124,25 @@
 
             Assert.AreEqual(1, machine.Stack.Size);
             Assert.AreEqual(new DataWord(bytes), machine.Stack.Pop());
+        }
+
+        private static Machine PushSwap(int nswap)
+        {
+            IList<byte> bytes = new List<byte>();
+
+            for (int k = 0; k < 17; k++)
+            {
+                bytes.Add((byte)Bytecodes.Push1);
+                bytes.Add((byte)k);
+            }
+
+            bytes.Add((byte)(Bytecodes.Swap1 + nswap - 1));
+
+            Machine machine = new Machine();
+
+            machine.Execute(bytes.ToArray());
+
+            return machine;
         }
 
         private static void PushDupPop(uint times)

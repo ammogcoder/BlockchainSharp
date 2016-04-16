@@ -81,6 +81,24 @@
                     case (byte)Bytecodes.Dup16:
                         this.stack.Push(this.stack.ElementAt(bytecode - (byte)Bytecodes.Dup1));
                         break;
+                    case (byte)Bytecodes.Swap1:
+                    case (byte)Bytecodes.Swap2:
+                    case (byte)Bytecodes.Swap3:
+                    case (byte)Bytecodes.Swap4:
+                    case (byte)Bytecodes.Swap5:
+                    case (byte)Bytecodes.Swap6:
+                    case (byte)Bytecodes.Swap7:
+                    case (byte)Bytecodes.Swap8:
+                    case (byte)Bytecodes.Swap9:
+                    case (byte)Bytecodes.Swap10:
+                    case (byte)Bytecodes.Swap11:
+                    case (byte)Bytecodes.Swap12:
+                    case (byte)Bytecodes.Swap13:
+                    case (byte)Bytecodes.Swap14:
+                    case (byte)Bytecodes.Swap15:
+                    case (byte)Bytecodes.Swap16:
+                        this.stack.Swap(bytecode - (byte)Bytecodes.Swap1 + 1);
+                        break;
                 }
             }
         }
