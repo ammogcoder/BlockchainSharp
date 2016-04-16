@@ -8,10 +8,10 @@
 
     public class DataWord
     {
-        public static DataWord Zero = new DataWord(0);
-        public static DataWord One = new DataWord(1);
-        public static DataWord Two = new DataWord(2);
-        public static DataWord Three = new DataWord(3);
+        private static DataWord zero = new DataWord(0);
+        private static DataWord one = new DataWord(1);
+        private static DataWord two = new DataWord(2);
+        private static DataWord three = new DataWord(3);
 
         private byte[] data;
 
@@ -63,6 +63,14 @@
             : this(value.ToByteArray(), true)
         {
         }
+
+        public static DataWord Zero { get { return zero; } }
+
+        public static DataWord One { get { return one; } }
+
+        public static DataWord Two { get { return two; } }
+
+        public static DataWord Three { get { return three; } }
 
         public byte[] Data { get { return this.data.Reverse().ToArray(); } }
 
