@@ -18,5 +18,22 @@ namespace BlockchainSharp.Tests.Stores
 
             Assert.IsNull(store.GetByHash(new Hash()));
         }
+
+        [TestMethod]
+        public void SaveAndGetBlockByHash()
+        {
+            var block = new Block(42, new Hash());
+            var hash = block.Hash;
+
+            var store = new InMemoryBlockStore();
+
+            store.Save(block);
+
+            var result = store.GetByHash(hash);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(42, result.Number);
+            Assert.AreEqual(hash, result.Hash);
+        }
     }
 }
