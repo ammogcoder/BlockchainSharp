@@ -8,6 +8,11 @@
 
     public class DataWord
     {
+        public static DataWord Zero = new DataWord(0);
+        public static DataWord One = new DataWord(1);
+        public static DataWord Two = new DataWord(2);
+        public static DataWord Three = new DataWord(3);
+
         private byte[] data;
 
         public DataWord(int num)
