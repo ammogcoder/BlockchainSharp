@@ -20,6 +20,17 @@ namespace BlockchainSharp.Tests.Stores
         }
 
         [TestMethod]
+        public void GetNoBlocksByNumber()
+        {
+            var store = new InMemoryBlockStore();
+
+            var result = store.GetByNumber(42);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count());
+        }
+
+        [TestMethod]
         public void SaveAndGetBlockByHash()
         {
             var block = new Block(42, new Hash());
