@@ -30,5 +30,24 @@
         {
             return this.stack.ElementAt(index);
         }
+
+        public void Swap(int position)
+        {
+            var top = this.stack.Pop();
+
+            var auxstack = new Stack<DataWord>();
+
+            for (int k = 1; k < position; k++)
+                auxstack.Push(this.stack.Pop());
+
+            var newtop = this.stack.Pop();
+
+            this.stack.Push(top);
+
+            for (int k = 1; k < position; k++)
+                this.stack.Push(auxstack.Pop());
+
+            this.stack.Push(newtop);
+        }
     }
 }
