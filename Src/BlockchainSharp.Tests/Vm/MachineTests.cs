@@ -152,7 +152,7 @@
             for (int k = 0; k < 17; k++)
                 compiler.Push(k);
 
-            compiler.CompileAdjust(Bytecodes.Swap1, nswap - 1);
+            compiler.Swap(nswap);
 
             Machine machine = new Machine();
 

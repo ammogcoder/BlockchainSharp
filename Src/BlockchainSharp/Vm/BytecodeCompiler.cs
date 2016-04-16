@@ -16,6 +16,11 @@
             this.CompileAdjust(Bytecodes.Push1, bytes.Length - 1, bytes);
         }
 
+        public void Swap(int n)
+        {
+            this.CompileAdjust(Bytecodes.Swap1, n - 1);
+        }
+
         public void Compile(Bytecodes bytecode, params byte[] args)
         {
             this.bytes.Add((byte)bytecode);
