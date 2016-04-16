@@ -55,6 +55,7 @@
     <Compile Include="Encoding\Rlp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tries\Trie.cs" />
+    <Compile Include="Vm\DataWord.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Core\Classes.cd" />
