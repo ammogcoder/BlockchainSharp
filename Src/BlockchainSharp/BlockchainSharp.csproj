@@ -57,6 +57,7 @@
     <Compile Include="Tries\Trie.cs" />
     <Compile Include="Vm\Bytecodes.cs" />
     <Compile Include="Vm\DataWord.cs" />
+    <Compile Include="Vm\Machine.cs" />
     <Compile Include="Vm\Stack.cs" />
   </ItemGroup>
   <ItemGroup>

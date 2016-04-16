@@ -32,14 +32,19 @@
         }
 
         public DataWord(byte[] bytes)
+            : this(bytes, 0, bytes.Length)
+        {
+        }
+
+        public DataWord(byte[] bytes, int offset, int length)
         {
             this.data = new byte[32];
 
-            for (int k = 0; k < bytes.Length; k++)
-                this.data[k] = bytes[bytes.Length - k - 1];
+            for (int k = 0; k < length; k++)
+                this.data[k] = bytes[length - k - 1 + offset];
 
             if ((bytes[0] & 0x80) != 0)
-                for (int k = bytes.Length; k < 32; k++)
+                for (int k = length; k < 32; k++)
                     this.data[k] = 0xff;
         }
 

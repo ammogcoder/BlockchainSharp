@@ -1,6 +1,6 @@
 ﻿namespace BlockchainSharp.Vm
 {
-    enum Bytecodes
+    public enum Bytecodes
     {
         Push1 = 0x60,
         Push2 = 0x61,
