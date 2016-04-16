@@ -31,6 +31,25 @@ namespace BlockchainSharp.Tests.Stores
         }
 
         [TestMethod]
+        public void GetBlocksByNumber()
+        {
+            var block1 = new Block(42, new Hash());
+            var block2 = new Block(42, new Hash());
+
+            var store = new InMemoryBlockStore();
+
+            store.Save(block1);
+            store.Save(block2);
+
+            var result = store.GetByNumber(42);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.IsTrue(result.Any(b => b.Hash.Equals(block1.Hash)));
+            Assert.IsTrue(result.Any(b => b.Hash.Equals(block2.Hash)));
+        }
+
+        [TestMethod]
         public void SaveAndGetBlockByHash()
         {
             var block = new Block(42, new Hash());

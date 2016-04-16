@@ -21,12 +21,27 @@
 
         public IEnumerable<Block> GetByNumber(long number)
         {
+            if (this.blocksbynumber.ContainsKey(number))
+                return this.blocksbynumber[number];
+
             return new List<Block>();
         }
 
         public void Save(Block block)
         {
             this.blocks[block.Hash] = block;
+
+            IList<Block> bs;
+
+            if (this.blocksbynumber.ContainsKey(block.Number))
+                bs = this.blocksbynumber[block.Number];
+            else
+            {
+                bs = new List<Block>();
+                this.blocksbynumber[block.Number] = bs;
+            }
+
+            bs.Add(block);
         }
     }
 }
