@@ -13,7 +13,7 @@
         {
             var dw = new DataWord(1);
 
-            var result = dw.Data;
+            var result = dw.ToBytes;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(32, result.Length);
@@ -45,7 +45,7 @@
         {
             var dw = new DataWord(-1);
 
-            var result = dw.Data;
+            var result = dw.ToBytes;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(32, result.Length);
