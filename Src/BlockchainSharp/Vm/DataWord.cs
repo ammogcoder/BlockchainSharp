@@ -72,7 +72,7 @@
 
         public static DataWord Three { get { return three; } }
 
-        public byte[] ToBytes { get { return this.data.Reverse().ToArray(); } }
+        public byte[] Bytes { get { return this.data.Reverse().ToArray(); } }
 
         public BigInteger Value { get { return new BigInteger(this.data); } }
 
