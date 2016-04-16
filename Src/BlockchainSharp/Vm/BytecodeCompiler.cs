@@ -21,6 +21,11 @@
             this.CompileAdjust(Bytecodes.Swap1, n - 1);
         }
 
+        public void Dup(int n)
+        {
+            this.CompileAdjust(Bytecodes.Dup1, n - 1);
+        }
+
         public void Compile(Bytecodes bytecode, params byte[] args)
         {
             this.bytes.Add((byte)bytecode);

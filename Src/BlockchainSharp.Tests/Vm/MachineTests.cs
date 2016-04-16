@@ -49,7 +49,7 @@
         [TestMethod]
         public void PushAllValuesAndDup()
         {
-            for (uint k = 1; k <= 16; k++)
+            for (int k = 1; k <= 16; k++)
                 PushDupPop(k);
         }
 
@@ -161,21 +161,18 @@
             return machine;
         }
 
-        private static void PushDupPop(uint times)
+        private static void PushDupPop(int times)
         {
-            IList<byte> bytes = new List<byte>();
+            var compiler = new BytecodeCompiler();
 
             for (int k = 0; k < times; k++)
-            {
-                bytes.Add((byte)Bytecodes.Push1);
-                bytes.Add((byte)k);
-            }
+                compiler.Push(k);
 
-            bytes.Add((byte)(Bytecodes.Dup1 + (int)times - 1));
+            compiler.Dup(times);
 
             Machine machine = new Machine();
 
-            machine.Execute(bytes.ToArray());
+            machine.Execute(compiler.ToBytes());
 
             DataWord value = new DataWord(times);
 
