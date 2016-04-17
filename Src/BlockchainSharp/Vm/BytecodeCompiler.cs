@@ -40,6 +40,11 @@
             this.Compile(Bytecodes.IsZero);
         }
 
+        public void Pop()
+        {
+            this.Compile(Bytecodes.Pop);
+        }
+
         public void Push(int value)
         {
             var bytes = (new BigInteger(value)).ToByteArray().Reverse().ToArray();

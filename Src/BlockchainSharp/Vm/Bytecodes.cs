@@ -10,6 +10,8 @@
         Equal = 0x14,
         IsZero = 0x15,
 
+        Pop = 0x50,
+
         Push1 = 0x60,
         Push2 = 0x61,
         Push3 = 0x62,

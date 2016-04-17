@@ -58,6 +58,11 @@
                         else
                             this.stack.Push(DataWord.Zero);
                         break;
+
+                    case (byte)Bytecodes.Pop:
+                        this.stack.Pop();
+                        break;
+
                     case (byte)Bytecodes.Push1:
                     case (byte)Bytecodes.Push2:
                     case (byte)Bytecodes.Push3:

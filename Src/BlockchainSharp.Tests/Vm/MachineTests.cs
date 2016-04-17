@@ -35,6 +35,26 @@
         }
 
         [TestMethod]
+        public void PushPushPopPop()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(1);
+            compiler.Push(2);
+            compiler.Pop();
+            compiler.Pop();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(0, stack.Size);
+        }
+
+        [TestMethod]
         public void PushThreeValuesAndDup()
         {
             PushDupPop(3);
