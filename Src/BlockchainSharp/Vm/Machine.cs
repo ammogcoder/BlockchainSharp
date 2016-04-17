@@ -27,6 +27,18 @@
 
                 switch (bytecode)
                 {
+                    case (byte)Bytecodes.Add:
+                        this.stack.Push(this.stack.Pop().Add(this.stack.Pop()));
+                        break;
+                    case (byte)Bytecodes.Multiply:
+                        this.stack.Push(this.stack.Pop().Multiply(this.stack.Pop()));
+                        break;
+                    case (byte)Bytecodes.Subtract:
+                        this.stack.Push(this.stack.Pop().Subtract(this.stack.Pop()));
+                        break;
+                    case (byte)Bytecodes.Divide:
+                        this.stack.Push(this.stack.Pop().Divide(this.stack.Pop()));
+                        break;
                     case (byte)Bytecodes.IsZero:
                         var top = this.stack.Pop();
                         if (DataWord.Zero.Equals(top))

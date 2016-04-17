@@ -10,6 +10,11 @@
     {
         private IList<byte> bytes = new List<byte>();
 
+        public void Add()
+        {
+            this.Compile(Bytecodes.Add);
+        }
+
         public void IsZero()
         {
             this.Compile(Bytecodes.IsZero);

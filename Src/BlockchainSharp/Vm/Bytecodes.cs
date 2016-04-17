@@ -2,6 +2,11 @@
 {
     public enum Bytecodes
     {
+        Add = 0x01,
+        Multiply = 0x02,
+        Subtract = 0x03,
+        Divide = 0x04,
+
         IsZero = 0x15,
 
         Push1 = 0x60,

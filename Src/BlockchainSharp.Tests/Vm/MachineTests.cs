@@ -121,6 +121,26 @@
             Assert.AreEqual(DataWord.One, stack.ElementAt(0));
         }
 
+        [TestMethod]
+        public void AddOneTwo()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(1);
+            compiler.Push(2);
+            compiler.Add();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(1, stack.Size);
+            Assert.AreEqual(DataWord.Three, stack.Pop());
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];
