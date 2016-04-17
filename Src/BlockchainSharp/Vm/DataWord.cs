@@ -101,6 +101,11 @@
             return new DataWord(BigInteger.Divide(this.Value, dw.Value));
         }
 
+        public int Compare(DataWord dw)
+        {
+            return BigInteger.Compare(this.Value, dw.Value);
+        }
+
         public override int GetHashCode()
         {
             return this.Value.GetHashCode();

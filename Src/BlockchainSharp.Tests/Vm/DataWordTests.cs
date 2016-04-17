@@ -163,5 +163,17 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(new BigInteger(2), result);
         }
+
+        [TestMethod]
+        public void Compare()
+        {
+            Assert.IsTrue(DataWord.Zero.Compare(DataWord.Zero) == 0);
+            Assert.IsTrue(DataWord.Zero.Compare(DataWord.One) < 0);
+            Assert.IsTrue(DataWord.One.Compare(DataWord.Zero) > 0);
+
+            Assert.IsTrue(new DataWord(-1).Compare(new DataWord(-2)) > 0);
+            Assert.IsTrue(new DataWord(-2).Compare(new DataWord(-1)) < 0);
+            Assert.IsTrue(new DataWord(-2).Compare(new DataWord(-2)) == 0);
+        }
     }
 }
