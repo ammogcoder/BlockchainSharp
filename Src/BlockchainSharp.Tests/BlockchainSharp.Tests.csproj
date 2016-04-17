@@ -46,6 +46,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compilers\SimpleCompilerTests.cs" />
     <Compile Include="Core\BlockChainTests.cs" />
     <Compile Include="Core\BlockProcessorTests.cs" />
     <Compile Include="Core\BlockTests.cs" />
