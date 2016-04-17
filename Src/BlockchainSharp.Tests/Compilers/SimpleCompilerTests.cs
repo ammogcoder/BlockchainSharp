@@ -17,5 +17,16 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Length);
         }
+
+        [TestMethod]
+        public void CompileNullString()
+        {
+            var compiler = new SimpleCompiler(null);
+
+            var result = compiler.Compile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Length);
+        }
     }
 }
