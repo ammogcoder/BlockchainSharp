@@ -15,6 +15,16 @@
             this.Compile(Bytecodes.Add);
         }
 
+        public void Subtract()
+        {
+            this.Compile(Bytecodes.Subtract);
+        }
+
+        public void Multiply()
+        {
+            this.Compile(Bytecodes.Multiply);
+        }
+
         public void IsZero()
         {
             this.Compile(Bytecodes.IsZero);

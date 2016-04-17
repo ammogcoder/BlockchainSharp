@@ -141,6 +141,46 @@
             Assert.AreEqual(DataWord.Three, stack.Pop());
         }
 
+        [TestMethod]
+        public void SubtractThreeOne()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(1);
+            compiler.Push(3);
+            compiler.Subtract();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(1, stack.Size);
+            Assert.AreEqual(DataWord.Two, stack.Pop());
+        }
+
+        [TestMethod]
+        public void MultiplyThreeTwo()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(2);
+            compiler.Push(3);
+            compiler.Multiply();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(1, stack.Size);
+            Assert.AreEqual(new DataWord(6), stack.Pop());
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];
