@@ -120,6 +120,62 @@
         }
 
         [TestMethod]
+        public void LessThan()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(2);
+            compiler.Push(2);
+            compiler.LessThan();
+            compiler.Push(0);
+            compiler.Push(1);
+            compiler.LessThan();
+            compiler.Push(1);
+            compiler.Push(0);
+            compiler.LessThan();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(3, stack.Size);
+            Assert.AreEqual(DataWord.Zero, stack.ElementAt(2));
+            Assert.AreEqual(DataWord.Zero, stack.ElementAt(1));
+            Assert.AreEqual(DataWord.One, stack.ElementAt(0));
+        }
+
+        [TestMethod]
+        public void GreaterThan()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(2);
+            compiler.Push(2);
+            compiler.GreaterThan();
+            compiler.Push(1);
+            compiler.Push(0);
+            compiler.GreaterThan();
+            compiler.Push(0);
+            compiler.Push(1);
+            compiler.GreaterThan();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(3, stack.Size);
+            Assert.AreEqual(DataWord.Zero, stack.ElementAt(2));
+            Assert.AreEqual(DataWord.Zero, stack.ElementAt(1));
+            Assert.AreEqual(DataWord.One, stack.ElementAt(0));
+        }
+
+        [TestMethod]
         public void Equal()
         {
             BytecodeCompiler compiler = new BytecodeCompiler();

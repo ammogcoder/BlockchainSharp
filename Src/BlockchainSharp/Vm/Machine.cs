@@ -45,6 +45,21 @@
                         else
                             this.stack.Push(n.Divide(d));
                         break;
+
+                    case (byte)Bytecodes.LessThan:
+                        if (this.stack.Pop().Compare(this.stack.Pop()) < 0)
+                            this.stack.Push(DataWord.One);
+                        else
+                            this.stack.Push(DataWord.Zero);
+                        break;
+
+                    case (byte)Bytecodes.GreaterThan:
+                        if (this.stack.Pop().Compare(this.stack.Pop()) > 0)
+                            this.stack.Push(DataWord.One);
+                        else
+                            this.stack.Push(DataWord.Zero);
+                        break;
+
                     case (byte)Bytecodes.Equal:
                         if (this.stack.Pop().Equals(this.stack.Pop()))
                             this.stack.Push(DataWord.One);

@@ -7,6 +7,9 @@
         Subtract = 0x03,
         Divide = 0x04,
 
+        LessThan = 0x10,
+        GreaterThan = 0x11,
+
         Equal = 0x14,
         IsZero = 0x15,
 

@@ -30,6 +30,16 @@
             this.Compile(Bytecodes.Divide);
         }
 
+        public void LessThan()
+        {
+            this.Compile(Bytecodes.LessThan);
+        }
+
+        public void GreaterThan()
+        {
+            this.Compile(Bytecodes.GreaterThan);
+        }
+
         public void Equal()
         {
             this.Compile(Bytecodes.Equal);
