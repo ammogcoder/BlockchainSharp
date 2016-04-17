@@ -61,6 +61,14 @@
         }
 
         [TestMethod]
+        public void CompilePush()
+        {
+            CompileBytecode("push 0", Bytecodes.Push1, 0);
+            CompileBytecode("push 1", Bytecodes.Push1, 1);
+            CompileBytecode("push 256", Bytecodes.Push2, 1, 0);
+        }
+
+        [TestMethod]
         public void CompileSkippingCommentsAndEmptyLines()
         {
             CompileBytecode("add\n", Bytecodes.Add);
@@ -80,6 +88,19 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Length);
             Assert.AreEqual((byte)bc, result[0]);
+        }
+
+        private static void CompileBytecode(string text, Bytecodes bc, params byte[] bytes)
+        {
+            var compiler = new SimpleCompiler(text);
+            var result = compiler.Compile();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1 + bytes.Length, result.Length);
+            Assert.AreEqual((byte)bc, result[0]);
+
+            for (int k = 0; k < bytes.Length; k++)
+                Assert.AreEqual(bytes[k], result[k + 1]);
         }
     }
 }

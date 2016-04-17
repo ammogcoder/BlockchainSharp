@@ -61,6 +61,8 @@
                 this.compiler.Divide();
             else if (verb == "dup")
                 this.compiler.Dup(int.Parse(words[1]));
+            else if (verb == "push")
+                this.compiler.Push(int.Parse(words[1]));
         }
     }
 }
