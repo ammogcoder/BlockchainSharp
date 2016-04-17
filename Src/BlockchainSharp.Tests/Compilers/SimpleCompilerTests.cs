@@ -88,6 +88,15 @@
         }
 
         [TestMethod]
+        public void CompileLessThanGreaterThan()
+        {
+            CompileBytecode("lessthan", Bytecodes.LessThan);
+            CompileBytecode("greaterthan", Bytecodes.GreaterThan);
+            CompileBytecode("lt", Bytecodes.LessThan);
+            CompileBytecode("gt", Bytecodes.GreaterThan);
+        }
+
+        [TestMethod]
         public void CompilePush()
         {
             CompileBytecode("push 0", Bytecodes.Push1, 0);

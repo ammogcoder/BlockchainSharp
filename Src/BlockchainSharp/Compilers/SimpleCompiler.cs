@@ -71,6 +71,10 @@
                 this.compiler.IsZero();
             else if (verb == "pop")
                 this.compiler.Pop();
+            else if (verb == "lessthan" || verb == "lt")
+                this.compiler.LessThan();
+            else if (verb == "greaterthan" || verb == "gt")
+                this.compiler.GreaterThan();
         }
     }
 }
