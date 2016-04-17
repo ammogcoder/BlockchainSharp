@@ -7,6 +7,7 @@
         Subtract = 0x03,
         Divide = 0x04,
 
+        Equal = 0x14,
         IsZero = 0x15,
 
         Push1 = 0x60,

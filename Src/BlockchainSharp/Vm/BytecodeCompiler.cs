@@ -30,6 +30,11 @@
             this.Compile(Bytecodes.Divide);
         }
 
+        public void Equal()
+        {
+            this.Compile(Bytecodes.Equal);
+        }
+
         public void IsZero()
         {
             this.Compile(Bytecodes.IsZero);

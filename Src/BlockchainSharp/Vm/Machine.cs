@@ -45,6 +45,12 @@
                         else
                             this.stack.Push(n.Divide(d));
                         break;
+                    case (byte)Bytecodes.Equal:
+                        if (this.stack.Pop().Equals(this.stack.Pop()))
+                            this.stack.Push(DataWord.One);
+                        else
+                            this.stack.Push(DataWord.Zero);
+                        break;
                     case (byte)Bytecodes.IsZero:
                         var top = this.stack.Pop();
                         if (DataWord.Zero.Equals(top))

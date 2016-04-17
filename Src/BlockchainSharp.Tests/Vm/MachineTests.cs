@@ -100,6 +100,30 @@
         }
 
         [TestMethod]
+        public void Equal()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(2);
+            compiler.Push(2);
+            compiler.Equal();
+            compiler.Push(0);
+            compiler.Push(1);
+            compiler.Equal();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(2, stack.Size);
+            Assert.AreEqual(DataWord.One, stack.ElementAt(1));
+            Assert.AreEqual(DataWord.Zero, stack.ElementAt(0));
+        }
+
+        [TestMethod]
         public void IsZero()
         {
             BytecodeCompiler compiler = new BytecodeCompiler();
