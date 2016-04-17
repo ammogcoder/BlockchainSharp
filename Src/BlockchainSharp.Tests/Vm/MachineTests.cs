@@ -104,10 +104,10 @@
         {
             BytecodeCompiler compiler = new BytecodeCompiler();
 
-            compiler.Compile(Bytecodes.Push1, 2);
-            compiler.Compile(Bytecodes.IsZero);
-            compiler.Compile(Bytecodes.Push1, 0);
-            compiler.Compile(Bytecodes.IsZero);
+            compiler.Push(2);
+            compiler.IsZero();
+            compiler.Push(0);
+            compiler.IsZero();
 
             Machine machine = new Machine();
 

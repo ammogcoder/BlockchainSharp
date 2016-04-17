@@ -10,6 +10,11 @@
     {
         private IList<byte> bytes = new List<byte>();
 
+        public void IsZero()
+        {
+            this.Compile(Bytecodes.IsZero);
+        }
+
         public void Push(int value)
         {
             var bytes = (new BigInteger(value)).ToByteArray().Reverse().ToArray();
