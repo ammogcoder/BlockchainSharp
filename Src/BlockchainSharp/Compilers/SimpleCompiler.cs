@@ -63,6 +63,12 @@
                 this.compiler.Dup(int.Parse(words[1]));
             else if (verb == "push")
                 this.compiler.Push(int.Parse(words[1]));
+            else if (verb == "swap")
+                this.compiler.Swap(int.Parse(words[1]));
+            else if (verb == "equal")
+                this.compiler.Equal();
+            else if (verb == "iszero")
+                this.compiler.IsZero();
         }
     }
 }

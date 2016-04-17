@@ -61,11 +61,39 @@
         }
 
         [TestMethod]
+        public void CompileSwap()
+        {
+            CompileBytecode("swap 1", Bytecodes.Swap1);
+            CompileBytecode("swap 2", Bytecodes.Swap2);
+            CompileBytecode("swap 3", Bytecodes.Swap3);
+            CompileBytecode("swap 4", Bytecodes.Swap4);
+            CompileBytecode("swap 5", Bytecodes.Swap5);
+            CompileBytecode("swap 6", Bytecodes.Swap6);
+            CompileBytecode("swap 7", Bytecodes.Swap7);
+            CompileBytecode("swap 8", Bytecodes.Swap8);
+            CompileBytecode("swap 9", Bytecodes.Swap9);
+            CompileBytecode("swap 10", Bytecodes.Swap10);
+            CompileBytecode("swap 11", Bytecodes.Swap11);
+            CompileBytecode("swap 12", Bytecodes.Swap12);
+            CompileBytecode("swap 13", Bytecodes.Swap13);
+            CompileBytecode("swap 14", Bytecodes.Swap14);
+            CompileBytecode("swap 15", Bytecodes.Swap15);
+            CompileBytecode("swap 16", Bytecodes.Swap16);
+        }
+
+        [TestMethod]
         public void CompilePush()
         {
             CompileBytecode("push 0", Bytecodes.Push1, 0);
             CompileBytecode("push 1", Bytecodes.Push1, 1);
             CompileBytecode("push 256", Bytecodes.Push2, 1, 0);
+        }
+
+        [TestMethod]
+        public void CompileEqualIsZero()
+        {
+            CompileBytecode("equal", Bytecodes.Equal);
+            CompileBytecode("iszero", Bytecodes.IsZero);
         }
 
         [TestMethod]
