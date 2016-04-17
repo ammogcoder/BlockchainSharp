@@ -37,7 +37,13 @@
                         this.stack.Push(this.stack.Pop().Subtract(this.stack.Pop()));
                         break;
                     case (byte)Bytecodes.Divide:
-                        this.stack.Push(this.stack.Pop().Divide(this.stack.Pop()));
+                        var n = this.stack.Pop();
+                        var d = this.stack.Pop();
+
+                        if (DataWord.Zero.Equals(d))
+                            this.stack.Push(DataWord.Zero);
+                        else
+                            this.stack.Push(n.Divide(d));
                         break;
                     case (byte)Bytecodes.IsZero:
                         var top = this.stack.Pop();

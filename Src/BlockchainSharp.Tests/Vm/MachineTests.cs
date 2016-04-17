@@ -181,6 +181,46 @@
             Assert.AreEqual(new DataWord(6), stack.Pop());
         }
 
+        [TestMethod]
+        public void DivideSixTwo()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(2);
+            compiler.Push(6);
+            compiler.Divide();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(1, stack.Size);
+            Assert.AreEqual(DataWord.Three, stack.Pop());
+        }
+
+        [TestMethod]
+        public void DivideByZero()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(0);
+            compiler.Push(6);
+            compiler.Divide();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(1, stack.Size);
+            Assert.AreEqual(DataWord.Zero, stack.Pop());
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];

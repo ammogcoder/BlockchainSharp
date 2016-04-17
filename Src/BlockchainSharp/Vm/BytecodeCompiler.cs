@@ -25,6 +25,11 @@
             this.Compile(Bytecodes.Multiply);
         }
 
+        public void Divide()
+        {
+            this.Compile(Bytecodes.Divide);
+        }
+
         public void IsZero()
         {
             this.Compile(Bytecodes.IsZero);
