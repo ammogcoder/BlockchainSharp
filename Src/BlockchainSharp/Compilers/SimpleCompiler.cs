@@ -69,6 +69,8 @@
                 this.compiler.Equal();
             else if (verb == "iszero")
                 this.compiler.IsZero();
+            else if (verb == "pop")
+                this.compiler.Pop();
         }
     }
 }

@@ -82,6 +82,12 @@
         }
 
         [TestMethod]
+        public void CompilePop()
+        {
+            CompileBytecode("pop", Bytecodes.Pop);
+        }
+
+        [TestMethod]
         public void CompilePush()
         {
             CompileBytecode("push 0", Bytecodes.Push1, 0);
