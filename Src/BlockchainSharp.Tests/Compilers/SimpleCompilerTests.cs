@@ -108,6 +108,7 @@
         public void CompileEqualIsZero()
         {
             CompileBytecode("equal", Bytecodes.Equal);
+            CompileBytecode("eq", Bytecodes.Equal);
             CompileBytecode("iszero", Bytecodes.IsZero);
         }
 

@@ -65,7 +65,7 @@
                 this.compiler.Push(int.Parse(words[1]));
             else if (verb == "swap")
                 this.compiler.Swap(int.Parse(words[1]));
-            else if (verb == "equal")
+            else if (verb == "equal" || verb == "eq")
                 this.compiler.Equal();
             else if (verb == "iszero")
                 this.compiler.IsZero();
