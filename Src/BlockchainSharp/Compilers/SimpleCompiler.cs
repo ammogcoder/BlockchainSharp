@@ -29,7 +29,7 @@
             while (this.cline < this.nlines)
                 this.ProcessLine(this.lines[this.cline++]);
 
-            return compiler.ToBytes();
+            return this.compiler.ToBytes();
         }
 
         private void ProcessLine(string line)
