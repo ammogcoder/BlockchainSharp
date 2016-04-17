@@ -59,6 +59,8 @@
                 this.compiler.Multiply();
             else if (verb == "divide")
                 this.compiler.Divide();
+            else if (verb == "dup")
+                this.compiler.Dup(int.Parse(words[1]));
         }
     }
 }
