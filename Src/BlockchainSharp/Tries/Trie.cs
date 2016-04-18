@@ -8,14 +8,22 @@
     public class Trie<T>
     {
         private object[] leafs;
+        private T defvalue;
 
         public Trie() 
+            : this(default(T))
         {
-            this.leafs = new object[16];
         }
 
-        private Trie(object[] leafs)
+        public Trie(T defvalue)
         {
+            this.leafs = new object[16];
+            this.defvalue = defvalue;
+        }
+
+        private Trie(T defvalue, object[] leafs)
+        {
+            this.defvalue = defvalue;
             this.leafs = leafs;
         }
 
@@ -47,7 +55,7 @@
             var trie = (Trie<T>)this.leafs[offset];
 
             if (trie == null)
-                return default(T);
+                return this.defvalue;
 
             return trie.Get(key, position + 1);
         }
@@ -61,21 +69,21 @@
             {
                 newleafs[offset] = value;
 
-                return new Trie<T>(newleafs);
+                return new Trie<T>(this.defvalue, newleafs);
             }
 
             if (this.leafs[position] != null)
             {
                 newleafs[offset] = ((Trie<T>)this.leafs[position]).Put(key, position + 1, value);
 
-                return new Trie<T>(newleafs);
+                return new Trie<T>(this.defvalue, newleafs);
             }
 
             var newtrie = new Trie<T>();
 
             newleafs[offset] = newtrie.Put(key, position + 1, value);
 
-            return new Trie<T>(newleafs);
+            return new Trie<T>(this.defvalue, newleafs);
         }
     }
 }
