@@ -7,7 +7,13 @@
 
     public static class Rlp
     {
+        private static byte[] emptyarray = new byte[0];
         private static byte[] empty = new byte[] { 0x80 };
+
+        public static byte[] Decode(byte[] bytes)
+        {
+            return emptyarray;
+        }
 
         public static byte[] Encode(byte[] bytes)
         {

@@ -128,5 +128,14 @@
             Assert.AreEqual(1, result.Length);
             Assert.AreEqual(0x80, result[0]);
         }
+
+        [TestMethod]
+        public void DecodeToEmptyArray()
+        {
+            var result = Rlp.Decode(new byte[] { 0x80 });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Length);
+        }
     }
 }

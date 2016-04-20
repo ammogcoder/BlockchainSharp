@@ -1,10 +1,15 @@
-﻿using System;
-namespace BlockchainSharp.Stores
+﻿namespace BlockchainSharp.Stores
 {
-    interface BlockStore
+    using System;
+    using System.Collections.Generic;
+    using BlockchainSharp.Core;
+
+    public interface BlockStore
     {
-        BlockchainSharp.Core.Block GetByHash(BlockchainSharp.Core.Hash hash);
-        System.Collections.Generic.IEnumerable<BlockchainSharp.Core.Block> GetByNumber(long number);
-        void Save(BlockchainSharp.Core.Block block);
+        Block GetByHash(Hash hash);
+
+        IEnumerable<Block> GetByNumber(long number);
+
+        void Save(Block block);
     }
 }
