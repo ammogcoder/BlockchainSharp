@@ -12,7 +12,10 @@
 
         public static byte[] Decode(byte[] bytes)
         {
-            return emptyarray;
+            if (bytes != null && bytes.Length == 1 && bytes[0] == 0x80)
+                return emptyarray;
+
+            return bytes;
         }
 
         public static byte[] Encode(byte[] bytes)

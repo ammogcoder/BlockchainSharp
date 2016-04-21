@@ -18,6 +18,16 @@
         }
 
         [TestMethod]
+        public void DecodeSingleLowByte()
+        {
+            var result = Rlp.Decode(new byte[] { 0x01 });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Length);
+            Assert.AreEqual(0x01, result[0]);
+        }
+
+        [TestMethod]
         public void EncodeSingleLowBytes()
         {
             for (var k = 0; k < 128; k++)
