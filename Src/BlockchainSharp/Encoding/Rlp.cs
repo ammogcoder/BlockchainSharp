@@ -15,6 +15,14 @@
             if (bytes != null && bytes.Length == 1 && bytes[0] == 0x80)
                 return emptyarray;
 
+            if ((bytes[0] & 0x80) != 0)
+            {
+                int length = bytes[0] - 0x80;
+                byte[] newbytes = new byte[length];
+                Array.Copy(bytes, 1, newbytes, 0, length);
+                return newbytes;
+            }
+
             return bytes;
         }
 
