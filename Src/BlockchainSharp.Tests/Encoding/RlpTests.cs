@@ -41,6 +41,19 @@
         }
 
         [TestMethod]
+        public void DecodeSingleLowBytes()
+        {
+            for (var k = 0; k < 128; k++)
+            {
+                var result = Rlp.Decode(new byte[] { (byte)k });
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(1, result.Length);
+                Assert.AreEqual(k, result[0]);
+            }
+        }
+
+        [TestMethod]
         public void EncodeSingleHighBytes()
         {
             for (var k = 128; k < 256; k++)
