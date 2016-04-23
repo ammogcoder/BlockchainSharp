@@ -10,8 +10,9 @@
         private IList<Block> blocks = new List<Block>();
         private BlockBranch parent = null;
 
-        public BlockBranch()
+        public BlockBranch(Block block)
         {
+            this.blocks.Add(block);
         }
 
         public long BestBlockNumber { get { return this.blocks.Last().Number; } }

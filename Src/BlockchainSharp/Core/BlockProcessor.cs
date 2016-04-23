@@ -31,11 +31,7 @@
                     nprocessed++;
 
             if (nprocessed == 0) 
-            {
-                BlockBranch branch = new BlockBranch();
-                branch.TryToAddFirst(block);
-                this.branches.Add(branch);
-            }
+                this.branches.Add(new BlockBranch(block));
 
             foreach (var branch in this.branches)
             {

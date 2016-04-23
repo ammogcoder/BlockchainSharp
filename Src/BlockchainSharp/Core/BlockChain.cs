@@ -8,11 +8,10 @@
     public class BlockChain : BlockBranch
     {
         public BlockChain(Block block)
+            : base(block)
         {
             if (!block.IsGenesis)
                 throw new ArgumentException("Initial block should be genesis");
-
-            this.Blocks.Add(block);
         }
 
         public bool TryToAdd(Block block)
