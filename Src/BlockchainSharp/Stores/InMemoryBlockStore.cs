@@ -6,7 +6,7 @@
     using System.Text;
     using BlockchainSharp.Core;
 
-    public class InMemoryBlockStore : BlockStore
+    public class InMemoryBlockStore : IBlockStore
     {
         private IDictionary<Hash, Block> blocks = new Dictionary<Hash, Block>();
         private IDictionary<long, IList<Block>> blocksbynumber = new Dictionary<long, IList<Block>>();

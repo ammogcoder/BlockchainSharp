@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using BlockchainSharp.Core;
 
-    public interface BlockStore
+    public interface IBlockStore
     {
         Block GetByHash(Hash hash);
 
