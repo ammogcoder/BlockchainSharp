@@ -17,8 +17,19 @@
 
             if ((bytes[0] & 0x80) != 0)
             {
-                int length = bytes[0] - 0x80;
-                byte[] newbytes = new byte[length];
+                int length;
+                byte[] newbytes;
+
+                if (bytes[0] > 183)
+                {
+                    length = bytes[1];
+                    newbytes = new byte[length];
+                    Array.Copy(bytes, 2, newbytes, 0, length);
+                    return newbytes;
+                }
+
+                length = bytes[0] - 0x80;
+                newbytes = new byte[length];
                 Array.Copy(bytes, 1, newbytes, 0, length);
                 return newbytes;
             }

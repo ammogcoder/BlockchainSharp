@@ -146,6 +146,29 @@
         }
 
         [TestMethod]
+        public void DecodeBytesOneByteLength()
+        {
+            for (var k = 56; k < 256; k++)
+            {
+                var bytes = new byte[k + 2];
+
+                bytes[0] = 183 + 1;
+                bytes[1] = (byte)k;
+
+                for (int j = 0; j < k; j++)
+                    bytes[j + 2] = (byte)(j % 256);
+
+                var result = Rlp.Decode(bytes);
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(k, result.Length);
+
+                for (var j = 0; j < k; j++)
+                    Assert.AreEqual(j % 256, result[j]);
+            }
+        }
+
+        [TestMethod]
         public void EncodeBytesTwoBytesLength()
         {
             for (var k = 256; k < 1000; k++)
