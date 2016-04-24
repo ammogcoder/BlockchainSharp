@@ -72,9 +72,9 @@
                 return new Trie<T>(this.defvalue, newleafs);
             }
 
-            if (this.leafs[position] != null)
+            if (this.leafs[offset] != null)
             {
-                newleafs[offset] = ((Trie<T>)this.leafs[position]).Put(key, position + 1, value);
+                newleafs[offset] = ((Trie<T>)this.leafs[offset]).Put(key, position + 1, value);
 
                 return new Trie<T>(this.defvalue, newleafs);
             }
