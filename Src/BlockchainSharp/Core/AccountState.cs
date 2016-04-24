@@ -16,5 +16,16 @@
         }
 
         public BigInteger Balance { get { return this.balance; } }
+
+        public AccountState AddToBalance(BigInteger amount)
+        {
+            return new AccountState(BigInteger.Add(this.balance, amount));
+        }
+
+        public AccountState SubtractFromBalance(BigInteger amount)
+        {
+            return new AccountState(BigInteger.Subtract(this.balance, amount));
+        }
     }
 }
+
