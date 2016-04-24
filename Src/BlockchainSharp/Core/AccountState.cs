@@ -12,6 +12,9 @@
 
         public AccountState(BigInteger balance)
         {
+            if (BigInteger.Compare(BigInteger.Zero, balance) > 0)
+                throw new InvalidOperationException("Invalid balance");
+
             this.balance = balance;
         }
 

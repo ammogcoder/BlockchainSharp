@@ -39,5 +39,22 @@
             Assert.AreNotSame(state, result);
             Assert.AreEqual(BigInteger.Zero, result.Balance);
         }
+
+        [TestMethod]
+        public void NonNegativeBalance()
+        {
+            var state = new AccountState(BigInteger.Zero);
+
+            try
+            {
+                state.SubtractFromBalance(BigInteger.One);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+                Assert.AreEqual("Invalid balance", ex.Message);
+            }
+        }
     }
 }
