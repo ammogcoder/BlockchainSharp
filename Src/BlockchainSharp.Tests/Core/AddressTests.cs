@@ -32,6 +32,13 @@
         }
 
         [TestMethod]
+        public void AddressToString()
+        {
+            Assert.AreEqual("00010203", new Address(new byte[] { 0x00, 0x01, 0x02, 0x03 }).ToString());
+            Assert.AreEqual("abcdef03", new Address(new byte[] { 0xab, 0xcd, 0xef, 0x03 }).ToString());
+        }
+
+        [TestMethod]
         public void Equals()
         {
             Address address1 = new Address(new byte[] { 0x00, 0x01, 0x02, 0x03 });

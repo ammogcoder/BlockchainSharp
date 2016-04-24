@@ -58,5 +58,18 @@
 
             return value;
         }
+
+        public override string ToString() 
+        {
+            return ByteArrayToString(this.bytes);
+        }
+
+        private static string ByteArrayToString(byte[] bytes)
+        {
+            StringBuilder hex = new StringBuilder(bytes.Length * 2);
+            foreach (byte b in bytes)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
+        }
     }
 }
