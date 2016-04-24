@@ -48,6 +48,29 @@
             Assert.AreEqual(new BigInteger(100), newstates.Get(addr2.ToString()).Balance);
         }
 
+        [TestMethod]
+        public void ExecuteTransactionWithoutFunds()
+        {
+            var transaction = CreateTransaction(100);
+
+            var addr1 = transaction.Inputs.First().Address;
+            var addr2 = transaction.Outputs.First().Address;
+
+            var states = new Trie<AccountState>(new AccountState(BigInteger.Zero));
+
+            var processor = new TransactionProcessor(states);
+
+            Assert.IsFalse(processor.ExecuteTransaction(transaction));
+
+            var newstates = processor.States;
+
+            Assert.IsNotNull(newstates);
+            Assert.AreSame(states, newstates);
+
+            Assert.AreEqual(BigInteger.Zero, states.Get(addr1.ToString()).Balance);
+            Assert.AreEqual(BigInteger.Zero, states.Get(addr2.ToString()).Balance);
+        }
+
         private static Transaction CreateTransaction(int amount)
         {
             Address addr1 = new Address();
