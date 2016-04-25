@@ -23,27 +23,21 @@
 
             try
             {
-                foreach (var av in transaction.Inputs)
-                {
-                    var addr = av.Address.ToString();
-                    var state = states.Get(addr);
-                    var newstate = state.SubtractFromBalance(av.Value);
-                    states = states.Put(addr, newstate);
-                }
+                var addr = transaction.Sender.ToString();
+                var state = states.Get(addr);
+                var newstate = state.SubtractFromBalance(transaction.SenderValue);
+                states = states.Put(addr, newstate);
 
-                foreach (var av in transaction.Outputs)
-                {
-                    var addr = av.Address.ToString();
-                    var state = states.Get(addr);
-                    var newstate = state.AddToBalance(av.Value);
-                    states = states.Put(addr, newstate);
-                }
+                addr = transaction.Receiver.ToString();
+                state = states.Get(addr);
+                newstate = state.AddToBalance(transaction.ReceiverValue);
+                states = states.Put(addr, newstate);
 
                 this.states = states;
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

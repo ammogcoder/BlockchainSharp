@@ -25,8 +25,8 @@
         {
             var transaction = CreateTransaction(100);
 
-            var addr1 = transaction.Inputs.First().Address;
-            var addr2 = transaction.Outputs.First().Address;
+            var addr1 = transaction.Sender;
+            var addr2 = transaction.Receiver;
 
             var states = new Trie<AccountState>(new AccountState(BigInteger.Zero));
 
@@ -53,8 +53,8 @@
         {
             var transaction = CreateTransaction(100);
 
-            var addr1 = transaction.Inputs.First().Address;
-            var addr2 = transaction.Outputs.First().Address;
+            var addr1 = transaction.Sender;
+            var addr2 = transaction.Receiver;
 
             var states = new Trie<AccountState>(new AccountState(BigInteger.Zero));
 
@@ -77,10 +77,7 @@
             Address addr2 = new Address();
             BigInteger value = new BigInteger(amount);
 
-            AddressValue av1 = new AddressValue(addr1, value);
-            AddressValue av2 = new AddressValue(addr2, value);
-
-            return new Transaction(new AddressValue[] { av1 }, new AddressValue[] { av2 });
+            return new Transaction(addr1, value, addr2, value);
         }
     }
 }

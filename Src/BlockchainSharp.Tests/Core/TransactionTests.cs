@@ -10,51 +10,38 @@
     public class TransactionTests
     {
         [TestMethod]
-        public void CreateTransactionWithTotals()
+        public void CreateTransaction()
         {
-            Transaction transaction = new Transaction(
-                new AddressValue[] 
-                {
-                    new AddressValue(new Address(), new BigInteger(100))
-                },
-                new AddressValue[] 
-                {
-                    new AddressValue(new Address(), new BigInteger(50)),
-                    new AddressValue(new Address(), new BigInteger(40))
-                });
+            var sender = new Address();
+            var receiver = new Address();
 
-            Assert.IsNotNull(transaction.Inputs);
-            Assert.AreEqual(1, transaction.Inputs.Count());
+            Transaction transaction = new Transaction(sender, new BigInteger(100), receiver, new BigInteger(90));
 
-            Assert.IsNotNull(transaction.Outputs);
-            Assert.AreEqual(2, transaction.Outputs.Count());
+            Assert.IsNotNull(transaction.Receiver);
+            Assert.AreEqual(receiver, transaction.Receiver);
 
-            Assert.AreEqual(new BigInteger(100), transaction.InputsTotal);
-            Assert.AreEqual(new BigInteger(90), transaction.OutputsTotal);
+            Assert.IsNotNull(transaction.Sender);
+            Assert.AreEqual(sender, transaction.Sender);
+
+            Assert.AreEqual(new BigInteger(100), transaction.SenderValue);
+            Assert.AreEqual(new BigInteger(90), transaction.ReceiverValue);
         }
 
         [TestMethod]
-        public void RejectTransactionWithOutputTotalsGreaterThanInputTotals()
+        public void RejectTransactionWithReceiverValueGreaterThanSenderValue()
         {
+            var sender = new Address();
+            var receiver = new Address();
+
             try
             {
-                new Transaction(
-                    new AddressValue[] 
-                    {
-                        new AddressValue(new Address(), new BigInteger(100))
-                    }, 
-                    new AddressValue[] 
-                    {
-                        new AddressValue(new Address(), new BigInteger(50)),
-                        new AddressValue(new Address(), new BigInteger(60))
-                    });
-
+                new Transaction(sender, new BigInteger(100), receiver, new BigInteger(110));
                 Assert.Fail();
             }
             catch (Exception ex)
             {
                 Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
-                Assert.AreEqual("Transaction outputs are greater than inputs", ex.Message);
+                Assert.AreEqual("Transaction receiver value is greater than sender value", ex.Message);
             }
         }
     }
