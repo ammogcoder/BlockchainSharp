@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Numerics;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Stores;
     using BlockchainSharp.Tries;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using BlockchainSharp.Stores;
 
     [TestClass]
     public class TransactionProcessorTests

@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using BlockchainSharp.Tries;
     using BlockchainSharp.Stores;
+    using BlockchainSharp.Tries;
 
     public class TransactionProcessor
     {
