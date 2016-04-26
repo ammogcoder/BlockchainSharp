@@ -57,6 +57,7 @@
     <Compile Include="Core\TransactionProcessor.cs" />
     <Compile Include="Encoding\Rlp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stores\AccountStateStore.cs" />
     <Compile Include="Stores\IBlockStore.cs" />
     <Compile Include="Stores\InMemoryBlockStore.cs" />
     <Compile Include="Tries\Trie.cs" />

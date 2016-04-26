@@ -6,18 +6,19 @@
     using BlockchainSharp.Core;
     using BlockchainSharp.Tries;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BlockchainSharp.Stores;
 
     [TestClass]
     public class TransactionProcessorTests
     {
         [TestMethod]
-        public void CreateWithAccountStates()
+        public void CreateWithAccountStore()
         {
-            var states = new Trie<AccountState>();
-            var tp = new TransactionProcessor(states);
+            var store = new AccountStateStore();
+            var tp = new TransactionProcessor(store);
 
-            Assert.IsNotNull(tp.States);
-            Assert.AreSame(states, tp.States);
+            Assert.IsNotNull(tp.Accounts);
+            Assert.AreSame(store, tp.Accounts);
         }
 
         [TestMethod]
@@ -28,24 +29,24 @@
             var addr1 = transaction.Sender;
             var addr2 = transaction.Receiver;
 
-            var states = new Trie<AccountState>(new AccountState(BigInteger.Zero));
+            var store = new AccountStateStore();
 
-            states = states.Put(addr1.ToString(), new AccountState(new BigInteger(200)));
+            store.Put(addr1, new AccountState(new BigInteger(200)));
 
-            var processor = new TransactionProcessor(states);
+            var processor = new TransactionProcessor(store);
 
             Assert.IsTrue(processor.ExecuteTransaction(transaction));
 
-            var newstates = processor.States;
+            var newstore = processor.Accounts;
 
-            Assert.IsNotNull(newstates);
-            Assert.AreNotSame(states, newstates);
+            Assert.IsNotNull(newstore);
+            Assert.AreNotSame(store, newstore);
 
-            Assert.AreEqual(new BigInteger(200), states.Get(addr1.ToString()).Balance);
-            Assert.AreEqual(BigInteger.Zero, states.Get(addr2.ToString()).Balance);
+            Assert.AreEqual(new BigInteger(200), store.Get(addr1).Balance);
+            Assert.AreEqual(BigInteger.Zero, store.Get(addr2).Balance);
 
-            Assert.AreEqual(new BigInteger(100), newstates.Get(addr1.ToString()).Balance);
-            Assert.AreEqual(new BigInteger(100), newstates.Get(addr2.ToString()).Balance);
+            Assert.AreEqual(new BigInteger(100), newstore.Get(addr1).Balance);
+            Assert.AreEqual(new BigInteger(100), newstore.Get(addr2).Balance);
         }
 
         [TestMethod]
@@ -56,19 +57,19 @@
             var addr1 = transaction.Sender;
             var addr2 = transaction.Receiver;
 
-            var states = new Trie<AccountState>(new AccountState(BigInteger.Zero));
+            var accounts = new AccountStateStore();
 
-            var processor = new TransactionProcessor(states);
+            var processor = new TransactionProcessor(accounts);
 
             Assert.IsFalse(processor.ExecuteTransaction(transaction));
 
-            var newstates = processor.States;
+            var newaccounts = processor.Accounts;
 
-            Assert.IsNotNull(newstates);
-            Assert.AreSame(states, newstates);
+            Assert.IsNotNull(newaccounts);
+            Assert.AreSame(accounts, newaccounts);
 
-            Assert.AreEqual(BigInteger.Zero, states.Get(addr1.ToString()).Balance);
-            Assert.AreEqual(BigInteger.Zero, states.Get(addr2.ToString()).Balance);
+            Assert.AreEqual(BigInteger.Zero, accounts.Get(addr1).Balance);
+            Assert.AreEqual(BigInteger.Zero, accounts.Get(addr2).Balance);
         }
 
         private static Transaction CreateTransaction(int amount)

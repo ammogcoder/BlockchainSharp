@@ -5,35 +5,36 @@
     using System.Linq;
     using System.Text;
     using BlockchainSharp.Tries;
+    using BlockchainSharp.Stores;
 
     public class TransactionProcessor
     {
-        private Trie<AccountState> states;
+        private AccountStateStore accounts;
 
-        public TransactionProcessor(Trie<AccountState> states)
+        public TransactionProcessor(AccountStateStore accounts)
         {
-            this.states = states;
+            this.accounts = accounts;
         }
 
-        public Trie<AccountState> States { get { return this.states; } }
+        public AccountStateStore Accounts { get { return this.accounts; } }
 
         public bool ExecuteTransaction(Transaction transaction)
         {
-            var states = this.states;
+            var accounts = this.accounts.Snapshot();
 
             try
             {
-                var addr = transaction.Sender.ToString();
-                var state = states.Get(addr);
+                var addr = transaction.Sender;
+                var state = accounts.Get(addr);
                 var newstate = state.SubtractFromBalance(transaction.SenderValue);
-                states = states.Put(addr, newstate);
+                accounts.Put(addr, newstate);
 
-                addr = transaction.Receiver.ToString();
-                state = states.Get(addr);
+                addr = transaction.Receiver;
+                state = accounts.Get(addr);
                 newstate = state.AddToBalance(transaction.ReceiverValue);
-                states = states.Put(addr, newstate);
+                accounts.Put(addr, newstate);
 
-                this.states = states;
+                this.accounts = accounts;
 
                 return true;
             }
