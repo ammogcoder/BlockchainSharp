@@ -20,11 +20,19 @@
                 int length;
                 byte[] newbytes;
 
-                if (bytes[0] > 183)
+                if (bytes[0] == 183 + 1)
                 {
                     length = bytes[1];
                     newbytes = new byte[length];
                     Array.Copy(bytes, 2, newbytes, 0, length);
+                    return newbytes;
+                }
+
+                if (bytes[0] == 183 + 2)
+                {
+                    length = bytes[1] << 8 + bytes[2];
+                    newbytes = new byte[length];
+                    Array.Copy(bytes, 3, newbytes, 0, length);
                     return newbytes;
                 }
 
