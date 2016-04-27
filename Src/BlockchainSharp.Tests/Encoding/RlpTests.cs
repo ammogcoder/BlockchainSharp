@@ -198,8 +198,8 @@
                 var bytes = new byte[k + 3];
 
                 bytes[0] = 183 + 2;
-                bytes[1] = (byte)(1000 >> 8);
-                bytes[2] = 1000 % 256;
+                bytes[1] = (byte)(k >> 8);
+                bytes[2] = (byte)(k % 256);
 
                 for (int j = 0; j < k; j++)
                     bytes[j + 3] = (byte)(j % 256);
