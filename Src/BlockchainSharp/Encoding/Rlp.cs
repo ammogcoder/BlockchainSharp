@@ -17,28 +17,12 @@
 
             if ((bytes[0] & 0x80) != 0)
             {
-                int length;
+                int length = GetLength(bytes);
+                int offset = GetOffset(bytes);
                 byte[] newbytes;
-
-                if (bytes[0] == 183 + 1)
-                {
-                    length = bytes[1];
-                    newbytes = new byte[length];
-                    Array.Copy(bytes, 2, newbytes, 0, length);
-                    return newbytes;
-                }
-
-                if (bytes[0] == 183 + 2)
-                {
-                    length = (((int)bytes[1]) << 8) + bytes[2];
-                    newbytes = new byte[length];
-                    Array.Copy(bytes, 3, newbytes, 0, length);
-                    return newbytes;
-                }
-
-                length = bytes[0] - 0x80;
                 newbytes = new byte[length];
-                Array.Copy(bytes, 1, newbytes, 0, length);
+                Array.Copy(bytes, offset, newbytes, 0, length);
+
                 return newbytes;
             }
 
@@ -87,6 +71,35 @@
             Array.Copy(bytes, 0, result, 3, bytes.Length);
 
             return result;
+        }
+
+        private static int GetOffset(byte[] bytes)
+        {
+            if (bytes[0] <= 183)
+                return 1;
+
+            return bytes[0] - 183 + 1;
+        }
+
+        private static int GetLength(byte[] bytes)
+        {
+            var b0 = bytes[0];
+
+            if (b0 > 183)
+            {
+                var nb = b0 - 183;
+                int length = 0;
+
+                for (int k = 0; k < nb; k++)
+                {
+                    length <<= 8;
+                    length += bytes[k + 1];
+                }
+
+                return length;
+            }
+            else
+                return b0 - 0x80;
         }
     }
 }
