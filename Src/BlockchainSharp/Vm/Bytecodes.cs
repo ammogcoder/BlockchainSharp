@@ -2,6 +2,8 @@
 {
     public enum Bytecodes
     {
+        Stop = 0x00,
+
         Add = 0x01,
         Multiply = 0x02,
         Subtract = 0x03,

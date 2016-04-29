@@ -120,6 +120,22 @@
         }
 
         [TestMethod]
+        public void Stop()
+        {
+            Machine machine = new Machine();
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Stop();
+            compiler.Push(1);
+            compiler.Push(2);
+            compiler.Push(3);
+
+            machine.Execute(compiler.ToBytes());
+
+            Assert.AreEqual(0, machine.Stack.Size);
+        }
+
+        [TestMethod]
         public void LessThan()
         {
             BytecodeCompiler compiler = new BytecodeCompiler();

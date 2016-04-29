@@ -27,6 +27,8 @@
 
                 switch (bytecode)
                 {
+                    case (byte)Bytecodes.Stop:
+                        return;
                     case (byte)Bytecodes.Add:
                         this.stack.Push(this.stack.Pop().Add(this.stack.Pop()));
                         break;
