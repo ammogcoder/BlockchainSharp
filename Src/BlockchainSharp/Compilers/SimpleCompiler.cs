@@ -75,6 +75,12 @@
                 this.compiler.LessThan();
             else if (verb == "greaterthan" || verb == "gt")
                 this.compiler.GreaterThan();
+            else if (verb == "sload")
+                this.compiler.SLoad();
+            else if (verb == "sstore")
+                this.compiler.SStore();
+            else if (verb == "stop")
+                this.compiler.Stop();
         }
     }
 }

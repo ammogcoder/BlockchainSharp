@@ -40,6 +40,19 @@
         }
 
         [TestMethod]
+        public void CompileStopOperation()
+        {
+            CompileBytecode("stop", Bytecodes.Stop);
+        }
+
+        [TestMethod]
+        public void CompileStorageOperation()
+        {
+            CompileBytecode("sload", Bytecodes.SLoad);
+            CompileBytecode("sstore", Bytecodes.SStore);
+        }
+
+        [TestMethod]
         public void CompileDup()
         {
             CompileBytecode("dup 1", Bytecodes.Dup1);
