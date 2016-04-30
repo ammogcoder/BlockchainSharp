@@ -60,6 +60,16 @@
             this.Compile(Bytecodes.Pop);
         }
 
+        public void SLoad()
+        {
+            this.Compile(Bytecodes.SLoad);
+        }
+
+        public void SStore()
+        {
+            this.Compile(Bytecodes.SStore);
+        }
+
         public void Push(int value)
         {
             var bytes = (new BigInteger(value)).ToByteArray().Reverse().ToArray();

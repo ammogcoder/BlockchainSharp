@@ -216,6 +216,31 @@
         }
 
         [TestMethod]
+        public void StorageStoreLoad()
+        {
+            BytecodeCompiler compiler = new BytecodeCompiler();
+
+            compiler.Push(1);
+            compiler.SLoad();
+            compiler.Push(2);
+            compiler.Push(3);
+            compiler.SStore();
+            compiler.Push(3);
+            compiler.SLoad();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(2, stack.Size);
+            Assert.AreEqual(DataWord.Two, stack.Pop());
+            Assert.AreEqual(DataWord.Zero, stack.Pop());
+        }
+
+        [TestMethod]
         public void IsZero()
         {
             BytecodeCompiler compiler = new BytecodeCompiler();

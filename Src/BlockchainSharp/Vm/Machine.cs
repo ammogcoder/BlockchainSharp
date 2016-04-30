@@ -4,14 +4,17 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BlockchainSharp.Core;
 
     public class Machine
     {
         private Stack stack;
+        private StorageState storage;
 
         public Machine()
         {
             this.stack = new Stack();
+            this.storage = new StorageState();
         }
 
         public Stack Stack { get { return this.stack; } }
@@ -78,6 +81,15 @@
 
                     case (byte)Bytecodes.Pop:
                         this.stack.Pop();
+                        break;
+
+                    case (byte)Bytecodes.SLoad:
+                        this.stack.Push(this.storage.Get(this.stack.Pop()));
+                        break;
+
+                    case (byte)Bytecodes.SStore:
+                        var address = this.stack.Pop();
+                        this.storage.Put(address, this.stack.Pop());
                         break;
 
                     case (byte)Bytecodes.Push1:

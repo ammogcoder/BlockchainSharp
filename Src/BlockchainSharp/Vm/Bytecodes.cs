@@ -17,6 +17,9 @@
 
         Pop = 0x50,
 
+        SLoad = 0x54,
+        SStore = 0x55,
+
         Push1 = 0x60,
         Push2 = 0x61,
         Push3 = 0x62,
