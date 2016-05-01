@@ -1,4 +1,4 @@
-﻿namespace BlockchainSharp.Core
+﻿namespace BlockchainSharp.Vm
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using System.Text;
     using BlockchainSharp.Vm;
 
-    public class StorageState
+    public class Storage
     {
         private IDictionary<DataWord, DataWord> state = new Dictionary<DataWord, DataWord>();
 

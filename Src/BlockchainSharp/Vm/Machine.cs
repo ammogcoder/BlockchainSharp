@@ -9,12 +9,12 @@
     public class Machine
     {
         private Stack stack;
-        private StorageState storage;
+        private Storage storage;
 
         public Machine()
         {
             this.stack = new Stack();
-            this.storage = new StorageState();
+            this.storage = new Storage();
         }
 
         public Stack Stack { get { return this.stack; } }

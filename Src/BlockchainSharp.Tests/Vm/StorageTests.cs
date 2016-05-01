@@ -1,4 +1,4 @@
-﻿namespace BlockchainSharp.Tests.Core
+﻿namespace BlockchainSharp.Tests.Vm
 {
     using System;
     using BlockchainSharp.Core;
@@ -6,12 +6,12 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class StorageStateTests
+    public class StorageTests
     {
         [TestMethod]
         public void GetZeroValue()
         {
-            var state = new StorageState();
+            var state = new Storage();
 
             Assert.AreEqual(DataWord.Zero, state.Get(DataWord.One));
         }
@@ -19,7 +19,7 @@
         [TestMethod]
         public void SetAndGetValue()
         {
-            var state = new StorageState();
+            var state = new Storage();
 
             state.Put(DataWord.One, new DataWord(42));
 

@@ -52,7 +52,7 @@
     <Compile Include="Core\BlockProcessor.cs" />
     <Compile Include="Core\Address.cs" />
     <Compile Include="Core\Hash.cs" />
-    <Compile Include="Core\StorageState.cs" />
+    <Compile Include="Vm\Storage.cs" />
     <Compile Include="Core\Transaction.cs" />
     <Compile Include="Core\TransactionProcessor.cs" />
     <Compile Include="Encoding\Rlp.cs" />
