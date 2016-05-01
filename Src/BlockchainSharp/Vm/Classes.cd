@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BlockchainSharp.Vm.DataWord">
+    <Position X="0.5" Y="0.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAQAQAAAAkAADAAAAAQAACIAAAAh8AAAAAIA=</HashCode>
+      <FileName>Vm\DataWord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlockchainSharp.Vm.Stack">
+    <Position X="3" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAACJAIAEAAAAAAAACAA=</HashCode>
+      <FileName>Vm\Stack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlockchainSharp.Vm.Machine">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAgAAAAIAAAAACAAAAAAA=</HashCode>
+      <FileName>Vm\Machine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
