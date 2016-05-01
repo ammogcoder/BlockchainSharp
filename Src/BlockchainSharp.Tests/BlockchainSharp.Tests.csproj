@@ -66,6 +66,7 @@
     <Compile Include="Vm\DataWordTests.cs" />
     <Compile Include="Vm\MachineTests.cs" />
     <Compile Include="Vm\StackTests.cs" />
+    <Compile Include="Vm\MemoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlockchainSharp\BlockchainSharp.csproj">
