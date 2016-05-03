@@ -10,6 +10,17 @@
     {
         private byte[] bytes;
 
+        public DataWord GetDataWord(DataWord address)
+        {
+            if (this.bytes != null) {
+                var bytes = new byte[32];
+                Array.Copy(this.bytes, (int)address.Value, bytes, 0, 32);
+                return new DataWord(bytes);
+            }
+
+            return DataWord.Zero;
+        }
+
         public byte GetByte(DataWord address)
         {
             if (this.bytes != null)

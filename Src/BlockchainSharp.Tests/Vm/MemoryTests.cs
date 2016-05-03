@@ -18,6 +18,16 @@
         }
 
         [TestMethod]
+        public void GetUnitializedDataWords()
+        {
+            var memory = new Memory();
+
+            Assert.AreEqual(DataWord.Zero, memory.GetDataWord(DataWord.Zero));
+            Assert.AreEqual(DataWord.Zero, memory.GetDataWord(DataWord.One));
+            Assert.AreEqual(DataWord.Zero, memory.GetDataWord(DataWord.Two));
+        }
+
+        [TestMethod]
         public void SetAndGetBytes()
         {
             var memory = new Memory();
@@ -27,6 +37,16 @@
             Assert.AreEqual(0, memory.GetByte(DataWord.Zero));
             Assert.AreEqual(0x12, memory.GetByte(DataWord.One));
             Assert.AreEqual(0, memory.GetByte(DataWord.Two));
+        }
+
+        [TestMethod]
+        public void GetDataWord()
+        {
+            var memory = new Memory();
+
+            memory.PutByte(new DataWord(30), 0x01);
+
+            Assert.AreEqual(new DataWord(256), memory.GetDataWord(DataWord.Zero));
         }
     }
 }
