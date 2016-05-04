@@ -48,5 +48,18 @@
 
             Assert.AreEqual(new DataWord(256), memory.GetDataWord(DataWord.Zero));
         }
+
+        [TestMethod]
+        public void PutBytes()
+        {
+            var memory = new Memory();
+
+            memory.PutBytes(new DataWord(30), new byte[] { 0x01, 0x02, 0x03 });
+
+            Assert.AreEqual(0x01, memory.GetByte(new DataWord(30)));
+            Assert.AreEqual(0x02, memory.GetByte(new DataWord(31)));
+            Assert.AreEqual(0x03, memory.GetByte(new DataWord(32)));
+        }
     }
 }
+

@@ -21,6 +21,14 @@
             return DataWord.Zero;
         }
 
+        public void PutBytes(DataWord address, byte[] values)
+        {
+            if (this.bytes == null)
+                this.bytes = new byte[1024];
+
+            Array.Copy(values, 0, this.bytes, (int)address.Value, values.Length);
+        }
+
         public byte GetByte(DataWord address)
         {
             if (this.bytes != null)
