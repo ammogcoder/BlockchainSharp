@@ -362,6 +362,26 @@
             Assert.AreEqual(DataWord.Zero, stack.Pop());
         }
 
+        [TestMethod]
+        public void StoreByte()
+        {
+            var compiler = new BytecodeCompiler();
+            compiler.Push(257);
+            compiler.Push(42);
+            compiler.MStore8();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var memory = machine.Memory;
+
+            Assert.IsNotNull(memory);
+            Assert.AreEqual(1, memory.GetByte(new DataWord(42)));
+            Assert.AreEqual(0, memory.GetByte(new DataWord(41)));
+            Assert.AreEqual(0, memory.GetByte(new DataWord(43)));
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];

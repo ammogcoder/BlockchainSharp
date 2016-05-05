@@ -17,6 +17,8 @@
 
         Pop = 0x50,
 
+        MStore8 = 0x53,
+
         SLoad = 0x54,
         SStore = 0x55,
 

@@ -10,14 +10,18 @@
     {
         private Stack stack;
         private Storage storage;
+        private Memory memory;
 
         public Machine()
         {
             this.stack = new Stack();
             this.storage = new Storage();
+            this.memory = new Memory();
         }
 
         public Stack Stack { get { return this.stack; } }
+
+        public Memory Memory { get { return this.memory; } }
 
         public void Execute(byte[] bytecodes)
         {
@@ -83,12 +87,18 @@
                         this.stack.Pop();
                         break;
 
+                    case (byte)Bytecodes.MStore8:
+                        var address = this.stack.Pop();
+                        var value = this.stack.Pop().Bytes[31];
+                        this.memory.PutByte(address, value);
+                        break;
+
                     case (byte)Bytecodes.SLoad:
                         this.stack.Push(this.storage.Get(this.stack.Pop()));
                         break;
 
                     case (byte)Bytecodes.SStore:
-                        var address = this.stack.Pop();
+                        address = this.stack.Pop();
                         this.storage.Put(address, this.stack.Pop());
                         break;
 
