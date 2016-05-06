@@ -60,6 +60,11 @@
             this.Compile(Bytecodes.Pop);
         }
 
+        public void MStore()
+        {
+            this.Compile(Bytecodes.MStore);
+        }
+
         public void MStore8()
         {
             this.Compile(Bytecodes.MStore8);
