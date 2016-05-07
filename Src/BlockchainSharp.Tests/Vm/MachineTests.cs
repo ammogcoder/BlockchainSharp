@@ -404,6 +404,24 @@
             Assert.AreEqual(1, memory.GetByte(new DataWord(42 + 31)));
         }
 
+        [TestMethod]
+        public void StoreAndLoadDataWord()
+        {
+            var compiler = new BytecodeCompiler();
+            compiler.Push(257);
+            compiler.Push(42);
+            compiler.MStore();
+            compiler.Push(43);
+            compiler.MLoad();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.AreEqual(new DataWord(257 << 8), stack.Pop());
+        }
 
         private static void PushPop(int times)
         {

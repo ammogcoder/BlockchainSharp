@@ -87,8 +87,13 @@
                         this.stack.Pop();
                         break;
 
-                    case (byte)Bytecodes.MStore:
+                    case (byte)Bytecodes.MLoad:
                         var address = this.stack.Pop();
+                        this.stack.Push(this.memory.GetDataWord(address));
+                        break;
+
+                    case (byte)Bytecodes.MStore:
+                        address = this.stack.Pop();
                         var valbytes = this.stack.Pop().Bytes;
                         this.memory.PutBytes(address, valbytes);
                         break;
