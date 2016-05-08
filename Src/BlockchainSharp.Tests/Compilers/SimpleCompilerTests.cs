@@ -137,6 +137,21 @@
             CompileBytecode("\r\radd # comment\n", Bytecodes.Add);
         }
 
+        [TestMethod]
+        public void CompileStorageAccess()
+        {
+            CompileBytecode("sload", Bytecodes.SLoad);
+            CompileBytecode("sstore", Bytecodes.SStore);
+        }
+
+        [TestMethod]
+        public void CompileMemoryAccess()
+        {
+            CompileBytecode("mload", Bytecodes.MLoad);
+            CompileBytecode("mstore", Bytecodes.MStore);
+            CompileBytecode("mstore8", Bytecodes.MStore8);
+        }
+
         private static void CompileBytecode(string text, Bytecodes bc)
         {
             var compiler = new SimpleCompiler(text);

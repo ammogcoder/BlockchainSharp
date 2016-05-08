@@ -79,6 +79,12 @@
                 this.compiler.SLoad();
             else if (verb == "sstore")
                 this.compiler.SStore();
+            else if (verb == "mstore")
+                this.compiler.MStore();
+            else if (verb == "mload")
+                this.compiler.MLoad();
+            else if (verb == "mstore8")
+                this.compiler.MStore8();
             else if (verb == "stop")
                 this.compiler.Stop();
         }
