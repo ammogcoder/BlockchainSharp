@@ -85,6 +85,11 @@
             this.Compile(Bytecodes.SStore);
         }
 
+        public void Jump()
+        {
+            this.Compile(Bytecodes.Jump);
+        }
+
         public void Push(int value)
         {
             var bytes = (new BigInteger(value)).ToByteArray().Reverse().ToArray();
