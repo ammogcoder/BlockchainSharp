@@ -5,6 +5,7 @@
     using System.Linq;
     using BlockchainSharp.Vm;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BlockchainSharp.Compilers;
 
     [TestClass]
     public class MachineTests
@@ -253,6 +254,28 @@
             Machine machine = new Machine();
 
             machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.IsNotNull(stack);
+            Assert.AreEqual(2, stack.Size);
+            Assert.AreEqual(DataWord.Zero, stack.ElementAt(1));
+            Assert.AreEqual(DataWord.One, stack.ElementAt(0));
+        }
+
+        [TestMethod]
+        public void IsZeroUsingSimpleCompiler()
+        {
+            string program = "push 2\n" +
+                "iszero\n" +
+                "push 0\n" +
+                "iszero";
+
+            SimpleCompiler compiler = new SimpleCompiler(program);
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.Compile());
 
             var stack = machine.Stack;
 
