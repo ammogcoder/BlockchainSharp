@@ -152,6 +152,12 @@
             CompileBytecode("mstore8", Bytecodes.MStore8);
         }
 
+        [TestMethod]
+        public void CompileJump()
+        {
+            CompileBytecode("jump", Bytecodes.Jump);
+        }
+
         private static void CompileBytecode(string text, Bytecodes bc)
         {
             var compiler = new SimpleCompiler(text);

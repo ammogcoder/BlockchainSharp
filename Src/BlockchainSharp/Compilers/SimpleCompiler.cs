@@ -85,6 +85,8 @@
                 this.compiler.MLoad();
             else if (verb == "mstore8")
                 this.compiler.MStore8();
+            else if (verb == "jump")
+                this.compiler.Jump();
             else if (verb == "stop")
                 this.compiler.Stop();
         }
