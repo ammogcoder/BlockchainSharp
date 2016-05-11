@@ -113,6 +113,10 @@
                         this.storage.Put(address, this.stack.Pop());
                         break;
 
+                    case (byte)Bytecodes.Jump:
+                        pc = (int)this.stack.Pop().Value;
+                        break;
+
                     case (byte)Bytecodes.Push1:
                     case (byte)Bytecodes.Push2:
                     case (byte)Bytecodes.Push3:

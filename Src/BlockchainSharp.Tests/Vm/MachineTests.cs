@@ -446,6 +446,26 @@
             Assert.AreEqual(new DataWord(257 << 8), stack.Pop());
         }
 
+        [TestMethod]
+        public void JumpPushes()
+        {
+            var compiler = new BytecodeCompiler();
+
+            compiler.Push(9);
+            compiler.Jump();
+            compiler.Push(2);
+            compiler.Push(3);
+            compiler.Push(4);
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.AreEqual(0, stack.Size);
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];

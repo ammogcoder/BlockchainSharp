@@ -8,14 +8,16 @@
 
     public class Memory
     {
-        private byte[] bytes;
+        private IDictionary<BigInteger, byte[]> blocks = new Dictionary<BigInteger, byte[]>();
 
         public DataWord GetDataWord(DataWord address)
         {
-            if (this.bytes != null) {
-                var bytes = new byte[32];
-                Array.Copy(this.bytes, (int)address.Value, bytes, 0, 32);
-                return new DataWord(bytes);
+            byte[] bytes = this.GetBlock(address);
+
+            if (bytes != null) {
+                var dbytes = new byte[32];
+                Array.Copy(bytes, (int)address.Value, dbytes, 0, 32);
+                return new DataWord(dbytes);
             }
 
             return DataWord.Zero;
@@ -23,26 +25,44 @@
 
         public void PutBytes(DataWord address, byte[] values)
         {
-            if (this.bytes == null)
-                this.bytes = new byte[1024];
+            byte[] bytes = this.GetOrCreateBlock(address);
 
-            Array.Copy(values, 0, this.bytes, (int)address.Value, values.Length);
+            Array.Copy(values, 0, bytes, (int)address.Value, values.Length);
         }
 
         public byte GetByte(DataWord address)
         {
-            if (this.bytes != null)
-                return this.bytes[(int)address.Value];
+            byte[] bytes = this.GetBlock(address);
+
+            if (bytes != null)
+                return bytes[(int)address.Value];
 
             return 0;
         }
 
         public void PutByte(DataWord address, byte value)
         {
-            if (this.bytes == null)
-                this.bytes = new byte[1024];
+            byte[] bytes = this.GetOrCreateBlock(address);
 
-            this.bytes[(int)address.Value] = value;
+            bytes[(int)address.Value] = value;
+        }
+
+        private byte[] GetBlock(DataWord address) 
+        {
+            if (this.blocks.ContainsKey(BigInteger.Zero))
+                return this.blocks[BigInteger.Zero];
+
+            return null;
+        }
+
+        private byte[] GetOrCreateBlock(DataWord address) 
+        {
+            if (this.blocks.ContainsKey(BigInteger.Zero))
+                return this.blocks[BigInteger.Zero];
+
+            this.blocks[BigInteger.Zero] = new byte[1024];
+
+            return this.blocks[BigInteger.Zero];
         }
     }
 }
