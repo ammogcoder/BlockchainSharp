@@ -90,6 +90,11 @@
             this.Compile(Bytecodes.Jump);
         }
 
+        public void Pc()
+        {
+            this.Compile(Bytecodes.Pc);
+        }
+
         public void Push(int value)
         {
             var bytes = (new BigInteger(value)).ToByteArray().Reverse().ToArray();

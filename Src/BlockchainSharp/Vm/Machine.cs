@@ -117,6 +117,10 @@
                         pc = (int)this.stack.Pop().Value;
                         break;
 
+                    case (byte)Bytecodes.Pc:
+                        this.stack.Push(new DataWord(pc - 1));
+                        break;
+
                     case (byte)Bytecodes.Push1:
                     case (byte)Bytecodes.Push2:
                     case (byte)Bytecodes.Push3:

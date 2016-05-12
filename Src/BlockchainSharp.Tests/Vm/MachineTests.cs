@@ -466,6 +466,29 @@
             Assert.AreEqual(0, stack.Size);
         }
 
+        [TestMethod]
+        public void PushesPc()
+        {
+            var compiler = new BytecodeCompiler();
+
+            compiler.Push(1);
+            compiler.Push(2);
+            compiler.Push(3);
+            compiler.Pc();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.AreEqual(4, stack.Size);
+            Assert.AreEqual(new DataWord(6), stack.Pop());
+            Assert.AreEqual(DataWord.Three, stack.Pop());
+            Assert.AreEqual(DataWord.Two, stack.Pop());
+            Assert.AreEqual(DataWord.One, stack.Pop());
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];

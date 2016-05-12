@@ -26,6 +26,8 @@
 
         Jump = 0x56,
 
+        Pc = 0x58,
+
         Push1 = 0x60,
         Push2 = 0x61,
         Push3 = 0x62,
