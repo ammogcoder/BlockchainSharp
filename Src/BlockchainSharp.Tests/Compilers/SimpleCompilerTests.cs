@@ -158,6 +158,12 @@
             CompileBytecode("jump", Bytecodes.Jump);
         }
 
+        [TestMethod]
+        public void CompilePc()
+        {
+            CompileBytecode("pc", Bytecodes.Pc);
+        }
+
         private static void CompileBytecode(string text, Bytecodes bc)
         {
             var compiler = new SimpleCompiler(text);

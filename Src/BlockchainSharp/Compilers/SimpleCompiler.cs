@@ -87,6 +87,8 @@
                 this.compiler.MStore8();
             else if (verb == "jump")
                 this.compiler.Jump();
+            else if (verb == "pc")
+                this.compiler.Pc();
             else if (verb == "stop")
                 this.compiler.Stop();
         }
