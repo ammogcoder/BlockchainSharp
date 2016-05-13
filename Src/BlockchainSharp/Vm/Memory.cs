@@ -14,7 +14,8 @@
         {
             byte[] bytes = this.GetBlock(address);
 
-            if (bytes != null) {
+            if (bytes != null) 
+            {
                 var dbytes = new byte[32];
                 Array.Copy(bytes, (int)address.Value, dbytes, 0, 32);
                 return new DataWord(dbytes);

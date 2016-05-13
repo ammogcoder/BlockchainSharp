@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using BlockchainSharp.Compilers;
     using BlockchainSharp.Vm;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using BlockchainSharp.Compilers;
 
     [TestClass]
     public class MachineTests
