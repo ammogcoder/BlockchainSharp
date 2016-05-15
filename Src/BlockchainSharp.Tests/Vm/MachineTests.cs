@@ -467,6 +467,46 @@
         }
 
         [TestMethod]
+        public void InvalidNegativeJump()
+        {
+            var compiler = new BytecodeCompiler();
+
+            compiler.Push(-1);
+            compiler.Jump();
+            compiler.Push(2);
+            compiler.Push(3);
+            compiler.Push(4);
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.AreEqual(0, stack.Size);
+        }
+
+        [TestMethod]
+        public void InvalidTooLargeJump()
+        {
+            var compiler = new BytecodeCompiler();
+
+            compiler.Push(10000);
+            compiler.Jump();
+            compiler.Push(2);
+            compiler.Push(3);
+            compiler.Push(4);
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.AreEqual(0, stack.Size);
+        }
+
+        [TestMethod]
         public void PushesPc()
         {
             var compiler = new BytecodeCompiler();
