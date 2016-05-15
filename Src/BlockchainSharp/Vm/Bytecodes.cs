@@ -25,6 +25,7 @@
         SStore = 0x55,
 
         Jump = 0x56,
+        JumpI = 0x57,
 
         Pc = 0x58,
 

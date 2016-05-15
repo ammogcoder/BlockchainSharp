@@ -159,6 +159,12 @@
         }
 
         [TestMethod]
+        public void CompileJumpI()
+        {
+            CompileBytecode("jumpi", Bytecodes.JumpI);
+        }
+
+        [TestMethod]
         public void CompilePc()
         {
             CompileBytecode("pc", Bytecodes.Pc);

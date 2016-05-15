@@ -90,6 +90,11 @@
             this.Compile(Bytecodes.Jump);
         }
 
+        public void JumpI()
+        {
+            this.Compile(Bytecodes.JumpI);
+        }
+
         public void Pc()
         {
             this.Compile(Bytecodes.Pc);

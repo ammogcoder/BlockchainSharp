@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Numerics;
     using System.Text;
     using BlockchainSharp.Core;
 
@@ -115,6 +116,14 @@
 
                     case (byte)Bytecodes.Jump:
                         pc = (int)this.stack.Pop().Value;
+                        break;
+
+                    case (byte)Bytecodes.JumpI:
+                        var newpc = (int)this.stack.Pop().Value;
+
+                        if (!this.stack.Pop().Value.Equals(BigInteger.Zero))
+                            pc = newpc;
+
                         break;
 
                     case (byte)Bytecodes.Pc:

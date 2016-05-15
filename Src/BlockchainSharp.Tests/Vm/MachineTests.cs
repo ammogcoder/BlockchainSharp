@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Numerics;
     using BlockchainSharp.Compilers;
     using BlockchainSharp.Vm;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -464,6 +465,51 @@
             var stack = machine.Stack;
 
             Assert.AreEqual(0, stack.Size);
+        }
+
+        [TestMethod]
+        public void ConditionalJumpWhenTrue()
+        {
+            var compiler = new BytecodeCompiler();
+
+            compiler.Push(1);
+            compiler.Push(11);
+            compiler.JumpI();
+            compiler.Push(2);
+            compiler.Push(3);
+            compiler.Push(4);
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.AreEqual(0, stack.Size);
+        }
+
+        [TestMethod]
+        public void ConditionalJumpWhenFalse()
+        {
+            var compiler = new BytecodeCompiler();
+
+            compiler.Push(0);
+            compiler.Push(11);
+            compiler.JumpI();
+            compiler.Push(2);
+            compiler.Push(3);
+            compiler.Push(4);
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            var stack = machine.Stack;
+
+            Assert.AreEqual(3, stack.Size);
+            Assert.AreEqual(new DataWord(4), stack.Pop());
+            Assert.AreEqual(new DataWord(3), stack.Pop());
+            Assert.AreEqual(new DataWord(2), stack.Pop());
         }
 
         [TestMethod]
