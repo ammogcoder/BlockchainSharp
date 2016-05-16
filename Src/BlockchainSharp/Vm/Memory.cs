@@ -8,8 +8,18 @@
 
     public class Memory
     {
-        private BigInteger blocksize = new BigInteger(1024);
+        private BigInteger blocksize;
         private IDictionary<BigInteger, byte[]> blocks = new Dictionary<BigInteger, byte[]>();
+
+        public Memory()
+            : this(1024)
+        {
+        }
+
+        public Memory(int blocksize)
+        {
+            this.blocksize = new BigInteger(blocksize);
+        }
 
         public DataWord GetDataWord(DataWord address)
         {
