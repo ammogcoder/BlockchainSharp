@@ -60,6 +60,18 @@
             Assert.AreEqual(0x02, memory.GetByte(new DataWord(31)));
             Assert.AreEqual(0x03, memory.GetByte(new DataWord(32)));
         }
+
+        [TestMethod]
+        public void PutBytesCrossingBloc()
+        {
+            var memory = new Memory(10);
+
+            memory.PutBytes(new DataWord(9), new byte[] { 0x01, 0x02, 0x03 });
+
+            Assert.AreEqual(0x01, memory.GetByte(new DataWord(9)));
+            Assert.AreEqual(0x02, memory.GetByte(new DataWord(10)));
+            Assert.AreEqual(0x03, memory.GetByte(new DataWord(11)));
+        }
     }
 }
 
