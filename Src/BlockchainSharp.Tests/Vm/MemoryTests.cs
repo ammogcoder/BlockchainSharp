@@ -62,7 +62,7 @@
         }
 
         [TestMethod]
-        public void PutBytesCrossingBloc()
+        public void PutBytesCrossingBlock()
         {
             var memory = new Memory(10);
 

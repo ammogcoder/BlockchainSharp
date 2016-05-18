@@ -41,7 +41,15 @@
             int offset;
             byte[] bytes = this.GetOrCreateBlock(address, out offset);
 
-            Array.Copy(values, 0, bytes, offset, values.Length);
+            if (values.Length > this.blocksize - offset)
+            {
+                int l = (int)this.blocksize - offset;
+                Array.Copy(values, 0, bytes, offset, l);
+                bytes = this.GetOrCreateBlock(address.Add(new DataWord(l)), out offset);
+                Array.Copy(values, l, bytes, offset, values.Length - l);
+            }
+            else
+                Array.Copy(values, 0, bytes, offset, values.Length);
         }
 
         public byte GetByte(DataWord address)
@@ -88,7 +96,7 @@
             if (this.blocks.ContainsKey(div))
                 return this.blocks[div];
 
-            this.blocks[BigInteger.Zero] = new byte[1024];
+            this.blocks[BigInteger.Zero] = new byte[(int)this.blocksize];
 
             return this.blocks[BigInteger.Zero];
         }
