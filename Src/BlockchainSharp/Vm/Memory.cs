@@ -96,9 +96,9 @@
             if (this.blocks.ContainsKey(div))
                 return this.blocks[div];
 
-            this.blocks[BigInteger.Zero] = new byte[(int)this.blocksize];
+            this.blocks[div] = new byte[(int)this.blocksize];
 
-            return this.blocks[BigInteger.Zero];
+            return this.blocks[div];
         }
     }
 }
