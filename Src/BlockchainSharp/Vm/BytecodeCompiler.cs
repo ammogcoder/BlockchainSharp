@@ -55,6 +55,26 @@
             this.Compile(Bytecodes.IsZero);
         }
 
+        public void And()
+        {
+            this.Compile(Bytecodes.And);
+        }
+
+        public void Or()
+        {
+            this.Compile(Bytecodes.Or);
+        }
+
+        public void Not()
+        {
+            this.Compile(Bytecodes.Not);
+        }
+
+        public void Xor()
+        {
+            this.Compile(Bytecodes.Xor);
+        }
+
         public void Pop()
         {
             this.Compile(Bytecodes.Pop);

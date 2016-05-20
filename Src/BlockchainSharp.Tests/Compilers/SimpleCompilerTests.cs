@@ -138,6 +138,15 @@
         }
 
         [TestMethod]
+        public void CompileLogicalOperations()
+        {
+            CompileBytecode("and", Bytecodes.And);
+            CompileBytecode("or", Bytecodes.Or);
+            CompileBytecode("not", Bytecodes.Not);
+            CompileBytecode("xor", Bytecodes.Xor);
+        }
+
+        [TestMethod]
         public void CompileStorageAccess()
         {
             CompileBytecode("sload", Bytecodes.SLoad);

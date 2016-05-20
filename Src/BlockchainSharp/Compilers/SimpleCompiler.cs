@@ -69,6 +69,14 @@
                 this.compiler.Equal();
             else if (verb == "iszero")
                 this.compiler.IsZero();
+            else if (verb == "and")
+                this.compiler.And();
+            else if (verb == "or")
+                this.compiler.Or();
+            else if (verb == "not")
+                this.compiler.Not();
+            else if (verb == "xor")
+                this.compiler.Xor();
             else if (verb == "pop")
                 this.compiler.Pop();
             else if (verb == "lessthan" || verb == "lt")

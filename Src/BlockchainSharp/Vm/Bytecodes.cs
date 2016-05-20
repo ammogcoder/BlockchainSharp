@@ -14,6 +14,10 @@
 
         Equal = 0x14,
         IsZero = 0x15,
+        And = 0x16,
+        Or = 0x17,
+        Xor = 0x18,
+        Not = 0x19,
 
         Pop = 0x50,
 
