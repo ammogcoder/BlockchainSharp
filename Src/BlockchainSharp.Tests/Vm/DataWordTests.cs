@@ -175,5 +175,15 @@
             Assert.IsTrue(new DataWord(-2).Compare(new DataWord(-1)) < 0);
             Assert.IsTrue(new DataWord(-2).Compare(new DataWord(-2)) == 0);
         }
+
+        [TestMethod]
+        public void And()
+        {
+            DataWord dw1 = new DataWord(new byte[] { 0x0f, 0xf0, 0x0f, 0xf0, 0x0f, 0xf0 });
+            DataWord dw2 = new DataWord(new byte[] { 0xf1, 0x1f, 0xf1, 0x1f, 0xf1, 0x1f });
+            DataWord dw3 = new DataWord(new byte[] { 0x01, 0x10, 0x01, 0x10, 0x01, 0x10 });
+
+            Assert.AreEqual(dw3, dw1.And(dw2));
+        }
     }
 }
