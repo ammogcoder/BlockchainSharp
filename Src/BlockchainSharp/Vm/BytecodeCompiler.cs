@@ -128,7 +128,7 @@
 
         public void Push(DataWord dw)
         {
-            var bytes = dw.Value.ToByteArray();
+            var bytes = dw.Value.ToByteArray().Reverse().ToArray();
             this.CompileAdjust(Bytecodes.Push1, bytes.Length - 1, bytes);
         }
 

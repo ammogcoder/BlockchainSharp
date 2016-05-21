@@ -576,6 +576,25 @@
         }
 
         [TestMethod]
+        public void PushDataWord()
+        {
+            DataWord dw1 = new DataWord(new byte[] { 0x0f, 0xf0, 0x0f, 0xf0, 0x0f, 0xf0 });
+            DataWord dw2 = new DataWord(new byte[] { 0x01, 0x1f, 0xf1, 0x1f, 0xf1, 0x1f });
+
+            var compiler = new BytecodeCompiler();
+
+            compiler.Push(dw1);
+            compiler.Push(dw2);
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            Assert.AreEqual(dw2, machine.Stack.Pop());
+            Assert.AreEqual(dw1, machine.Stack.Pop());
+        }
+
+        [TestMethod]
         public void And()
         {
             DataWord dw1 = new DataWord(new byte[] { 0x0f, 0xf0, 0x0f, 0xf0, 0x0f, 0xf0 });

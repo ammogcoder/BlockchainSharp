@@ -30,6 +30,14 @@
             var dw = new DataWord(new byte[] { 0x01, 0x02 });
 
             Assert.AreEqual(new BigInteger(258), dw.Value);
+
+            var result = dw.Bytes;
+
+            for (int k = 0; k < 30; k++)
+                Assert.AreEqual(0x00, result[k]);
+
+            Assert.AreEqual(0x01, result[30]);
+            Assert.AreEqual(0x02, result[31]);
         }
 
         [TestMethod]

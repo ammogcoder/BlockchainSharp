@@ -76,12 +76,17 @@
                         else
                             this.stack.Push(DataWord.Zero);
                         break;
+
                     case (byte)Bytecodes.IsZero:
                         var top = this.stack.Pop();
                         if (DataWord.Zero.Equals(top))
                             this.stack.Push(DataWord.One);
                         else
                             this.stack.Push(DataWord.Zero);
+                        break;
+
+                    case (byte)Bytecodes.And:
+                        this.stack.Push(this.stack.Pop().And(this.stack.Pop()));
                         break;
 
                     case (byte)Bytecodes.Pop:
