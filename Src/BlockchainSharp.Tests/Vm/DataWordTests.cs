@@ -193,5 +193,15 @@
 
             Assert.AreEqual(dw3, dw1.And(dw2));
         }
+
+        [TestMethod]
+        public void Or()
+        {
+            DataWord dw1 = new DataWord(new byte[] { 0x0f, 0xf0, 0x0f, 0xf0, 0x0f, 0xf0 });
+            DataWord dw2 = new DataWord(new byte[] { 0xf1, 0x1f, 0xf1, 0x1f, 0xf1, 0x1f });
+            DataWord dw3 = new DataWord(new byte[] { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff });
+
+            Assert.AreEqual(dw3, dw1.Or(dw2));
+        }
     }
 }
