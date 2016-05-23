@@ -42,10 +42,6 @@
 
             for (int k = 0; k < length; k++)
                 this.data[k] = bytes[length - k - 1 + offset];
-
-            if ((bytes[0] & 0x80) != 0)
-                for (int k = length; k < 32; k++)
-                    this.data[k] = 0xff;
         }
 
         public DataWord(BigInteger value)
