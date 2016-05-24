@@ -123,6 +123,19 @@
             return new DataWord(newbytes);
         }
 
+        public DataWord Xor(DataWord dw)
+        {
+            var bytes1 = this.Bytes;
+            var bytes2 = dw.Bytes;
+
+            var newbytes = new byte[32];
+
+            for (int k = 0; k < 32; k++)
+                newbytes[k] = (byte)(bytes1[k] ^ bytes2[k]);
+
+            return new DataWord(newbytes);
+        }
+
         public int Compare(DataWord dw)
         {
             return BigInteger.Compare(this.Value, dw.Value);
