@@ -93,6 +93,10 @@
                         this.stack.Push(this.stack.Pop().Or(this.stack.Pop()));
                         break;
 
+                    case (byte)Bytecodes.Xor:
+                        this.stack.Push(this.stack.Pop().Xor(this.stack.Pop()));
+                        break;
+
                     case (byte)Bytecodes.Pop:
                         this.stack.Pop();
                         break;
