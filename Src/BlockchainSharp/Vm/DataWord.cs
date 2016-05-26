@@ -136,6 +136,17 @@
             return new DataWord(newbytes);
         }
 
+        public DataWord Not()
+        {
+            var bytes = this.Bytes;
+            var newbytes = new byte[32];
+
+            for (int k = 0; k < 32; k++)
+                newbytes[k] = (byte)~bytes[k];
+
+            return new DataWord(newbytes);
+        }
+
         public int Compare(DataWord dw)
         {
             return BigInteger.Compare(this.Value, dw.Value);
