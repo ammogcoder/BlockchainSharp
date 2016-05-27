@@ -654,6 +654,24 @@
             Assert.AreEqual(dw3, machine.Stack.Pop());
         }
 
+        [TestMethod]
+        public void Not()
+        {
+            DataWord dw1 = new DataWord(new byte[] { 0x0f, 0xf0, 0x0f, 0xf0, 0x0f, 0xf0 });
+            DataWord dw2 = new DataWord(new byte[] { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xf0, 0x0f, 0xf0, 0x0f, 0xf0, 0x0f });
+
+            var compiler = new BytecodeCompiler();
+
+            compiler.Push(dw1);
+            compiler.Not();
+
+            Machine machine = new Machine();
+
+            machine.Execute(compiler.ToBytes());
+
+            Assert.AreEqual(dw2, machine.Stack.Pop());
+        }
+
         private static void PushPop(int times)
         {
             byte[] bytes = new byte[times];

@@ -97,6 +97,10 @@
                         this.stack.Push(this.stack.Pop().Xor(this.stack.Pop()));
                         break;
 
+                    case (byte)Bytecodes.Not:
+                        this.stack.Push(this.stack.Pop().Not());
+                        break;
+
                     case (byte)Bytecodes.Pop:
                         this.stack.Pop();
                         break;
