@@ -10,6 +10,8 @@
 
         IEnumerable<Block> GetByNumber(long number);
 
+        IEnumerable<Block> GetByParentHash(Hash hash);
+
         void Save(Block block);
     }
 }

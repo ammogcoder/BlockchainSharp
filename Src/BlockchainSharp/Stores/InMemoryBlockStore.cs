@@ -10,6 +10,7 @@
     {
         private IDictionary<Hash, Block> blocks = new Dictionary<Hash, Block>();
         private IDictionary<long, IList<Block>> blocksbynumber = new Dictionary<long, IList<Block>>();
+        private IDictionary<Hash, IList<Block>> blocksbyparenthash = new Dictionary<Hash, IList<Block>>();
 
         public Block GetByHash(Hash hash)
         {
@@ -23,6 +24,14 @@
         {
             if (this.blocksbynumber.ContainsKey(number))
                 return this.blocksbynumber[number];
+
+            return new List<Block>();
+        }
+
+        public IEnumerable<Block> GetByParentHash(Hash hash)
+        {
+            if (this.blocksbyparenthash.ContainsKey(hash))
+                return this.blocksbyparenthash[hash];
 
             return new List<Block>();
         }
@@ -42,6 +51,18 @@
             }
 
             bs.Add(block);
+
+            IList<Block> bs2
+                ;
+            if (this.blocksbyparenthash.ContainsKey(block.ParentHash))
+                bs2 = this.blocksbyparenthash[block.ParentHash];
+            else
+            {
+                bs2 = new List<Block>();
+                this.blocksbyparenthash[block.ParentHash] = bs2;
+            }
+
+            bs2.Add(block);
         }
     }
 }

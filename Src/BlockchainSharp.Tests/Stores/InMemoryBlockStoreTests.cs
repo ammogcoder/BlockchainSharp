@@ -20,6 +20,17 @@
         }
 
         [TestMethod]
+        public void GetNoBlocksByParentHash()
+        {
+            var store = new InMemoryBlockStore();
+
+            var result = store.GetByParentHash(new Hash());
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count());
+        }
+
+        [TestMethod]
         public void GetNoBlocksByNumber()
         {
             var store = new InMemoryBlockStore();
@@ -64,6 +75,23 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(42, result.Number);
             Assert.AreEqual(hash, result.Hash);
+        }
+
+        [TestMethod]
+        public void SaveAndGetBlockByParentHash()
+        {
+            var block = new Block(42, new Hash());
+            var hash = block.Hash;
+
+            var store = new InMemoryBlockStore();
+
+            store.Save(block);
+
+            var result = store.GetByParentHash(block.ParentHash);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count());
+            Assert.IsTrue(result.First().Hash.Equals(block.Hash));
         }
     }
 }
