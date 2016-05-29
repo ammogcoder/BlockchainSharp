@@ -25,26 +25,18 @@
                 return;
 
             this.store.Save(block);
-
-            int nprocessed = 0;
-
-            if (this.chain == null)
-            {
-                this.chain = new BlockChain(block);
-                nprocessed++;
-                return;
-            }
-
-            if (this.chain.TryToAdd(block))
-            {
-                nprocessed++;
-                return;
-            }
-
             var unknownAncestor = this.GetUnknownAncestor(block);
 
             if (unknownAncestor != null)
                 return;
+
+            if (this.chain == null)
+            {
+                this.chain = new BlockChain(block);
+                return;
+            }
+
+            this.chain.TryToAdd(block);
 
             this.TryConnect(block);
         }
