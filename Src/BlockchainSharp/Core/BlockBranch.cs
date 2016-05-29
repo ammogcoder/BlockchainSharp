@@ -7,12 +7,18 @@
 
     public class BlockBranch
     {
-        private IList<Block> blocks = new List<Block>();
+        private IList<Block> blocks;
         private BlockBranch parent = null;
 
         public BlockBranch(Block block)
         {
+            this.blocks = new List<Block>();
             this.blocks.Add(block);
+        }
+
+        public BlockBranch(IList<Block> blocks)
+        {
+            this.blocks = blocks;
         }
 
         public long BestBlockNumber { get { return this.blocks.Last().Number; } }

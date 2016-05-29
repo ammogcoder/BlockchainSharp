@@ -4,63 +4,92 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BlockchainSharp.Stores;
 
     public class BlockProcessor
     {
         private BlockChain chain;
+        private IBlockStore store;
         private IList<BlockBranch> branches = new List<BlockBranch>();
+
+        public BlockProcessor()
+        {
+            this.store = new InMemoryBlockStore();
+        }
 
         public BlockChain BlockChain { get { return this.chain; } }
 
         public void Process(Block block)
         {
+            if (this.store.GetByHash(block.Hash) != null)
+                return;
+
+            this.store.Save(block);
+
             int nprocessed = 0;
 
             if (this.chain == null)
             {
                 this.chain = new BlockChain(block);
                 nprocessed++;
+                return;
             }
-            else if (this.chain.TryToAdd(block))
+
+            if (this.chain.TryToAdd(block))
+            {
                 nprocessed++;
-
-            foreach (var branch in this.branches)
-                if (branch.TryToAddFirst(block))
-                    nprocessed++;
-                else if (branch.TryToAddLast(block))
-                    nprocessed++;
-
-            if (nprocessed == 0) 
-                this.branches.Add(new BlockBranch(block));
-
-            foreach (var branch in this.branches)
-            {
-                if (branch.IsConnected())
-                    continue;
-
-                if (branch.TryToConnect(this.chain))
-                    continue;
-
-                foreach (var branch2 in this.branches)
-                    branch.TryToConnect(branch2);
+                return;
             }
 
-            IList<BlockBranch> toremove = new List<BlockBranch>();
+            var unknownAncestor = this.GetUnknownAncestor(block);
 
-            foreach (var branch in this.branches)
+            if (unknownAncestor != null)
+                return;
+
+            this.TryConnect(block);
+        }
+
+        private void TryConnect(Block block) {
+            if (this.BlockChain.BestBlockNumber < block.Number)
+                this.chain = ToBlockChain(block);
+
+            foreach (var child in this.store.GetByParentHash(block.Hash))
+                this.TryConnect(child);
+        }
+
+        private BlockChain ToBlockChain(Block block)
+        {
+            Block[] blocks = new Block[block.Number + 1];
+
+            long n = block.Number + 1;
+
+            while (n > 0)
             {
-                if (!branch.HasGenesis())
-                    continue;
+                n--;
+                blocks[n] = block;
 
-                if (branch.BestBlockNumber > this.chain.BestBlockNumber)
-                {
-                    this.chain = branch.ToBlockChain(branch.BestBlockNumber);
-                    toremove.Add(branch);
-                }
+                if (n > 0)
+                    block = this.store.GetByHash(block.ParentHash);
             }
 
-            foreach (var branch in toremove)
-                this.branches.Remove(branch);
+            return new BlockChain(blocks.ToList());
+        }
+
+        private Hash GetUnknownAncestor(Block block)
+        {
+            var parentHash = block.ParentHash;
+
+            while (block.Number > 0)
+            {
+                block = this.store.GetByHash(parentHash);
+
+                if (block == null)
+                    return parentHash;
+
+                parentHash = block.ParentHash;
+            }
+
+            return null;
         }
     }
 }

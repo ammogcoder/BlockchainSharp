@@ -14,6 +14,11 @@
                 throw new ArgumentException("Initial block should be genesis");
         }
 
+        public BlockChain(IList<Block> blocks)
+            : base(blocks)
+        {
+        }
+
         public bool TryToAdd(Block block)
         {
             return this.TryToAddLast(block);

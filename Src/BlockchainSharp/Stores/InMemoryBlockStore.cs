@@ -52,8 +52,11 @@
 
             bs.Add(block);
 
-            IList<Block> bs2
-                ;
+            if (block.ParentHash == null)
+                return;
+
+            IList<Block> bs2;
+
             if (this.blocksbyparenthash.ContainsKey(block.ParentHash))
                 bs2 = this.blocksbyparenthash[block.ParentHash];
             else
