@@ -10,7 +10,6 @@
     {
         private BlockChain chain;
         private IBlockStore store;
-        private IList<BlockBranch> branches = new List<BlockBranch>();
 
         public BlockProcessor()
         {

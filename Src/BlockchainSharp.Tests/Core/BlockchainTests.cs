@@ -105,42 +105,6 @@
             Assert.IsNull(chain.GetBlock(10));
             Assert.IsNull(chain.GetBlock(-1));
         }
-
-        [TestMethod]
-        public void GetBlockByNumberAndHash()
-        {
-            IList<Block> blocks = new List<Block>();
-            Block parent = null;
-            BlockChain chain = null;
-
-            for (int k = 0; k < 10; k++)
-            {
-                Block block = new Block(k, parent != null ? parent.Hash : null);
-                blocks.Add(block);
-                parent = block;
-
-                if (chain == null)
-                    chain = new BlockChain(block);
-                else
-                    Assert.IsTrue(chain.TryToAdd(block));
-            }
-
-            Assert.AreEqual(9, chain.BestBlockNumber);
-
-            for (int k = 0; k < 10; k++)
-            {
-                Block block = chain.GetBlock(k, blocks[k].Hash);
-
-                Assert.IsNotNull(block);
-                Assert.AreEqual(blocks[k], block);
-                Assert.AreEqual(k, block.Number);
-                Assert.AreEqual(blocks[k].Hash, block.Hash);
-            }
-
-            Assert.IsNull(chain.GetBlock(1, new Hash()));
-            Assert.IsNull(chain.GetBlock(10, new Hash()));
-            Assert.IsNull(chain.GetBlock(-1, new Hash()));
-        }
     }
 }
 
