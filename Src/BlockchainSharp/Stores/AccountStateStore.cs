@@ -22,19 +22,14 @@
             this.states = states;
         }
 
-        public void Put(Address address, AccountState state)
+        public AccountStateStore Put(Address address, AccountState state)
         {
-            this.states = this.states.Put(address.ToString(), state);
+            return new AccountStateStore(this.states.Put(address.ToString(), state));
         }
 
         public AccountState Get(Address address)
         {
             return this.states.Get(address.ToString());
-        }
-
-        public AccountStateStore Snapshot()
-        {
-            return new AccountStateStore(this.states);
         }
     }
 }

@@ -31,7 +31,7 @@
 
             var store = new AccountStateStore();
 
-            store.Put(addr1, new AccountState(new BigInteger(200)));
+            store = store.Put(addr1, new AccountState(new BigInteger(200)));
 
             var processor = new TransactionProcessor(store);
 
