@@ -40,9 +40,10 @@
             this.TryConnect(block);
         }
 
-        private void TryConnect(Block block) {
+        private void TryConnect(Block block) 
+        {
             if (this.BlockChain.BestBlockNumber < block.Number)
-                this.chain = ToBlockChain(block);
+                this.chain = this.ToBlockChain(block);
 
             foreach (var child in this.store.GetByParentHash(block.Hash))
                 this.TryConnect(child);

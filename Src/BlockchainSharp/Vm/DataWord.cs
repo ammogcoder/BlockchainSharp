@@ -142,7 +142,7 @@
             var newbytes = new byte[32];
 
             for (int k = 0; k < 32; k++)
-                newbytes[k] = (byte)~bytes[k];
+                newbytes[k] = (byte)(~bytes[k]);
 
             return new DataWord(newbytes);
         }
