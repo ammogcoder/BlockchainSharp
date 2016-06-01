@@ -41,6 +41,7 @@
 
             Assert.IsNotNull(newstore);
             Assert.AreNotSame(store, newstore);
+            Assert.AreSame(newstore, transaction.Store);
 
             Assert.AreEqual(new BigInteger(200), store.Get(addr1).Balance);
             Assert.AreEqual(BigInteger.Zero, store.Get(addr2).Balance);

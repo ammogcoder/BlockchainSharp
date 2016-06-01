@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Numerics;
     using System.Text;
+    using BlockchainSharp.Stores;
 
     public class Transaction
     {
@@ -12,6 +13,7 @@
         private BigInteger sendervalue;
         private Address receiver;
         private BigInteger receivervalue;
+        private AccountStateStore store;
 
         public Transaction(Address sender, BigInteger sendervalue, Address receiver, BigInteger receivervalue)
         {
@@ -31,5 +33,17 @@
         public Address Receiver { get { return this.receiver; } }
 
         public BigInteger ReceiverValue { get { return this.receivervalue; } }
+
+        public AccountStateStore Store
+        {
+            get
+            {
+                return this.store;
+            }
+            set
+            {
+                this.store = value;
+            }
+        }
     }
 }

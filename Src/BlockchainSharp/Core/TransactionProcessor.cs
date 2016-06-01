@@ -36,6 +36,8 @@
 
                 this.accounts = accounts;
 
+                transaction.Store = accounts;
+
                 return true;
             }
             catch (Exception)
