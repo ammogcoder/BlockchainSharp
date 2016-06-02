@@ -9,34 +9,23 @@
 
     public class TransactionProcessor
     {
-        private AccountStateStore accounts;
-
-        public TransactionProcessor(AccountStateStore accounts)
+        public bool ExecuteTransaction(Transaction transaction, AccountStateStore initialstate, ref AccountStateStore newstate)
         {
-            this.accounts = accounts;
-        }
-
-        public AccountStateStore Accounts { get { return this.accounts; } }
-
-        public bool ExecuteTransaction(Transaction transaction)
-        {
-            var accounts = this.accounts;
+            var state = initialstate;
 
             try
             {
                 var addr = transaction.Sender;
-                var state = accounts.Get(addr);
-                var newstate = state.SubtractFromBalance(transaction.SenderValue);
-                accounts = accounts.Put(addr, newstate);
+                var accstate = state.Get(addr);
+                var newaccstate = accstate.SubtractFromBalance(transaction.SenderValue);
+                state = state.Put(addr, newaccstate);
 
                 addr = transaction.Receiver;
-                state = accounts.Get(addr);
-                newstate = state.AddToBalance(transaction.ReceiverValue);
-                accounts = accounts.Put(addr, newstate);
+                accstate = state.Get(addr);
+                newaccstate = accstate.AddToBalance(transaction.ReceiverValue);
+                state = state.Put(addr, newaccstate);
 
-                this.accounts = accounts;
-
-                transaction.Store = accounts;
+                newstate = state;
 
                 return true;
             }

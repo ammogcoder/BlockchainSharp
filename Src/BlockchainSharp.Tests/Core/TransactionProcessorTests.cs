@@ -12,16 +12,6 @@
     public class TransactionProcessorTests
     {
         [TestMethod]
-        public void CreateWithAccountStore()
-        {
-            var store = new AccountStateStore();
-            var tp = new TransactionProcessor(store);
-
-            Assert.IsNotNull(tp.Accounts);
-            Assert.AreSame(store, tp.Accounts);
-        }
-
-        [TestMethod]
         public void ExecuteTransaction()
         {
             var transaction = CreateTransaction(100);
@@ -30,18 +20,16 @@
             var addr2 = transaction.Receiver;
 
             var store = new AccountStateStore();
+            AccountStateStore newstore = null;
 
             store = store.Put(addr1, new AccountState(new BigInteger(200)));
 
-            var processor = new TransactionProcessor(store);
+            var processor = new TransactionProcessor();
 
-            Assert.IsTrue(processor.ExecuteTransaction(transaction));
-
-            var newstore = processor.Accounts;
+            Assert.IsTrue(processor.ExecuteTransaction(transaction, store, ref newstore));
 
             Assert.IsNotNull(newstore);
             Assert.AreNotSame(store, newstore);
-            Assert.AreSame(newstore, transaction.Store);
 
             Assert.AreEqual(new BigInteger(200), store.Get(addr1).Balance);
             Assert.AreEqual(BigInteger.Zero, store.Get(addr2).Balance);
@@ -58,19 +46,17 @@
             var addr1 = transaction.Sender;
             var addr2 = transaction.Receiver;
 
-            var accounts = new AccountStateStore();
+            var store = new AccountStateStore();
+            AccountStateStore newstore = null;
 
-            var processor = new TransactionProcessor(accounts);
+            var processor = new TransactionProcessor();
 
-            Assert.IsFalse(processor.ExecuteTransaction(transaction));
+            Assert.IsFalse(processor.ExecuteTransaction(transaction, store, ref newstore));
 
-            var newaccounts = processor.Accounts;
+            Assert.IsNull(newstore);
 
-            Assert.IsNotNull(newaccounts);
-            Assert.AreSame(accounts, newaccounts);
-
-            Assert.AreEqual(BigInteger.Zero, accounts.Get(addr1).Balance);
-            Assert.AreEqual(BigInteger.Zero, accounts.Get(addr2).Balance);
+            Assert.AreEqual(BigInteger.Zero, store.Get(addr1).Balance);
+            Assert.AreEqual(BigInteger.Zero, store.Get(addr2).Balance);
         }
 
         private static Transaction CreateTransaction(int amount)
