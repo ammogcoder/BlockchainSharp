@@ -59,6 +59,20 @@
             Assert.AreEqual(BigInteger.Zero, store.Get(addr2).Balance);
         }
 
+        [TestMethod]
+        public void ExecuteBlockWithoutTransactions()
+        {
+            Block block = new Block(0, null);
+            var state = new AccountStateStore();
+
+            var processor = new TransactionProcessor();
+
+            var result = processor.ExecuteBlock(block, state);
+
+            Assert.IsNotNull(result);
+            Assert.AreSame(state, result);
+        }
+
         private static Transaction CreateTransaction(int amount)
         {
             Address addr1 = new Address();

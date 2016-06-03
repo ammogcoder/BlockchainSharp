@@ -9,6 +9,11 @@
 
     public class TransactionProcessor
     {
+        public AccountStateStore ExecuteBlock(Block block, AccountStateStore initialstate)
+        {
+            return initialstate;
+        }
+
         public bool ExecuteTransaction(Transaction transaction, AccountStateStore initialstate, ref AccountStateStore newstate)
         {
             var state = initialstate;
