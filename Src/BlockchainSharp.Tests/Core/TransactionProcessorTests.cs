@@ -73,6 +73,29 @@
             Assert.AreSame(state, result);
         }
 
+        [TestMethod]
+        public void ExecuteBlockWithTransaction()
+        {
+            Transaction tx = CreateTransaction(100);
+            Block block = new Block(0, null, new Transaction[] { tx });
+            var state = new AccountStateStore();
+
+            state = state.Put(tx.Sender, new AccountState(new BigInteger(200)));
+
+            var processor = new TransactionProcessor();
+
+            var result = processor.ExecuteBlock(block, state);
+
+            Assert.IsNotNull(result);
+            Assert.AreNotSame(state, result);
+
+            Assert.AreEqual(new BigInteger(200), state.Get(tx.Sender).Balance);
+            Assert.AreEqual(BigInteger.Zero, state.Get(tx.Receiver).Balance);
+
+            Assert.AreEqual(new BigInteger(100), result.Get(tx.Sender).Balance);
+            Assert.AreEqual(new BigInteger(100), result.Get(tx.Receiver).Balance);
+        }
+
         private static Transaction CreateTransaction(int amount)
         {
             Address addr1 = new Address();

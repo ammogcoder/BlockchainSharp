@@ -11,7 +11,15 @@
     {
         public AccountStateStore ExecuteBlock(Block block, AccountStateStore initialstate)
         {
-            return initialstate;
+            if (block.Transactions == null)
+                return initialstate;
+
+            var state = initialstate;
+
+            foreach (var tx in block.Transactions)
+                this.ExecuteTransaction(tx, state, ref state);
+
+            return state;
         }
 
         public bool ExecuteTransaction(Transaction transaction, AccountStateStore initialstate, ref AccountStateStore newstate)
