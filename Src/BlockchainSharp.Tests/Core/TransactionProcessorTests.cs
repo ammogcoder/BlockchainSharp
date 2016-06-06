@@ -19,8 +19,8 @@
             var addr1 = transaction.Sender;
             var addr2 = transaction.Receiver;
 
-            var store = new AccountStateStore();
-            AccountStateStore newstore = null;
+            var store = new AccountsState();
+            AccountsState newstore = null;
 
             store = store.Put(addr1, new AccountState(new BigInteger(200)));
 
@@ -46,8 +46,8 @@
             var addr1 = transaction.Sender;
             var addr2 = transaction.Receiver;
 
-            var store = new AccountStateStore();
-            AccountStateStore newstore = null;
+            var store = new AccountsState();
+            AccountsState newstore = null;
 
             var processor = new TransactionProcessor();
 
@@ -63,7 +63,7 @@
         public void ExecuteBlockWithoutTransactions()
         {
             Block block = new Block(0, null);
-            var state = new AccountStateStore();
+            var state = new AccountsState();
 
             var processor = new TransactionProcessor();
 
@@ -78,7 +78,7 @@
         {
             Transaction tx = CreateTransaction(100);
             Block block = new Block(0, null, new Transaction[] { tx });
-            var state = new AccountStateStore();
+            var state = new AccountsState();
 
             state = state.Put(tx.Sender, new AccountState(new BigInteger(200)));
 
@@ -101,7 +101,7 @@
         {
             Transaction tx = CreateTransaction(100);
             Block block = new Block(0, null, new Transaction[] { tx });
-            var state = new AccountStateStore();
+            var state = new AccountsState();
 
             var processor = new TransactionProcessor();
 

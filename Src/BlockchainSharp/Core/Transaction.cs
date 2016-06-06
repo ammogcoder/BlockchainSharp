@@ -13,7 +13,7 @@
         private BigInteger sendervalue;
         private Address receiver;
         private BigInteger receivervalue;
-        private AccountStateStore store;
+        private AccountsState store;
 
         public Transaction(Address sender, BigInteger sendervalue, Address receiver, BigInteger receivervalue)
         {
@@ -34,7 +34,7 @@
 
         public BigInteger ReceiverValue { get { return this.receivervalue; } }
 
-        public AccountStateStore Store
+        public AccountsState Store
         {
             get
             {

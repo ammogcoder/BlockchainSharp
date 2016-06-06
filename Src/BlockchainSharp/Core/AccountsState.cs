@@ -1,4 +1,4 @@
-﻿namespace BlockchainSharp.Stores
+﻿namespace BlockchainSharp.Core
 {
     using System;
     using System.Collections.Generic;
@@ -8,23 +8,23 @@
     using BlockchainSharp.Core;
     using BlockchainSharp.Tries;
 
-    public class AccountStateStore
+    public class AccountsState
     {
         private Trie<AccountState> states;
 
-        public AccountStateStore()
+        public AccountsState()
             : this(new Trie<AccountState>(new AccountState(BigInteger.Zero)))
         {
         }
 
-        private AccountStateStore(Trie<AccountState> states)
+        private AccountsState(Trie<AccountState> states)
         {
             this.states = states;
         }
 
-        public AccountStateStore Put(Address address, AccountState state)
+        public AccountsState Put(Address address, AccountState state)
         {
-            return new AccountStateStore(this.states.Put(address.ToString(), state));
+            return new AccountsState(this.states.Put(address.ToString(), state));
         }
 
         public AccountState Get(Address address)

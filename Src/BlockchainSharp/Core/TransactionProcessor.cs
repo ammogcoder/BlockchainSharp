@@ -9,7 +9,7 @@
 
     public class TransactionProcessor
     {
-        public AccountStateStore ExecuteBlock(Block block, AccountStateStore initialstate)
+        public AccountsState ExecuteBlock(Block block, AccountsState initialstate)
         {
             if (block.Transactions == null)
                 return initialstate;
@@ -22,7 +22,7 @@
             return state;
         }
 
-        public bool ExecuteTransaction(Transaction transaction, AccountStateStore initialstate, ref AccountStateStore newstate)
+        public bool ExecuteTransaction(Transaction transaction, AccountsState initialstate, ref AccountsState newstate)
         {
             var state = initialstate;
 
