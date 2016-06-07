@@ -40,6 +40,7 @@
             {
                 return this.store;
             }
+
             set
             {
                 this.store = value;
