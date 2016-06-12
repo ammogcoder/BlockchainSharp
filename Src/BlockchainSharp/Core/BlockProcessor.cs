@@ -51,20 +51,20 @@
 
         private BlockChain ToBlockChain(Block block)
         {
-            Block[] blocks = new Block[block.Number + 1];
+            BlockInfo[] blockinfos = new BlockInfo[block.Number + 1];
 
             long n = block.Number + 1;
 
             while (n > 0)
             {
                 n--;
-                blocks[n] = block;
+                blockinfos[n] = new BlockInfo(block, null);
 
                 if (n > 0)
                     block = this.store.GetByHash(block.ParentHash);
             }
 
-            return new BlockChain(blocks.ToList());
+            return new BlockChain(blockinfos.ToList());
         }
 
         private Hash GetUnknownAncestor(Block block)

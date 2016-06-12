@@ -7,47 +7,47 @@
 
     public class BlockChain
     {
-        private IList<Block> blocks;
+        private IList<BlockInfo> blockinfos;
 
         public BlockChain(Block block)
         {
             if (!block.IsGenesis)
                 throw new ArgumentException("Initial block should be genesis");
-            this.blocks = new List<Block>();
-            this.blocks.Add(block);
+            this.blockinfos = new List<BlockInfo>();
+            this.blockinfos.Add(new BlockInfo(block, null));
         }
 
-        public BlockChain(IList<Block> blocks)
+        public BlockChain(IList<BlockInfo> blockinfos)
         {
-            this.blocks = blocks;
+            this.blockinfos = blockinfos;
         }
 
-        public long BestBlockNumber { get { return this.blocks.Last().Number; } }
+        public long BestBlockNumber { get { return this.blockinfos.Last().Block.Number; } }
 
-        public Block BestBlock { get { return this.blocks.Last(); } }
+        public Block BestBlock { get { return this.blockinfos.Last().Block; } }
 
         public bool TryToAdd(Block block)
         {
-            if (this.blocks.Count == 0)
+            if (this.blockinfos.Count == 0)
             {
-                this.blocks.Add(block);
+                this.blockinfos.Add(new BlockInfo(block, null));
                 return true;
             }
 
-            if (!block.HasParent(this.blocks.Last()))
+            if (!block.HasParent(this.blockinfos.Last().Block))
                 return false;
 
-            this.blocks.Add(block);
+            this.blockinfos.Add(new BlockInfo(block, null));
 
             return true;
         }
 
         public Block GetBlock(long n)
         {
-            if (n < 0 || n >= this.blocks.Count)
+            if (n < 0 || n >= this.blockinfos.Count)
                 return null;
 
-            return this.blocks[(int)n];
+            return this.blockinfos[(int)n].Block;
         }
     }
 }
