@@ -10,10 +10,11 @@
 
     public class AccountsState
     {
+        private static AccountState defaultValue = new AccountState(BigInteger.Zero);
         private Trie<AccountState> states;
 
         public AccountsState()
-            : this(new Trie<AccountState>(new AccountState(BigInteger.Zero)))
+            : this(new Trie<AccountState>())
         {
         }
 
@@ -29,7 +30,12 @@
 
         public AccountState Get(Address address)
         {
-            return this.states.Get(address.ToString());
+            var result = this.states.Get(address.ToString());
+
+            if (result == null)
+                return defaultValue;
+
+            return result;
         }
     }
 }

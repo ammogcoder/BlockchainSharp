@@ -7,23 +7,21 @@
 
     public class Trie<T>
     {
-        private object[] leafs;
-        private T defvalue;
+        private Trie<T>[] leafs;
+        private T value;
 
         public Trie() 
-            : this(default(T))
         {
         }
 
-        public Trie(T defvalue)
+        private Trie(Trie<T>[] leafs)
         {
-            this.leafs = new object[16];
-            this.defvalue = defvalue;
+            this.leafs = leafs;
         }
 
-        private Trie(T defvalue, object[] leafs)
+        private Trie(T value, Trie<T>[] leafs)
         {
-            this.defvalue = defvalue;
+            this.value = value;
             this.leafs = leafs;
         }
 
@@ -49,41 +47,46 @@
         {
             var offset = GetOffset(key[position]);
 
-            if (position == key.Length - 1)
-                return (T)this.leafs[offset];
+            if (position == key.Length)
+                return this.value;
+
+            if (this.leafs == null)
+                return default(T);
 
             var trie = (Trie<T>)this.leafs[offset];
 
             if (trie == null)
-                return this.defvalue;
+                return default(T);
 
             return trie.Get(key, position + 1);
         }
 
         private Trie<T> Put(string key, int position, T value)
         {
-            var offset = GetOffset(key[position]);
-            var newleafs = (object[])this.leafs.Clone();
+            Trie<T>[] newleafs;
 
-            if (position == key.Length - 1)
-            {
-                newleafs[offset] = value;
+            if (this.leafs != null)
+                newleafs = (Trie<T>[])this.leafs.Clone();
+            else
+                newleafs = null;
 
-                return new Trie<T>(this.defvalue, newleafs);
-            }
+            if (position == key.Length)
+                return new Trie<T>(value, newleafs);
+
+            int offset = GetOffset(key[position]);
 
             if (this.leafs[offset] != null)
             {
                 newleafs[offset] = ((Trie<T>)this.leafs[offset]).Put(key, position + 1, value);
 
-                return new Trie<T>(this.defvalue, newleafs);
+                return new Trie<T>(newleafs);
             }
 
             var newtrie = new Trie<T>();
 
             newleafs[offset] = newtrie.Put(key, position + 1, value);
 
-            return new Trie<T>(this.defvalue, newleafs);
+            return new Trie<T>(newleafs);
         }
     }
 }

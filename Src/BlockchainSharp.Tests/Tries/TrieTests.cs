@@ -16,14 +16,6 @@
         }
 
         [TestMethod]
-        public void GetDefaultValueIfUnknowKey()
-        {
-            Trie<string> trie = new Trie<string>("000");
-
-            Assert.AreEqual("000", trie.Get("012"));
-        }
-
-        [TestMethod]
         public void PutAndGetKeyValue()
         {
             Trie<string> trie = new Trie<string>();
