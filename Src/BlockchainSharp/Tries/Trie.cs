@@ -45,10 +45,10 @@
 
         private T Get(string key, int position)
         {
-            var offset = GetOffset(key[position]);
-
             if (position == key.Length)
                 return this.value;
+
+            var offset = GetOffset(key[position]);
 
             if (this.leafs == null)
                 return default(T);
@@ -75,12 +75,15 @@
 
             int offset = GetOffset(key[position]);
 
-            if (this.leafs[offset] != null)
+            if (this.leafs != null && this.leafs[offset] != null)
             {
                 newleafs[offset] = ((Trie<T>)this.leafs[offset]).Put(key, position + 1, value);
 
                 return new Trie<T>(newleafs);
             }
+
+            if (newleafs == null)
+                newleafs = new Trie<T>[16];
 
             var newtrie = new Trie<T>();
 
