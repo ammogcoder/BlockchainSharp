@@ -57,6 +57,7 @@
     <Compile Include="Core\TransactionTests.cs" />
     <Compile Include="Core\AccountStateTests.cs" />
     <Compile Include="Core\TransactionProcessorTests.cs" />
+    <Compile Include="Tries\BytesTrie.cs" />
     <Compile Include="Vm\StorageTests.cs" />
     <Compile Include="Dsl\BlockProcessorDsl.cs" />
     <Compile Include="Encoding\RlpTests.cs" />
