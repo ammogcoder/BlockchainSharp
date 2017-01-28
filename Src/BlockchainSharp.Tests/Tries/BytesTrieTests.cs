@@ -1,6 +1,7 @@
 ﻿namespace BlockchainSharp.Tests.Tries
 {
     using System;
+    using System.Linq;
     using BlockchainSharp.Tries;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -25,7 +26,7 @@
             Assert.IsNotNull(trie2);
             Assert.AreNotSame(trie2, trie);
             Assert.IsNull(trie.Get("012"));
-            Assert.IsTrue(Array.Equals(new byte[] { 1, 2, 3 }, trie2.Get("012")));
+            Assert.IsTrue((new byte[] { 1, 2, 3 }).SequenceEqual(trie2.Get("012")));
         }
 
         [TestMethod]
@@ -40,13 +41,13 @@
             Assert.AreNotSame(trie2, trie);
             Assert.IsNull(trie.Get("012"));
             Assert.IsNull(trie.Get("abc"));
-            Assert.AreEqual(new byte[] { 1, 2, 3 }, trie2.Get("012"));
+            Assert.IsTrue((new byte[] { 1, 2, 3 }).SequenceEqual(trie2.Get("012")));
             Assert.IsNull(trie2.Get("abc"));
 
             Assert.IsNotNull(trie3);
             Assert.AreNotSame(trie3, trie2);
-            Assert.AreEqual(new byte[] { 1, 2, 3 }, trie3.Get("012"));
-            Assert.AreEqual(new byte[] { 4, 5, 6 }, trie3.Get("abc"));
+            Assert.IsTrue((new byte[] { 1, 2, 3 }).SequenceEqual(trie3.Get("012")));
+            Assert.IsTrue((new byte[] { 4, 5, 6 }).SequenceEqual(trie3.Get("abc")));
         }
 
         [TestMethod]
