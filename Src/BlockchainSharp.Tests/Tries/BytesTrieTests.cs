@@ -53,19 +53,19 @@
         [TestMethod]
         public void ReplaceValue()
         {
-            Trie<string> trie = new Trie<string>();
+            BytesTrie trie = new BytesTrie();
 
-            var trie2 = trie.Put("012", "foo");
-            var trie3 = trie2.Put("012", "bar");
+            var trie2 = trie.Put("012", new byte[] { 1, 2, 3 });
+            var trie3 = trie2.Put("012", new byte[] { 4, 5, 6 });
 
             Assert.IsNotNull(trie2);
             Assert.AreNotSame(trie2, trie);
             Assert.IsNull(trie.Get("012"));
-            Assert.AreEqual("foo", trie2.Get("012"));
+            Assert.IsTrue((new byte[] { 1, 2, 3 }).SequenceEqual(trie2.Get("012")));
 
             Assert.IsNotNull(trie3);
             Assert.AreNotSame(trie3, trie2);
-            Assert.AreEqual("bar", trie3.Get("012"));
+            Assert.IsTrue((new byte[] { 4, 5, 6 }).SequenceEqual(trie3.Get("012")));
         }
     }
 }
