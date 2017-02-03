@@ -35,6 +35,11 @@
             return this.Get(key, 0);
         }
 
+        public BytesTrie Remove(string key)
+        {
+            return this.Put(key, null);
+        }
+
         private static int GetOffset(char ch)
         {
             if (ch >= '0' && ch <= '9')
