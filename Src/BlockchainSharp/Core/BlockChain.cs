@@ -28,12 +28,6 @@
 
         public bool TryToAdd(Block block)
         {
-            if (this.blockinfos.Count == 0)
-            {
-                this.blockinfos.Add(new BlockInfo(block, null));
-                return true;
-            }
-
             if (!block.HasParent(this.blockinfos.Last().Block))
                 return false;
 
