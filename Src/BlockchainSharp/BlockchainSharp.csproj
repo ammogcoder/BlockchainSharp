@@ -56,6 +56,7 @@
     <Compile Include="Core\Address.cs" />
     <Compile Include="Core\Hash.cs" />
     <Compile Include="Encoding\AddressEncoder.cs" />
+    <Compile Include="Encoding\BigIntegerEncoder.cs" />
     <Compile Include="Tries\BytesTrie.cs" />
     <Compile Include="Vm\Memory.cs" />
     <Compile Include="Vm\Storage.cs" />
