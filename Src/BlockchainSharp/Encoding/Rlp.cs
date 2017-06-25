@@ -73,6 +73,17 @@
             return result;
         }
 
+        public static byte[] EncodeList(params byte[][] bytes)
+        {
+            byte[] result = new byte[bytes[0].Length + 1];
+
+            Array.Copy(bytes[0], 0, result, 1, bytes[0].Length);
+
+            result[0] = (byte)(bytes[0].Length + 192);
+            
+            return result;
+        }
+
         private static int GetOffset(byte[] bytes)
         {
             if (bytes[0] <= 183)
