@@ -59,6 +59,7 @@
     <Compile Include="Core\TransactionProcessorTests.cs" />
     <Compile Include="Encoding\AddressEncoderTests.cs" />
     <Compile Include="Encoding\BigIntegerTests.cs" />
+    <Compile Include="Encoding\HashEncoderTests.cs" />
     <Compile Include="Tries\BytesTrieTests.cs" />
     <Compile Include="Vm\StorageTests.cs" />
     <Compile Include="Dsl\BlockProcessorDsl.cs" />
