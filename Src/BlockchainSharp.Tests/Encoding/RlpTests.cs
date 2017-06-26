@@ -253,5 +253,17 @@
             Assert.AreEqual(192 + 1, result[0]);
             Assert.AreEqual(0x01, result[1]);
         }
+
+        [TestMethod]
+        public void EncodeListWithOnlyTwoShortEntry()
+        {
+            var result = Rlp.EncodeList(new byte[] { 0x01 }, new byte[] { 0x02 });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result.Length);
+            Assert.AreEqual(192 + 2, result[0]);
+            Assert.AreEqual(0x01, result[1]);
+            Assert.AreEqual(0x02, result[2]);
+        }
     }
 }
