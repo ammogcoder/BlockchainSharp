@@ -265,5 +265,25 @@
             Assert.AreEqual(0x01, result[1]);
             Assert.AreEqual(0x02, result[2]);
         }
+
+        [TestMethod]
+        public void EncodeListWithMoreThan55Bytes()
+        {
+            byte[] bytes1 = new byte[30];
+            bytes1[0] = 0x01;
+            byte[] bytes2 = new byte[30];
+            bytes2[0] = 0x02;
+
+            var result = Rlp.EncodeList(bytes1, bytes2);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(62, result.Length);
+            Assert.AreEqual(247 + 1, result[0]);
+            Assert.AreEqual(60, result[1]);
+            Assert.AreEqual(0x01, result[2]);
+            Assert.AreEqual(0x0, result[3]);
+            Assert.AreEqual(0x02, result[32]);
+            Assert.AreEqual(0x0, result[33]);
+        }
     }
 }
