@@ -76,16 +76,29 @@
         public static byte[] EncodeList(params byte[][] bytes)
         {
             int totallength = bytes.Sum(b => b.Length);
-
-            byte[] result = new byte[totallength + 1];
+            int resultlength = totallength + 1;
             int offset = 1;
+
+            if (totallength > 55)
+            {
+                resultlength++;
+                offset++;
+            }
+
+            byte[] result = new byte[resultlength];
 
             foreach (byte[] bs in bytes) {
                 Array.Copy(bs, 0, result, offset, bs.Length);
                 offset += bs.Length;
             }
 
-            result[0] = (byte)(totallength + 192);
+            if (totallength > 55)
+            {
+                result[0] = 247 + 1;
+                result[1] = (byte)(totallength);
+            }
+            else
+                result[0] = (byte)(totallength + 192);
             
             return result;
         }
