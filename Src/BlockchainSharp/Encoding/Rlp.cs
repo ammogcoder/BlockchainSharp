@@ -73,6 +73,11 @@
             return result;
         }
 
+        public static IList<byte[]> DecodeList(byte[] bytes)
+        {
+            return null;
+        }
+
         public static byte[] EncodeList(params byte[][] bytes)
         {
             int totallength = bytes.Sum(b => b.Length);

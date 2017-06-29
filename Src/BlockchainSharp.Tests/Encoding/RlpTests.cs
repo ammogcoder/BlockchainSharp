@@ -285,5 +285,20 @@
             Assert.AreEqual(0x02, result[32]);
             Assert.AreEqual(0x0, result[33]);
         }
+
+        [TestMethod]
+        public void DecodeSimpleListWithOneElement()
+        {
+            var result = Rlp.DecodeList(new byte[] { 0x01, 0x02 });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+
+            var elem = result[0];
+
+            Assert.IsNotNull(elem);
+            Assert.AreEqual(1, elem.Length);
+            Assert.AreEqual(0x02, elem[0]);
+        }
     }
 }
