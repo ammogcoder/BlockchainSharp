@@ -75,7 +75,15 @@
 
         public static IList<byte[]> DecodeList(byte[] bytes)
         {
-            return null;
+            IList<byte[]> items = new List<byte[]>();
+
+            byte[] result = new byte[bytes.Length - 1];
+
+            Array.Copy(bytes, 1, result, 0, bytes.Length - 1);
+
+            items.Add(result);
+
+            return items;
         }
 
         public static byte[] EncodeList(params byte[][] bytes)
