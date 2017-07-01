@@ -300,5 +300,22 @@
             Assert.AreEqual(1, elem.Length);
             Assert.AreEqual(0x02, elem[0]);
         }
+
+        [TestMethod]
+        public void DecodeEndodedListWithTwoElements()
+        {
+            byte[] bytes1 = Rlp.Encode(new byte[] { 0x01 });
+            byte[] bytes2 = Rlp.Encode(new byte[] { 0x02 });
+
+            byte[] list = Rlp.EncodeList(bytes1, bytes2);
+
+            var result = Rlp.DecodeList(list);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+
+            Assert.AreEqual(bytes1, result[0]);
+            Assert.AreEqual(bytes2, result[1]);
+        }
     }
 }
