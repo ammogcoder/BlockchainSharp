@@ -76,12 +76,22 @@
         public static IList<byte[]> DecodeList(byte[] bytes)
         {
             IList<byte[]> items = new List<byte[]>();
+            int totallength = bytes[0] - 192 + 1;
 
-            byte[] result = new byte[bytes.Length - 1];
+            int position = 1;
 
-            Array.Copy(bytes, 1, result, 0, bytes.Length - 1);
+            while (position < totallength)
+            {
+                int offset = GetOffset(bytes, position);
+                int length = GetLength(bytes, position);
 
-            items.Add(result);
+                byte[] item = new byte[offset + length];
+                Array.Copy(bytes, position, item, 0, item.Length);
+
+                items.Add(item);
+
+                position += item.Length;
+            }
 
             return items;
         }
