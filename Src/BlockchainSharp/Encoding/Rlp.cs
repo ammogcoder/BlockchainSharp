@@ -128,15 +128,23 @@
 
         private static int GetOffset(byte[] bytes, int position)
         {
-            if (bytes[position] <= 183)
+            var b0 = bytes[position];
+
+            if (b0 < 128)
+                return 0;
+
+            if (b0 <= 183)
                 return 1;
 
-            return bytes[position] - 183 + 1;
+            return b0 - 183 + 1;
         }
 
         private static int GetLength(byte[] bytes, int position)
         {
             var b0 = bytes[position];
+
+            if (b0 < 128)
+                return 1;
 
             if (b0 > 183)
             {
