@@ -55,6 +55,7 @@
     <Compile Include="Core\BlockProcessor.cs" />
     <Compile Include="Core\Address.cs" />
     <Compile Include="Core\Hash.cs" />
+    <Compile Include="Encoding\AccountStateEncoder.cs" />
     <Compile Include="Encoding\AddressEncoder.cs" />
     <Compile Include="Encoding\BigIntegerEncoder.cs" />
     <Compile Include="Encoding\HashEncoder.cs" />

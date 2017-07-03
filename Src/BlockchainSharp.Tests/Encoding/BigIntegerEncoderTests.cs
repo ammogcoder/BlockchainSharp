@@ -6,7 +6,7 @@
     using System.Numerics;
 
     [TestClass]
-    public class BigIntegerTests
+    public class BigIntegerEncoderTests
     {
         [TestMethod]
         public void EncodeDecodeBigIntegerOne()
