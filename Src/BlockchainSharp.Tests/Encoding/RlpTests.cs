@@ -289,7 +289,7 @@
         [TestMethod]
         public void DecodeSimpleListWithOneElement()
         {
-            var result = Rlp.DecodeList(Rlp.Encode(new byte[] { 0x01, 0x02 }));
+            var result = Rlp.DecodeList(Rlp.EncodeList(new byte[] { 0x01 }));
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count);
@@ -298,7 +298,7 @@
 
             Assert.IsNotNull(elem);
             Assert.AreEqual(1, elem.Length);
-            Assert.AreEqual(0x02, elem[0]);
+            Assert.AreEqual(0x01, elem[0]);
         }
 
         [TestMethod]
