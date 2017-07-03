@@ -1,6 +1,7 @@
 ﻿namespace BlockchainSharp.Tests.Encoding
 {
     using System;
+    using System.Linq;
     using BlockchainSharp.Encoding;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -314,8 +315,8 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result.Count);
 
-            Assert.IsTrue(Array.Equals(bytes1, result[0]));
-            Assert.IsTrue(Array.Equals(bytes2, result[1]));
+            Assert.IsTrue(bytes1.SequenceEqual(result[0]));
+            Assert.IsTrue(bytes2.SequenceEqual(result[1]));
         }
     }
 }
