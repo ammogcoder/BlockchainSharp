@@ -59,6 +59,7 @@
     <Compile Include="Encoding\AddressEncoder.cs" />
     <Compile Include="Encoding\BigIntegerEncoder.cs" />
     <Compile Include="Encoding\HashEncoder.cs" />
+    <Compile Include="Encoding\TransactionEncoder.cs" />
     <Compile Include="Tries\BytesTrie.cs" />
     <Compile Include="Vm\Memory.cs" />
     <Compile Include="Vm\Storage.cs" />
