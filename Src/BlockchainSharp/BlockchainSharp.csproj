@@ -58,6 +58,7 @@
     <Compile Include="Encoding\AccountStateEncoder.cs" />
     <Compile Include="Encoding\AddressEncoder.cs" />
     <Compile Include="Encoding\BigIntegerEncoder.cs" />
+    <Compile Include="Encoding\BlockEncoder.cs" />
     <Compile Include="Encoding\HashEncoder.cs" />
     <Compile Include="Encoding\TransactionEncoder.cs" />
     <Compile Include="Tries\BytesTrie.cs" />
