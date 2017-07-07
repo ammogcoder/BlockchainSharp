@@ -4,18 +4,30 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Numerics;
     using System.Text;
 
     public class BlockEncoder
     {
+        private static BigIntegerEncoder bigIntegerEncoder = new BigIntegerEncoder();
+        private static HashEncoder hashEncoder = new HashEncoder();
+
         public byte[] Encode(Block block)
         {
-            return null;
+            byte[] number = bigIntegerEncoder.Encode(new BigInteger(block.Number));
+            byte[] hash = hashEncoder.Encode(block.Hash);
+
+            return Rlp.EncodeList(number, hash);
         }
 
         public Block Decode(byte[] bytes)
         {
-            return null;
+            IList<byte[]> list = Rlp.DecodeList(bytes);
+
+            long number = (long)bigIntegerEncoder.Decode(list[0]);
+            Hash hash = hashEncoder.Decode(list[1]);
+
+            return new Block(number, hash);
         }
     }
 }
