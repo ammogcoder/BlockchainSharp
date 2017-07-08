@@ -36,14 +36,7 @@
 
             Hash h = (Hash)obj;
 
-            if (this.bytes.Length != h.bytes.Length)
-                return false;
-
-            for (int k = 0; k < this.bytes.Length; k++)
-                if (this.bytes[k] != h.bytes[k])
-                    return false;
-
-            return true;
+            return this.bytes.SequenceEqual(h.bytes);
         }
 
         public override int GetHashCode()
