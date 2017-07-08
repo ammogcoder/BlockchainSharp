@@ -36,9 +36,6 @@
 
             Address h = (Address)obj;
 
-            if (this.bytes.Length != h.bytes.Length)
-                return false;
-
             return this.bytes.SequenceEqual(h.bytes);
         }
 
