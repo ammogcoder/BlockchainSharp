@@ -15,7 +15,7 @@
         public byte[] Encode(Block block)
         {
             byte[] number = bigIntegerEncoder.Encode(new BigInteger(block.Number));
-            byte[] hash = hashEncoder.Encode(block.Hash);
+            byte[] hash = hashEncoder.Encode(block.ParentHash);
 
             return Rlp.EncodeList(number, hash);
         }
