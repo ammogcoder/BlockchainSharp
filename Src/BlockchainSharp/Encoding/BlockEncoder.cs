@@ -11,6 +11,9 @@
     {
         private static BigIntegerEncoder bigIntegerEncoder = new BigIntegerEncoder();
         private static HashEncoder hashEncoder = new HashEncoder();
+        private static BlockEncoder instance = new BlockEncoder();
+
+        public static BlockEncoder Instance { get { return instance; } }
 
         public byte[] Encode(Block block)
         {

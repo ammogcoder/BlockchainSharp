@@ -2,8 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Security.Cryptography;
     using System.Linq;
     using System.Text;
+
+    using BlockchainSharp.Encoding;
 
     public class Block
     {
@@ -20,6 +23,7 @@
             this.number = number;
             this.parentHash = parentHash;
             this.hash = new Hash();
+//            this.hash = this.CalculateHash();
         }
 
         public Block(long number, Hash parentHash, IEnumerable<Transaction> transactions)
@@ -47,6 +51,12 @@
                 return false;
 
             return parent.Number == this.number - 1 && parent.Hash.Equals(this.parentHash);
+        }
+
+        private Hash CalculateHash()
+        {
+            SHA1CryptoServiceProvider provider = new SHA1CryptoServiceProvider();
+            return new Hash(provider.ComputeHash(BlockEncoder.Instance.Encode(this)));
         }
     }
 }
