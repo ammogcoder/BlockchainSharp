@@ -7,6 +7,7 @@
     using System.Text;
 
     using BlockchainSharp.Encoding;
+    using Org.BouncyCastle.Crypto.Digests;
 
     public class Block
     {
@@ -23,7 +24,9 @@
             this.number = number;
             this.parentHash = parentHash;
             this.hash = new Hash();
-//            this.hash = this.CalculateHash();
+
+            if (parentHash != null)
+                this.hash = this.CalculateHash();
         }
 
         public Block(long number, Hash parentHash, IEnumerable<Transaction> transactions)
@@ -55,8 +58,13 @@
 
         private Hash CalculateHash()
         {
-            SHA1CryptoServiceProvider provider = new SHA1CryptoServiceProvider();
-            return new Hash(provider.ComputeHash(BlockEncoder.Instance.Encode(this)));
+            Sha3Digest digest = new Sha3Digest(256);
+            byte[] bytes = BlockEncoder.Instance.Encode(this);
+            digest.BlockUpdate(bytes, 0, bytes.Length);
+            byte[] result = new byte[32];
+            digest.DoFinal(result, 0);
+
+            return new Hash(result);
         }
     }
 }
