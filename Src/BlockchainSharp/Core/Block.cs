@@ -11,9 +11,8 @@
 
     public class Block
     {
-        private long number;
+        BlockHeader header;
         private Hash hash;
-        private Hash parentHash;
         private IList<Transaction> transactions;
 
         public Block(long number, Hash parentHash)
@@ -21,8 +20,7 @@
             if (number == 0 && parentHash != null)
                 throw new InvalidOperationException("Genesis block should have no parent");
 
-            this.number = number;
-            this.parentHash = parentHash;
+            this.header = new BlockHeader(number, parentHash);
             this.hash = new Hash();
 
             if (parentHash != null)
@@ -37,23 +35,23 @@
 
         public IEnumerable<Transaction> Transactions { get { return this.transactions; } }
 
-        public long Number { get { return this.number; } }
+        public long Number { get { return this.header.Number; } }
 
         public Hash Hash { get { return this.hash; } }
 
-        public Hash ParentHash { get { return this.parentHash; } }
+        public Hash ParentHash { get { return this.header.ParentHash; } }
 
-        public bool IsGenesis { get { return this.number == 0 && this.parentHash == null; } }
+        public bool IsGenesis { get { return this.header.Number == 0 && this.header.ParentHash == null; } }
 
         public bool HasParent(Block parent)
         {
-            if (parent == null && this.parentHash == null)
+            if (parent == null && this.header.ParentHash == null)
                 return true;
 
             if (parent == null)
                 return false;
 
-            return parent.Number == this.number - 1 && parent.Hash.Equals(this.parentHash);
+            return parent.Number == this.header.Number - 1 && parent.Hash.Equals(this.header.ParentHash);
         }
 
         private Hash CalculateHash()
