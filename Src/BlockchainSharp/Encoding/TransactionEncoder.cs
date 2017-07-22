@@ -16,10 +16,9 @@
         {
             byte[] sender = addressEncoder.Encode(tx.Sender);
             byte[] receiver = addressEncoder.Encode(tx.Receiver);
-            byte[] senderValue = bigIntegerEncoder.Encode(tx.SenderValue);
-            byte[] receiverValue = bigIntegerEncoder.Encode(tx.ReceiverValue);
+            byte[] value = bigIntegerEncoder.Encode(tx.Value);
                 
-            return Rlp.EncodeList(sender, senderValue, receiver, receiverValue);
+            return Rlp.EncodeList(sender, receiver, value);
         }
 
         public Transaction Decode(byte[] bytes)
@@ -27,11 +26,10 @@
             IList<byte[]> items = Rlp.DecodeList(bytes);
 
             Address sender = addressEncoder.Decode(items[0]);
-            BigInteger senderValue = bigIntegerEncoder.Decode(items[1]);
-            Address receiver = addressEncoder.Decode(items[2]);
-            BigInteger receiverValue = bigIntegerEncoder.Decode(items[3]);
+            Address receiver = addressEncoder.Decode(items[1]);
+            BigInteger value = bigIntegerEncoder.Decode(items[2]);
 
-            return new Transaction(sender, senderValue, receiver, receiverValue);
+            return new Transaction(sender, receiver, value);
         }
     }
 }

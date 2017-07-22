@@ -120,7 +120,7 @@
             Address addr2 = new Address();
             BigInteger value = new BigInteger(amount);
 
-            return new Transaction(addr1, value, addr2, value);
+            return new Transaction(addr1, addr2, value);
         }
     }
 }

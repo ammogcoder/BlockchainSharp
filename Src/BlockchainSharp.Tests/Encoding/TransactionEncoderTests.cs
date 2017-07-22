@@ -16,7 +16,7 @@
             var sender = new Address();
             var receiver = new Address();
 
-            Transaction transaction = new Transaction(sender, new BigInteger(100), receiver, new BigInteger(90));
+            Transaction transaction = new Transaction(sender, receiver, new BigInteger(100));
 
             var result = encoder.Decode(encoder.Encode(transaction));
 
@@ -28,8 +28,7 @@
             Assert.IsNotNull(result.Sender);
             Assert.AreEqual(sender, result.Sender);
 
-            Assert.AreEqual(new BigInteger(100), result.SenderValue);
-            Assert.AreEqual(new BigInteger(90), result.ReceiverValue);
+            Assert.AreEqual(new BigInteger(100), result.Value);
         }
     }
 }

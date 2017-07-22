@@ -15,7 +15,7 @@
             var sender = new Address();
             var receiver = new Address();
 
-            Transaction transaction = new Transaction(sender, new BigInteger(100), receiver, new BigInteger(90));
+            Transaction transaction = new Transaction(sender, receiver, new BigInteger(100));
 
             Assert.IsNotNull(transaction.Receiver);
             Assert.AreEqual(receiver, transaction.Receiver);
@@ -23,25 +23,24 @@
             Assert.IsNotNull(transaction.Sender);
             Assert.AreEqual(sender, transaction.Sender);
 
-            Assert.AreEqual(new BigInteger(100), transaction.SenderValue);
-            Assert.AreEqual(new BigInteger(90), transaction.ReceiverValue);
+            Assert.AreEqual(new BigInteger(100), transaction.Value);
         }
 
         [TestMethod]
-        public void RejectTransactionWithReceiverValueGreaterThanSenderValue()
+        public void RejectTransactionWithNegativeValue()
         {
             var sender = new Address();
             var receiver = new Address();
 
             try
             {
-                new Transaction(sender, new BigInteger(100), receiver, new BigInteger(110));
+                new Transaction(sender, receiver, new BigInteger(-100));
                 Assert.Fail();
             }
             catch (Exception ex)
             {
                 Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
-                Assert.AreEqual("Transaction receiver value is greater than sender value", ex.Message);
+                Assert.AreEqual("Transaction value is negative", ex.Message);
             }
         }
     }

@@ -30,12 +30,12 @@
             {
                 var addr = transaction.Sender;
                 var accstate = state.Get(addr);
-                var newaccstate = accstate.SubtractFromBalance(transaction.SenderValue);
+                var newaccstate = accstate.SubtractFromBalance(transaction.Value);
                 state = state.Put(addr, newaccstate);
 
                 addr = transaction.Receiver;
                 accstate = state.Get(addr);
-                newaccstate = accstate.AddToBalance(transaction.ReceiverValue);
+                newaccstate = accstate.AddToBalance(transaction.Value);
                 state = state.Put(addr, newaccstate);
 
                 newstate = state;

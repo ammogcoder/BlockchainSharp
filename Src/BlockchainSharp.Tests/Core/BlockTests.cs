@@ -64,7 +64,7 @@
         {
             Address from = new Address();
             Address to = new Address();
-            Transaction transaction = new Transaction(from, new BigInteger(2), to, new BigInteger(1));
+            Transaction transaction = new Transaction(from, to, new BigInteger(2));
 
             Block block = new Block(0, null, new Transaction[] { transaction });
 
@@ -73,8 +73,7 @@
 
             Transaction result = block.Transactions.First();
 
-            Assert.AreEqual(new BigInteger(2), result.SenderValue);
-            Assert.AreEqual(new BigInteger(1), result.ReceiverValue);
+            Assert.AreEqual(new BigInteger(2), result.Value);
         }
     }
 }

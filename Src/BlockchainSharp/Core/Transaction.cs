@@ -10,29 +10,25 @@
     public class Transaction
     {
         private Address sender;
-        private BigInteger sendervalue;
         private Address receiver;
-        private BigInteger receivervalue;
+        private BigInteger value;
         private AccountsState store;
 
-        public Transaction(Address sender, BigInteger sendervalue, Address receiver, BigInteger receivervalue)
+        public Transaction(Address sender, Address receiver, BigInteger value)
         {
+            if (value.CompareTo(BigInteger.Zero) < 0)
+                throw new InvalidOperationException("Transaction value is negative");
+
             this.sender = sender;
             this.receiver = receiver;
-            this.sendervalue = sendervalue;
-            this.receivervalue = receivervalue;
-
-            if (BigInteger.Compare(sendervalue, receivervalue) < 0)
-                throw new InvalidOperationException("Transaction receiver value is greater than sender value");
+            this.value = value;
         }
 
         public Address Sender { get { return this.sender; } }
 
-        public BigInteger SenderValue { get { return this.sendervalue; } }
+        public BigInteger Value { get { return this.value; } }
 
         public Address Receiver { get { return this.receiver; } }
-
-        public BigInteger ReceiverValue { get { return this.receivervalue; } }
 
         public AccountsState Store
         {
