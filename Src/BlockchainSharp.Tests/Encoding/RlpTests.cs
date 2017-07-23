@@ -318,5 +318,30 @@
             Assert.IsTrue(bytes1.SequenceEqual(result[0]));
             Assert.IsTrue(bytes2.SequenceEqual(result[1]));
         }
+
+        [TestMethod]
+        public void DecodeEndodedListWithTenLongElements()
+        {
+            byte[][] bytes = new byte[10][];
+
+            for (int k = 0; k < bytes.Length; k++) {
+                byte[] data = new byte[256];
+
+                for (int j = 0; j < data.Length; j++)
+                    data[j] = (byte)(k + j);
+
+                bytes[k] = Rlp.Encode(data);
+            }
+
+            byte[] list = Rlp.EncodeList(bytes);
+
+            var result = Rlp.DecodeList(list);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(bytes.Length, result.Count);
+
+            for (int k = 0; k < bytes.Length; k++)
+                Assert.IsTrue(bytes[k].SequenceEqual(result[k]));
+        }
     }
 }

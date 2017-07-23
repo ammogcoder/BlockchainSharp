@@ -76,9 +76,26 @@
         public static IList<byte[]> DecodeList(byte[] bytes)
         {
             IList<byte[]> items = new List<byte[]>();
-            int totallength = bytes[0] - 192 + 1;
+            int resultlength;
+            int position;
 
-            int position = 1;
+            if (bytes[0] == 247 + 2)
+            {
+                resultlength = ((bytes[1] << 8) & 0x00ffff) + bytes[2];
+                position = 3;
+            }
+            else if (bytes[0] == 247 + 1)
+            {
+                resultlength = bytes[1] & 0x00ff;
+                position = 2;
+            }
+            else
+            {
+                resultlength = bytes[0] - 192;
+                position = 1;
+            }
+
+            int totallength = position + resultlength;
 
             while (position < totallength)
             {
@@ -102,7 +119,13 @@
             int resultlength = totallength + 1;
             int offset = 1;
 
-            if (totallength > 55)
+            if (totallength >= 256)
+            {
+                resultlength++;
+                offset++;
+            }
+            
+            if (totallength >= 56)
             {
                 resultlength++;
                 offset++;
@@ -115,7 +138,13 @@
                 offset += bs.Length;
             }
 
-            if (totallength > 55)
+            if (totallength >= 256)
+            {
+                result[0] = 247 + 2;
+                result[1] = (byte)(totallength >> 8);
+                result[2] = (byte)(totallength & 0x00ff);
+            }
+            else if (totallength >= 56)
             {
                 result[0] = 247 + 1;
                 result[1] = (byte)(totallength);
