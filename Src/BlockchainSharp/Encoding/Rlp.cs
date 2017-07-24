@@ -121,14 +121,13 @@
 
             if (totallength >= 256)
             {
-                resultlength++;
-                offset++;
+                resultlength += 2;
+                offset = 3;
             }
-            
-            if (totallength >= 56)
+            else if (totallength >= 56)
             {
                 resultlength++;
-                offset++;
+                offset = 2;
             }
 
             byte[] result = new byte[resultlength];
