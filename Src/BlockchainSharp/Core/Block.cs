@@ -11,11 +11,18 @@
 
     public class Block
     {
+        private static Transaction[] emptyTxs = new Transaction[0];
+
         BlockHeader header;
         private Hash hash;
         private IList<Transaction> transactions;
 
         public Block(long number, Hash parentHash)
+            : this(number, parentHash, emptyTxs)
+        {
+        }
+
+        public Block(long number, Hash parentHash, IEnumerable<Transaction> transactions)
         {
             if (number == 0 && parentHash != null)
                 throw new InvalidOperationException("Genesis block should have no parent");
@@ -23,13 +30,6 @@
             this.header = new BlockHeader(number, parentHash);
             this.hash = new Hash();
 
-            if (parentHash != null)
-                this.hash = this.CalculateHash();
-        }
-
-        public Block(long number, Hash parentHash, IEnumerable<Transaction> transactions)
-            : this(number, parentHash)
-        {
             this.transactions = new List<Transaction>(transactions);
         }
 
