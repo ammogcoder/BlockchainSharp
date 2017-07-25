@@ -288,6 +288,15 @@
         }
 
         [TestMethod]
+        public void DecodeEncodeEmptyList()
+        {
+            var result = Rlp.DecodeList(Rlp.EncodeList(new byte[0]));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
         public void DecodeSimpleListWithOneElement()
         {
             var result = Rlp.DecodeList(Rlp.EncodeList(new byte[] { 0x01 }));
