@@ -33,7 +33,7 @@
             this.transactions = new List<Transaction>(transactions);
         }
 
-        public IEnumerable<Transaction> Transactions { get { return this.transactions; } }
+        public IList<Transaction> Transactions { get { return this.transactions; } }
 
         public long Number { get { return this.header.Number; } }
 
