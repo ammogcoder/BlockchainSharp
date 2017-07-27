@@ -34,7 +34,7 @@
             if (bytes == null || bytes.Length == 0)
                 return empty;
 
-            if (bytes.Length == 1 && bytes[0] < 0x80)
+            if (bytes.Length == 1 && (bytes[0] & 0x80) == 0)
                 return bytes;
 
             byte[] result;
