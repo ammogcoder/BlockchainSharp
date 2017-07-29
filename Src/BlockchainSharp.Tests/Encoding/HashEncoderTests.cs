@@ -24,5 +24,20 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(hash, result);
         }
+
+        [TestMethod]
+        public void EncodeAndDecodeNullHash()
+        {
+            HashEncoder encoder = new HashEncoder();
+
+            byte[] bytes = encoder.Encode(null);
+
+            Assert.IsNotNull(bytes);
+            Assert.AreNotEqual(0, bytes.Length);
+
+            Hash result = encoder.Decode(bytes);
+
+            Assert.IsNull(result);
+        }
     }
 }
