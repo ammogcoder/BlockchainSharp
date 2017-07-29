@@ -35,7 +35,7 @@
 
             long number = (long)bigIntegerEncoder.Decode(list[0]);
             Hash hash = hashEncoder.Decode(list[1]);
-            IList<byte[]> btxs = Rlp.DecodeList(list[2]);
+            IList<byte[]> btxs = Rlp.DecodeList(Rlp.Decode(list[2]));
 
             IList<Transaction> txs = new List<Transaction>();
 
