@@ -164,6 +164,12 @@
             if (b0 <= 183)
                 return 1;
 
+            if (b0 <= 247)
+                return 1;
+
+            if (b0 >= 248)
+                return b0 - 247 + 1;
+
             return b0 - 183 + 1;
         }
 
@@ -171,6 +177,15 @@
         {
             var b0 = bytes[position];
 
+            if (b0 >= 192 && b0 <= 247)
+                return b0 - 192;
+
+            if (b0 == 248)
+                return bytes[position + 1];
+
+            if (b0 == 249)
+                return bytes[position + 1] << 8 + bytes[position + 2];
+ 
             if (b0 < 128)
                 return 1;
 
