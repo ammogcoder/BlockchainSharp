@@ -165,12 +165,9 @@
                 return 1;
 
             if (b0 <= 247)
-                return 1;
+                return b0 - 183 + 1;
 
-            if (b0 >= 248)
-                return b0 - 247 + 1;
-
-            return b0 - 183 + 1;
+            return b0 - 247 + 1;
         }
 
         private static int GetLength(byte[] bytes, int position)
