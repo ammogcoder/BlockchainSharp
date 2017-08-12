@@ -164,8 +164,11 @@
             if (b0 <= 183)
                 return 1;
 
-            if (b0 <= 247)
-                return b0 - 183 + 1;
+            if (b0 < 192)
+                return b0 - 182;
+
+            if (b0 < 247)
+                return 1;
 
             return b0 - 247 + 1;
         }
