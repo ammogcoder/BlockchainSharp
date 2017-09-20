@@ -62,13 +62,27 @@
                 return result;
             }
 
-            result = new byte[bytes.Length + 3];
+            if (bytes.Length < 256 * 256)
+            {
+                result = new byte[bytes.Length + 3];
 
-            result[0] = (byte)(183 + 2);
-            result[1] = (byte)(bytes.Length / 256);
-            result[2] = (byte)(bytes.Length % 256);
+                result[0] = (byte)(183 + 2);
+                result[1] = (byte)(bytes.Length / 256);
+                result[2] = (byte)(bytes.Length % 256);
 
-            Array.Copy(bytes, 0, result, 3, bytes.Length);
+                Array.Copy(bytes, 0, result, 3, bytes.Length);
+
+                return result;
+            }
+        
+            result = new byte[bytes.Length + 4];
+
+            result[0] = (byte)(183 + 3);
+            result[1] = (byte)(bytes.Length >> 16);
+            result[2] = (byte)(bytes.Length >> 8);
+            result[3] = (byte)(bytes.Length % 256);
+
+            Array.Copy(bytes, 0, result, 4, bytes.Length);
 
             return result;
         }
@@ -79,7 +93,12 @@
             int resultlength;
             int position;
 
-            if (bytes[0] == 247 + 2)
+            if (bytes[0] == 247 + 3)
+            {
+                resultlength = ((bytes[1] << 16) & 0x00ffffff) + ((bytes[2] << 8) & 0x00ffff) + bytes[3];
+                position = 4;
+            }
+            else if (bytes[0] == 247 + 2)
             {
                 resultlength = ((bytes[1] << 8) & 0x00ffff) + bytes[2];
                 position = 3;
@@ -119,7 +138,12 @@
             int resultlength = totallength + 1;
             int offset = 1;
 
-            if (totallength >= 256)
+            if (totallength >= 256 * 256)
+            {
+                resultlength += 3;
+                offset = 4;
+            }
+            else if (totallength >= 256)
             {
                 resultlength += 2;
                 offset = 3;
@@ -137,7 +161,14 @@
                 offset += bs.Length;
             }
 
-            if (totallength >= 256)
+            if (totallength >= 256 * 256)
+            {
+                result[0] = 247 + 3;
+                result[1] = (byte)(totallength >> 16);
+                result[2] = (byte)(totallength >> 8);
+                result[3] = (byte)(totallength & 0x00ff);
+            }
+            else if (totallength >= 256)
             {
                 result[0] = 247 + 2;
                 result[1] = (byte)(totallength >> 8);
@@ -185,7 +216,10 @@
 
             if (b0 == 249)
                 return bytes[position + 1] << 8 + bytes[position + 2];
- 
+
+            if (b0 == 250)
+                return bytes[position + 1] << 16 + bytes[position + 2] << 8 + bytes[position + 3];
+
             if (b0 < 128)
                 return 1;
 
