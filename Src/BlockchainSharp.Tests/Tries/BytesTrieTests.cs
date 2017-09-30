@@ -17,6 +17,14 @@
         }
 
         [TestMethod]
+        public void NewTrieIsEmpty()
+        {
+            BytesTrie trie = new BytesTrie();
+
+            Assert.IsTrue(trie.IsEmpty());
+        }
+
+        [TestMethod]
         public void PutAndGetKeyValue()
         {
             BytesTrie trie = new BytesTrie();
@@ -27,6 +35,7 @@
             Assert.AreNotSame(trie2, trie);
             Assert.IsNull(trie.Get("012"));
             Assert.IsTrue((new byte[] { 1, 2, 3 }).SequenceEqual(trie2.Get("012")));
+            Assert.IsFalse(trie2.IsEmpty());
         }
 
         [TestMethod]
@@ -78,6 +87,7 @@
             Assert.IsNotNull(trie3);
             Assert.AreNotSame(trie3, trie2);
             Assert.IsTrue((new byte[] { 4, 5, 6 }).SequenceEqual(trie3.Get("012")));
+            Assert.IsFalse(trie3.IsEmpty());
         }
 
         [TestMethod]
@@ -96,6 +106,7 @@
             Assert.IsNotNull(trie3);
             Assert.AreNotSame(trie3, trie2);
             Assert.IsNull(trie3.Get("012"));
+            Assert.IsTrue(trie3.IsEmpty());
         }
     }
 }

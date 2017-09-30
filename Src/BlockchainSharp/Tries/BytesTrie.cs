@@ -7,6 +7,8 @@
 
     public class BytesTrie
     {
+        private static BytesTrie empty = new BytesTrie();
+
         private BytesTrie[] leafs;
         private byte[] value;
 
@@ -25,9 +27,19 @@
             this.leafs = leafs;
         }
 
+        public bool IsEmpty()
+        {
+            return this.value == null && this.leafs == null;
+        }
+
         public BytesTrie Put(string key, byte[] value)
         {
-            return this.Put(key, 0, value);
+            BytesTrie newtrie = this.Put(key, 0, value);
+
+            if (newtrie == null)
+                return empty;
+
+            return newtrie;
         }
 
         public byte[] Get(string key)
@@ -69,10 +81,7 @@
         private BytesTrie Put(string key, int position, byte[] value)
         {
             if (position == key.Length)
-                if (ValuesAreEqual(this.value, value))
-                    return this;
-                else
-                    return new BytesTrie(value, CloneLeafs(this.leafs));
+                return this.ChangeValue(value);
 
             int offset = GetOffset(key[position]);
             BytesTrie leaf;
@@ -84,7 +93,10 @@
 
             BytesTrie newleaf = leaf.Put(key, position + 1, value);
 
-            BytesTrie[] newleafs = PutLeaf(this.leafs, offset, newleaf);
+            BytesTrie[] newleafs = this.ChangeLeaf(offset, newleaf);
+
+            if (EmptyLeafs(newleafs) && this.value == null)
+                return null;
 
             if (this.leafs == newleafs)
                 return this;
@@ -92,30 +104,56 @@
             return new BytesTrie(this.value, newleafs);
         }
 
-        private static bool ValuesAreEqual(byte[] value1, byte[] value2) {
-            if (value1 == value2)
+        private BytesTrie ChangeValue(byte[] newvalue)
+        {
+            if (this.SameValue(newvalue))
+                return this;
+
+            if (newvalue == null && EmptyLeafs(this.leafs))
+                return null;
+
+            return new BytesTrie(newvalue, this.leafs);
+        }
+
+        private bool SameValue(byte[] newvalue) {
+            if (this.value == newvalue)
                 return true;
 
-            if (value1 == null || value2 == null)
+            if (this.value == null || newvalue == null)
                 return false;
 
-            return value1.SequenceEqual(value2);
+            return this.value.SequenceEqual(newvalue);
         }
 
-        private static BytesTrie[] CloneLeafs(BytesTrie[] leafs)
+        private BytesTrie[] CloneLeafs()
         {
-            if (leafs == null)
+            if (this.leafs == null)
                 return new BytesTrie[16];
 
-            return (BytesTrie[])leafs.Clone();
+            return (BytesTrie[])this.leafs.Clone();
         }
 
-        private static BytesTrie[] PutLeaf(BytesTrie[] leafs, int offset, BytesTrie newleaf)
+        private static bool EmptyLeafs(BytesTrie[] leafs)
         {
-            if (leafs != null && leafs[offset] == newleaf)
+            if (leafs == null)
+                return true;
+
+            for (int k = 0; k < leafs.Length; k++)
+                if (leafs[k] != null)
+                    return false;
+
+            return true;
+        }
+
+        private BytesTrie[] ChangeLeaf(int offset, BytesTrie newleaf)
+        {
+            if (this.leafs != null && this.leafs[offset] == newleaf)
                 return leafs;
 
-            BytesTrie[] newleafs = CloneLeafs(leafs);
+            if (EmptyLeafs(this.leafs) && newleaf == null)
+                return null;
+
+            BytesTrie[] newleafs = this.CloneLeafs();
 
             newleafs[offset] = newleaf;
 
