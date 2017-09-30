@@ -68,41 +68,28 @@
 
         private BytesTrie Put(string key, int position, byte[] value)
         {
-            BytesTrie[] newleafs;
-
-            if (this.leafs != null)
-                newleafs = (BytesTrie[])this.leafs.Clone();
-            else
-                newleafs = null;
-
             if (position == key.Length)
                 if (ValuesAreEqual(this.value, value))
                     return this;
                 else
-                    return new BytesTrie(value, newleafs);
+                    return new BytesTrie(value, CloneLeafs(this.leafs));
 
             int offset = GetOffset(key[position]);
+            BytesTrie leaf;
 
             if (this.leafs != null && this.leafs[offset] != null)
-            {
-                BytesTrie newleaf = this.leafs[offset].Put(key, position + 1, value);
+                leaf = this.leafs[offset];
+            else
+                leaf = new BytesTrie();
 
-                if (this.leafs[offset] == newleaf)
-                    return this;
+            BytesTrie newleaf = leaf.Put(key, position + 1, value);
 
-                newleafs[offset] = this.leafs[offset].Put(key, position + 1, value);
+            BytesTrie[] newleafs = PutLeaf(this.leafs, offset, newleaf);
 
-                return new BytesTrie(newleafs);
-            }
+            if (this.leafs == newleafs)
+                return this;
 
-            if (newleafs == null)
-                newleafs = new BytesTrie[16];
-
-            var newtrie = new BytesTrie();
-
-            newleafs[offset] = newtrie.Put(key, position + 1, value);
-
-            return new BytesTrie(newleafs);
+            return new BytesTrie(this.value, newleafs);
         }
 
         private static bool ValuesAreEqual(byte[] value1, byte[] value2) {
@@ -113,6 +100,26 @@
                 return false;
 
             return value1.SequenceEqual(value2);
+        }
+
+        private static BytesTrie[] CloneLeafs(BytesTrie[] leafs)
+        {
+            if (leafs == null)
+                return new BytesTrie[16];
+
+            return (BytesTrie[])leafs.Clone();
+        }
+
+        private static BytesTrie[] PutLeaf(BytesTrie[] leafs, int offset, BytesTrie newleaf)
+        {
+            if (leafs != null && leafs[offset] == newleaf)
+                return leafs;
+
+            BytesTrie[] newleafs = CloneLeafs(leafs);
+
+            newleafs[offset] = newleaf;
+
+            return newleafs;
         }
     }
 }
