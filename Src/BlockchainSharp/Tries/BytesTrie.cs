@@ -76,12 +76,20 @@
                 newleafs = null;
 
             if (position == key.Length)
-                return new BytesTrie(value, newleafs);
+                if (ValuesAreEqual(this.value, value))
+                    return this;
+                else
+                    return new BytesTrie(value, newleafs);
 
             int offset = GetOffset(key[position]);
 
             if (this.leafs != null && this.leafs[offset] != null)
             {
+                BytesTrie newleaf = this.leafs[offset].Put(key, position + 1, value);
+
+                if (this.leafs[offset] == newleaf)
+                    return this;
+
                 newleafs[offset] = this.leafs[offset].Put(key, position + 1, value);
 
                 return new BytesTrie(newleafs);
@@ -95,6 +103,16 @@
             newleafs[offset] = newtrie.Put(key, position + 1, value);
 
             return new BytesTrie(newleafs);
+        }
+
+        private static bool ValuesAreEqual(byte[] value1, byte[] value2) {
+            if (value1 == value2)
+                return true;
+
+            if (value1 == null || value2 == null)
+                return false;
+
+            return value1.SequenceEqual(value2);
         }
     }
 }

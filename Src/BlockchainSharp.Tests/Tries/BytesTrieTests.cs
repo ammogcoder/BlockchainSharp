@@ -30,6 +30,18 @@
         }
 
         [TestMethod]
+        public void PutKeyValueTwice()
+        {
+            BytesTrie trie = new BytesTrie();
+
+            var trie2 = trie.Put("012", new byte[] { 1, 2, 3 });
+            var trie3 = trie2.Put("012", new byte[] { 1, 2, 3 });
+
+            Assert.IsNotNull(trie3);
+            Assert.AreEqual(trie2, trie3);
+        }
+
+        [TestMethod]
         public void PutAndGetKeyValues()
         {
             BytesTrie trie = new BytesTrie();
