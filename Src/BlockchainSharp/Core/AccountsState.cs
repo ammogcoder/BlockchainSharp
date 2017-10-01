@@ -7,25 +7,28 @@
     using System.Text;
     using BlockchainSharp.Core;
     using BlockchainSharp.Tries;
+    using BlockchainSharp.Encoding;
 
     public class AccountsState
     {
+        private static AccountStateEncoder encoder = new AccountStateEncoder();
         private static AccountState defaultValue = new AccountState(BigInteger.Zero);
-        private Trie<AccountState> states;
+
+        private BytesTrie states;
 
         public AccountsState()
-            : this(new Trie<AccountState>())
+            : this(new BytesTrie())
         {
         }
 
-        private AccountsState(Trie<AccountState> states)
+        private AccountsState(BytesTrie states)
         {
             this.states = states;
         }
 
         public AccountsState Put(Address address, AccountState state)
         {
-            return new AccountsState(this.states.Put(address.ToString(), state));
+            return new AccountsState(this.states.Put(address.ToString(), encoder.Encode(state)));
         }
 
         public AccountState Get(Address address)
@@ -35,7 +38,7 @@
             if (result == null)
                 return defaultValue;
 
-            return result;
+            return encoder.Decode(result);
         }
     }
 }
