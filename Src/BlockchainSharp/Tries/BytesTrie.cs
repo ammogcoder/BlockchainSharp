@@ -34,7 +34,7 @@
 
         public BytesTrie Put(string key, byte[] value)
         {
-            BytesTrie newtrie = this.Put(key, 0, value);
+            BytesTrie newtrie = this.Put(ToBytes(key), 0, value);
 
             if (newtrie == null)
                 return empty;
@@ -44,7 +44,7 @@
 
         public byte[] Get(string key)
         {
-            return this.Get(key, 0);
+            return this.Get(ToBytes(key), 0);
         }
 
         public BytesTrie Remove(string key)
@@ -52,20 +52,12 @@
             return this.Put(key, null);
         }
 
-        private static int GetOffset(char ch)
-        {
-            if (ch >= '0' && ch <= '9')
-                return ch - '0';
-
-            return ch - 'a' + 10;
-        }
-
-        private byte[] Get(string key, int position)
+        private byte[] Get(byte[] key, int position)
         {
             if (position == key.Length)
                 return this.value;
 
-            var offset = GetOffset(key[position]);
+            var offset = key[position];
 
             if (this.leafs == null)
                 return null;
@@ -78,12 +70,12 @@
             return trie.Get(key, position + 1);
         }
 
-        private BytesTrie Put(string key, int position, byte[] value)
+        private BytesTrie Put(byte[] key, int position, byte[] value)
         {
             if (position == key.Length)
                 return this.ChangeValue(value);
 
-            int offset = GetOffset(key[position]);
+            int offset = key[position];
             BytesTrie leaf;
 
             if (this.leafs != null && this.leafs[offset] != null)
@@ -158,6 +150,24 @@
             newleafs[offset] = newleaf;
 
             return newleafs;
+        }
+
+        private static byte[] ToBytes(string key)
+        {
+            byte[] bytes = new byte[key.Length];
+
+            for (int k = 0; k < bytes.Length; k++)
+                bytes[k] = ToByte(key[k]);
+
+            return bytes;
+        }
+
+        private static byte ToByte(char ch)
+        {
+            if (ch >= '0' && ch <= '9')
+                return (byte)(ch - '0');
+
+            return (byte)(ch - 'a' + 10);
         }
     }
 }
