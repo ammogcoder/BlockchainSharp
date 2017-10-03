@@ -73,7 +73,6 @@
     <Compile Include="Core\AccountsState.cs" />
     <Compile Include="Stores\IBlockStore.cs" />
     <Compile Include="Stores\InMemoryBlockStore.cs" />
-    <Compile Include="Tries\Trie.cs" />
     <Compile Include="Vm\BytecodeCompiler.cs" />
     <Compile Include="Vm\Bytecodes.cs" />
     <Compile Include="Vm\DataWord.cs" />
