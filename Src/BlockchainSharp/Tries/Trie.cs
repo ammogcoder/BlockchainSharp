@@ -76,14 +76,8 @@
                 return this.ChangeValue(value);
 
             int offset = key[position];
-            Trie leaf;
-
-            if (this.leafs != null && this.leafs[offset] != null)
-                leaf = this.leafs[offset];
-            else
-                leaf = new Trie();
-
-            Trie newleaf = leaf.Put(key, position + 1, value);
+ 
+            Trie newleaf = PutAtNewLeaf(key, position, value, offset);
 
             Trie[] newleafs = this.ChangeLeaf(offset, newleaf);
 
@@ -94,6 +88,18 @@
                 return this;
 
             return new Trie(this.value, newleafs);
+        }
+
+        private Trie PutAtNewLeaf(byte[] key, int position, byte[] value, int offset)
+        {
+            Trie leaf;
+
+            if (this.leafs != null && this.leafs[offset] != null)
+                leaf = this.leafs[offset];
+            else
+                leaf = new Trie();
+
+            return leaf.Put(key, position + 1, value);
         }
 
         private Trie ChangeValue(byte[] newvalue)
