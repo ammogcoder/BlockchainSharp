@@ -6,12 +6,12 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class BytesTrieTests
+    public class TrieTests
     {
         [TestMethod]
         public void GetUnknowKey()
         {
-            BytesTrie trie = new BytesTrie();
+            Trie trie = new Trie();
 
             Assert.IsNull(trie.Get("012"));
         }
@@ -19,7 +19,7 @@
         [TestMethod]
         public void NewTrieIsEmpty()
         {
-            BytesTrie trie = new BytesTrie();
+            Trie trie = new Trie();
 
             Assert.IsTrue(trie.IsEmpty());
         }
@@ -27,7 +27,7 @@
         [TestMethod]
         public void PutAndGetKeyValue()
         {
-            BytesTrie trie = new BytesTrie();
+            Trie trie = new Trie();
 
             var trie2 = trie.Put("012", new byte[] { 1, 2, 3 });
 
@@ -41,7 +41,7 @@
         [TestMethod]
         public void PutKeyValueTwice()
         {
-            BytesTrie trie = new BytesTrie();
+            Trie trie = new Trie();
 
             var trie2 = trie.Put("012", new byte[] { 1, 2, 3 });
             var trie3 = trie2.Put("012", new byte[] { 1, 2, 3 });
@@ -53,7 +53,7 @@
         [TestMethod]
         public void PutAndGetKeyValues()
         {
-            BytesTrie trie = new BytesTrie();
+            Trie trie = new Trie();
 
             var trie2 = trie.Put("012", new byte[] { 1, 2, 3 });
             var trie3 = trie2.Put("abc", new byte[] { 4, 5, 6 });
@@ -74,7 +74,7 @@
         [TestMethod]
         public void ReplaceValue()
         {
-            BytesTrie trie = new BytesTrie();
+            Trie trie = new Trie();
 
             var trie2 = trie.Put("012", new byte[] { 1, 2, 3 });
             var trie3 = trie2.Put("012", new byte[] { 4, 5, 6 });
@@ -93,7 +93,7 @@
         [TestMethod]
         public void RemoveValue()
         {
-            BytesTrie trie = new BytesTrie();
+            Trie trie = new Trie();
 
             var trie2 = trie.Put("012", new byte[] { 1, 2, 3 });
             var trie3 = trie2.Remove("012");

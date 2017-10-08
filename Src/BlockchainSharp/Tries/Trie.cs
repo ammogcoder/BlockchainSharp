@@ -5,23 +5,23 @@
     using System.Linq;
     using System.Text;
 
-    public class BytesTrie
+    public class Trie
     {
-        private static BytesTrie empty = new BytesTrie();
+        private static Trie empty = new Trie();
 
-        private BytesTrie[] leafs;
+        private Trie[] leafs;
         private byte[] value;
 
-        public BytesTrie() 
+        public Trie() 
         {
         }
 
-        private BytesTrie(BytesTrie[] leafs)
+        private Trie(Trie[] leafs)
         {
             this.leafs = leafs;
         }
 
-        private BytesTrie(byte[] value, BytesTrie[] leafs)
+        private Trie(byte[] value, Trie[] leafs)
         {
             this.value = value;
             this.leafs = leafs;
@@ -32,9 +32,9 @@
             return this.value == null && this.leafs == null;
         }
 
-        public BytesTrie Put(string key, byte[] value)
+        public Trie Put(string key, byte[] value)
         {
-            BytesTrie newtrie = this.Put(ToBytes(key), 0, value);
+            Trie newtrie = this.Put(ToBytes(key), 0, value);
 
             if (newtrie == null)
                 return empty;
@@ -47,7 +47,7 @@
             return this.Get(ToBytes(key), 0);
         }
 
-        public BytesTrie Remove(string key)
+        public Trie Remove(string key)
         {
             return this.Put(key, null);
         }
@@ -70,22 +70,22 @@
             return trie.Get(key, position + 1);
         }
 
-        private BytesTrie Put(byte[] key, int position, byte[] value)
+        private Trie Put(byte[] key, int position, byte[] value)
         {
             if (position == key.Length)
                 return this.ChangeValue(value);
 
             int offset = key[position];
-            BytesTrie leaf;
+            Trie leaf;
 
             if (this.leafs != null && this.leafs[offset] != null)
                 leaf = this.leafs[offset];
             else
-                leaf = new BytesTrie();
+                leaf = new Trie();
 
-            BytesTrie newleaf = leaf.Put(key, position + 1, value);
+            Trie newleaf = leaf.Put(key, position + 1, value);
 
-            BytesTrie[] newleafs = this.ChangeLeaf(offset, newleaf);
+            Trie[] newleafs = this.ChangeLeaf(offset, newleaf);
 
             if (EmptyLeafs(newleafs) && this.value == null)
                 return null;
@@ -93,10 +93,10 @@
             if (this.leafs == newleafs)
                 return this;
 
-            return new BytesTrie(this.value, newleafs);
+            return new Trie(this.value, newleafs);
         }
 
-        private BytesTrie ChangeValue(byte[] newvalue)
+        private Trie ChangeValue(byte[] newvalue)
         {
             if (this.SameValue(newvalue))
                 return this;
@@ -104,7 +104,7 @@
             if (newvalue == null && EmptyLeafs(this.leafs))
                 return null;
 
-            return new BytesTrie(newvalue, this.leafs);
+            return new Trie(newvalue, this.leafs);
         }
 
         private bool SameValue(byte[] newvalue) {
@@ -117,15 +117,15 @@
             return this.value.SequenceEqual(newvalue);
         }
 
-        private BytesTrie[] CloneLeafs()
+        private Trie[] CloneLeafs()
         {
             if (this.leafs == null)
-                return new BytesTrie[16];
+                return new Trie[16];
 
-            return (BytesTrie[])this.leafs.Clone();
+            return (Trie[])this.leafs.Clone();
         }
 
-        private static bool EmptyLeafs(BytesTrie[] leafs)
+        private static bool EmptyLeafs(Trie[] leafs)
         {
             if (leafs == null)
                 return true;
@@ -137,7 +137,7 @@
             return true;
         }
 
-        private BytesTrie[] ChangeLeaf(int offset, BytesTrie newleaf)
+        private Trie[] ChangeLeaf(int offset, Trie newleaf)
         {
             if (this.leafs != null && this.leafs[offset] == newleaf)
                 return leafs;
@@ -145,7 +145,7 @@
             if (EmptyLeafs(this.leafs) && newleaf == null)
                 return null;
 
-            BytesTrie[] newleafs = this.CloneLeafs();
+            Trie[] newleafs = this.CloneLeafs();
 
             newleafs[offset] = newleaf;
 

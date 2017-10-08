@@ -14,14 +14,14 @@
         private static AccountStateEncoder encoder = new AccountStateEncoder();
         private static AccountState defaultValue = new AccountState(BigInteger.Zero);
 
-        private BytesTrie states;
+        private Trie states;
 
         public AccountsState()
-            : this(new BytesTrie())
+            : this(new Trie())
         {
         }
 
-        private AccountsState(BytesTrie states)
+        private AccountsState(Trie states)
         {
             this.states = states;
         }

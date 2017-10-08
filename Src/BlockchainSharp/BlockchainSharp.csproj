@@ -63,7 +63,7 @@
     <Compile Include="Encoding\BlockHeaderEncoder.cs" />
     <Compile Include="Encoding\HashEncoder.cs" />
     <Compile Include="Encoding\TransactionEncoder.cs" />
-    <Compile Include="Tries\BytesTrie.cs" />
+    <Compile Include="Tries\Trie.cs" />
     <Compile Include="Vm\Memory.cs" />
     <Compile Include="Vm\Storage.cs" />
     <Compile Include="Core\Transaction.cs" />

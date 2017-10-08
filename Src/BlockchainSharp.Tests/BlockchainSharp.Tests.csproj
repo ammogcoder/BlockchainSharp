@@ -68,7 +68,7 @@
     <Compile Include="Encoding\BlockHeaderEncoderTests.cs" />
     <Compile Include="Encoding\HashEncoderTests.cs" />
     <Compile Include="Encoding\TransactionEncoderTests.cs" />
-    <Compile Include="Tries\BytesTrieTests.cs" />
+    <Compile Include="Tries\TrieTests.cs" />
     <Compile Include="Vm\StorageTests.cs" />
     <Compile Include="Dsl\BlockProcessorDsl.cs" />
     <Compile Include="Encoding\RlpTests.cs" />
