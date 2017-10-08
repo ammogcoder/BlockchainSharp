@@ -42,7 +42,7 @@
 
         private void TryConnect(Block block) 
         {
-            if (this.BlockChain.BestBlockNumber < block.Number)
+            if (this.chain.BestBlockNumber < block.Number)
                 this.chain = this.ToBlockChain(block);
 
             foreach (var child in this.store.GetByParentHash(block.Hash))
