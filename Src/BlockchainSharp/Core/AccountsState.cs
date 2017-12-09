@@ -12,7 +12,7 @@
     public class AccountsState
     {
         private static AccountStateEncoder encoder = new AccountStateEncoder();
-        private static AccountState defaultValue = new AccountState(BigInteger.Zero);
+        private static AccountState defaultValue = new AccountState(BigInteger.Zero, 0);
 
         private Trie states;
 

@@ -22,7 +22,7 @@
             var store = new AccountsState();
             AccountsState newstore = null;
 
-            store = store.Put(addr1, new AccountState(new BigInteger(200)));
+            store = store.Put(addr1, new AccountState(new BigInteger(200), 0));
 
             var processor = new TransactionProcessor();
 
@@ -80,7 +80,7 @@
             Block block = new Block(0, null, new Transaction[] { tx });
             var state = new AccountsState();
 
-            state = state.Put(tx.Sender, new AccountState(new BigInteger(200)));
+            state = state.Put(tx.Sender, new AccountState(new BigInteger(200), 0));
 
             var processor = new TransactionProcessor();
 

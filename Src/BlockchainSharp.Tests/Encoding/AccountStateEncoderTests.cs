@@ -14,7 +14,7 @@
         {
             AccountStateEncoder encoder = new AccountStateEncoder();
 
-            byte[] bytes = encoder.Encode(new AccountState(BigInteger.One));
+            byte[] bytes = encoder.Encode(new AccountState(BigInteger.One, 0));
 
             Assert.IsNotNull(bytes);
             Assert.AreNotEqual(0, bytes.Length);

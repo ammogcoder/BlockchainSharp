@@ -9,25 +9,32 @@
     public class AccountState
     {
         private BigInteger balance;
+        private long nonce;
 
-        public AccountState(BigInteger balance)
+        public AccountState(BigInteger balance, long nonce)
         {
             if (BigInteger.Compare(BigInteger.Zero, balance) > 0)
                 throw new InvalidOperationException("Invalid balance");
 
+            if (nonce < 0)
+                throw new InvalidOperationException("Invalid nonce");
+
             this.balance = balance;
+            this.nonce = nonce;
         }
 
         public BigInteger Balance { get { return this.balance; } }
 
+        public long Nonce { get { return this.nonce; } }
+
         public AccountState AddToBalance(BigInteger amount)
         {
-            return new AccountState(BigInteger.Add(this.balance, amount));
+            return new AccountState(BigInteger.Add(this.balance, amount), this.nonce);
         }
 
         public AccountState SubtractFromBalance(BigInteger amount)
         {
-            return new AccountState(BigInteger.Subtract(this.balance, amount));
+            return new AccountState(BigInteger.Subtract(this.balance, amount), this.nonce);
         }
     }
 }

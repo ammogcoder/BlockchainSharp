@@ -19,7 +19,7 @@
         {
             IList<byte[]> list = Rlp.DecodeList(bytes);
 
-            return new AccountState(bigIntegerEncoder.Decode(list[0]));
+            return new AccountState(bigIntegerEncoder.Decode(list[0]), 0);
         }
     }
 }
