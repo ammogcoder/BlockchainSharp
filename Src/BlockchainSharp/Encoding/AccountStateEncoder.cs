@@ -8,18 +8,16 @@
 
     public class AccountStateEncoder
     {
-        private static BigIntegerEncoder bigIntegerEncoder = new BigIntegerEncoder();
-
         public byte[] Encode(AccountState state)
         {
-            return Rlp.EncodeList(bigIntegerEncoder.Encode(state.Balance));
+            return Rlp.EncodeList(BigIntegerEncoder.Instance.Encode(state.Balance));
         }
 
         public AccountState Decode(byte[] bytes)
         {
             IList<byte[]> list = Rlp.DecodeList(bytes);
 
-            return new AccountState(bigIntegerEncoder.Decode(list[0]), 0);
+            return new AccountState(BigIntegerEncoder.Instance.Decode(list[0]), 0);
         }
     }
 }

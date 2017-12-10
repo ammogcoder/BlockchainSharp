@@ -8,6 +8,10 @@
 
     public class BigIntegerEncoder
     {
+        private static BigIntegerEncoder instance = new BigIntegerEncoder();
+
+        public static BigIntegerEncoder Instance { get { return instance; } }
+
         public byte[] Encode(BigInteger value)
         {
             return Rlp.Encode(value.ToByteArray());

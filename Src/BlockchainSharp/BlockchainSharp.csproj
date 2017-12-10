@@ -61,6 +61,7 @@
     <Compile Include="Encoding\BigIntegerEncoder.cs" />
     <Compile Include="Encoding\BlockEncoder.cs" />
     <Compile Include="Encoding\BlockHeaderEncoder.cs" />
+    <Compile Include="Encoding\UnsignedLongEncoder.cs" />
     <Compile Include="Encoding\HashEncoder.cs" />
     <Compile Include="Encoding\TransactionEncoder.cs" />
     <Compile Include="Tries\Trie.cs" />

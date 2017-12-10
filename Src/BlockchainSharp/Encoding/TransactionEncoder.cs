@@ -10,13 +10,12 @@
     public class TransactionEncoder
     {
         private AddressEncoder addressEncoder = new AddressEncoder();
-        private BigIntegerEncoder bigIntegerEncoder = new BigIntegerEncoder();
 
         public byte[] Encode(Transaction tx)
         {
-            byte[] sender = addressEncoder.Encode(tx.Sender);
-            byte[] receiver = addressEncoder.Encode(tx.Receiver);
-            byte[] value = bigIntegerEncoder.Encode(tx.Value);
+            byte[] sender = AddressEncoder.Instance.Encode(tx.Sender);
+            byte[] receiver = AddressEncoder.Instance.Encode(tx.Receiver);
+            byte[] value = BigIntegerEncoder.Instance.Encode(tx.Value);
                 
             return Rlp.EncodeList(sender, receiver, value);
         }
@@ -25,9 +24,9 @@
         {
             IList<byte[]> items = Rlp.DecodeList(bytes);
 
-            Address sender = addressEncoder.Decode(items[0]);
-            Address receiver = addressEncoder.Decode(items[1]);
-            BigInteger value = bigIntegerEncoder.Decode(items[2]);
+            Address sender = AddressEncoder.Instance.Decode(items[0]);
+            Address receiver = AddressEncoder.Instance.Decode(items[1]);
+            BigInteger value = BigIntegerEncoder.Instance.Decode(items[2]);
 
             return new Transaction(sender, receiver, value);
         }

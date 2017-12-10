@@ -8,6 +8,10 @@
 
     public class AddressEncoder
     {
+        private static AddressEncoder instance = new AddressEncoder();
+
+        public static AddressEncoder Instance { get { return instance; } }
+
         public byte[] Encode(Address address)
         {
             return Rlp.Encode(address.Bytes);
