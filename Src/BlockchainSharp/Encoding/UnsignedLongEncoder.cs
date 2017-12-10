@@ -8,14 +8,18 @@
 
     public class UnsignedLongEncoder
     {
+        private static UnsignedLongEncoder instance = new UnsignedLongEncoder();
+
+        public static UnsignedLongEncoder Instance { get { return instance; } }
+
         public byte[] Encode(ulong value)
         {
-            return null;
+            return new BigInteger(value).ToByteArray();
         }
 
         public ulong Decode(byte[] bytes)
         {
-            return 0;
+            return (ulong)(new BigInteger(bytes));
         }
     }
 }

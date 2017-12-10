@@ -66,6 +66,7 @@
     <Compile Include="Encoding\AccountStateEncoderTests.cs" />
     <Compile Include="Encoding\BlockEncoderTests.cs" />
     <Compile Include="Encoding\BlockHeaderEncoderTests.cs" />
+    <Compile Include="Encoding\UnsignedLongEncoderTests.cs" />
     <Compile Include="Encoding\HashEncoderTests.cs" />
     <Compile Include="Encoding\TransactionEncoderTests.cs" />
     <Compile Include="Tries\TrieTests.cs" />
