@@ -24,5 +24,22 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(BigInteger.One, result.Balance);
         }
+
+        [TestMethod]
+        public void EncodeDecodeAccountStateWithNonce()
+        {
+            AccountStateEncoder encoder = new AccountStateEncoder();
+
+            byte[] bytes = encoder.Encode(new AccountState(BigInteger.Zero, 42));
+
+            Assert.IsNotNull(bytes);
+            Assert.AreNotEqual(0, bytes.Length);
+
+            AccountState result = encoder.Decode(bytes);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(BigInteger.Zero, result.Balance);
+            Assert.AreEqual(42ul, result.Nonce);
+        }
     }
 }

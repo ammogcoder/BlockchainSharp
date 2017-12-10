@@ -10,14 +10,14 @@
     {
         public byte[] Encode(AccountState state)
         {
-            return Rlp.EncodeList(BigIntegerEncoder.Instance.Encode(state.Balance));
+            return Rlp.EncodeList(BigIntegerEncoder.Instance.Encode(state.Balance), UnsignedLongEncoder.Instance.Encode(state.Nonce));
         }
 
         public AccountState Decode(byte[] bytes)
         {
             IList<byte[]> list = Rlp.DecodeList(bytes);
 
-            return new AccountState(BigIntegerEncoder.Instance.Decode(list[0]), 0);
+            return new AccountState(BigIntegerEncoder.Instance.Decode(list[0]), UnsignedLongEncoder.Instance.Decode(list[1]));
         }
     }
 }
