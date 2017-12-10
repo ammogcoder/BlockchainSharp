@@ -14,7 +14,7 @@
             var state = new AccountState(BigInteger.One, 0);
 
             Assert.AreEqual(BigInteger.One, state.Balance);
-            Assert.AreEqual(0, state.Nonce);
+            Assert.AreEqual(0ul, state.Nonce);
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@
             var state = new AccountState(BigInteger.Zero, 42);
 
             Assert.AreEqual(BigInteger.Zero, state.Balance);
-            Assert.AreEqual(42, state.Nonce);
+            Assert.AreEqual(42ul, state.Nonce);
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@
             Assert.IsNotNull(result);
             Assert.AreNotSame(state, result);
             Assert.AreEqual(BigInteger.Zero, result.Balance);
-            Assert.AreEqual(0, result.Nonce);
+            Assert.AreEqual(0ul, result.Nonce);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@
             Assert.IsNotNull(result);
             Assert.AreNotSame(state, result);
             Assert.AreEqual(BigInteger.Zero, result.Balance);
-            Assert.AreEqual(42, result.Nonce);
+            Assert.AreEqual(42ul, result.Nonce);
         }
 
         [TestMethod]
@@ -66,21 +66,6 @@
             {
                 Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
                 Assert.AreEqual("Invalid balance", ex.Message);
-            }
-        }
-
-        [TestMethod]
-        public void NegativeNonce()
-        {
-            try
-            {
-                new AccountState(BigInteger.Zero, -42);
-                Assert.Fail();
-            }
-            catch (Exception ex)
-            {
-                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
-                Assert.AreEqual("Invalid nonce", ex.Message);
             }
         }
     }

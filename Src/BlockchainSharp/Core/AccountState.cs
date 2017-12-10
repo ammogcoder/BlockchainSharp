@@ -9,15 +9,12 @@
     public class AccountState
     {
         private BigInteger balance;
-        private long nonce;
+        private ulong nonce;
 
-        public AccountState(BigInteger balance, long nonce)
+        public AccountState(BigInteger balance, ulong nonce)
         {
             if (BigInteger.Compare(BigInteger.Zero, balance) > 0)
                 throw new InvalidOperationException("Invalid balance");
-
-            if (nonce < 0)
-                throw new InvalidOperationException("Invalid nonce");
 
             this.balance = balance;
             this.nonce = nonce;
@@ -25,7 +22,7 @@
 
         public BigInteger Balance { get { return this.balance; } }
 
-        public long Nonce { get { return this.nonce; } }
+        public ulong Nonce { get { return this.nonce; } }
 
         public AccountState AddToBalance(BigInteger amount)
         {
