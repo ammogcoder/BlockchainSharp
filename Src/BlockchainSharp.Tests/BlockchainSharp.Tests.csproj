@@ -52,7 +52,7 @@
     <Compile Include="Compilers\SimpleCompilerTests.cs" />
     <Compile Include="Core\BlockChainTests.cs" />
     <Compile Include="Core\BlockInfoTests.cs" />
-    <Compile Include="Core\BlockProcessorTests.cs" />
+    <Compile Include="Processors\BlockProcessorTests.cs" />
     <Compile Include="Core\BlockTests.cs" />
     <Compile Include="Core\Types\AddressTests.cs" />
     <Compile Include="Core\BlockHeaderTests.cs" />

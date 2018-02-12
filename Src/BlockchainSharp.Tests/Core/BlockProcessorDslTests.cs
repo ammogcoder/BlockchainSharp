@@ -2,6 +2,7 @@
 {
     using System;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Processors;
     using BlockchainSharp.Tests.Dsl;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

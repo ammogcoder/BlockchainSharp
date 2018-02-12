@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Processors;
 
     public class BlockProcessorDsl
     {

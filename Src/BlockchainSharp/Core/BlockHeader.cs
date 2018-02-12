@@ -9,7 +9,6 @@
     public class BlockHeader
     {
         private long number;
-        private Hash hash;
         private Hash parentHash;
 
         public BlockHeader(long number, Hash parentHash)
