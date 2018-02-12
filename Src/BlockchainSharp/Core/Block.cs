@@ -15,7 +15,6 @@
         private static Transaction[] emptyTxs = new Transaction[0];
 
         BlockHeader header;
-        private Hash hash;
         private IList<Transaction> transactions;
 
         public Block(long number, Hash parentHash)
@@ -29,8 +28,6 @@
                 throw new InvalidOperationException("Genesis block should have no parent");
 
             this.header = new BlockHeader(number, parentHash);
-            this.hash = new Hash();
-
             this.transactions = new List<Transaction>(transactions);
         }
 
@@ -38,7 +35,7 @@
 
         public long Number { get { return this.header.Number; } }
 
-        public Hash Hash { get { return this.hash; } }
+        public Hash Hash { get { return this.header.Hash; } }
 
         public Hash ParentHash { get { return this.header.ParentHash; } }
 
@@ -53,17 +50,6 @@
                 return false;
 
             return parent.Number == this.header.Number - 1 && parent.Hash.Equals(this.header.ParentHash);
-        }
-
-        private Hash CalculateHash()
-        {
-            Sha3Digest digest = new Sha3Digest(256);
-            byte[] bytes = BlockEncoder.Instance.Encode(this);
-            digest.BlockUpdate(bytes, 0, bytes.Length);
-            byte[] result = new byte[32];
-            digest.DoFinal(result, 0);
-
-            return new Hash(result);
         }
     }
 }
