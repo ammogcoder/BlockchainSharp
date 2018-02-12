@@ -1,22 +1,22 @@
-﻿namespace BlockchainSharp.Core
+﻿namespace BlockchainSharp.Core.Types
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    public class Address
+    public class Hash
     {
         private static Random random = new Random();
         private byte[] bytes;
 
-        public Address()
+        public Hash()
         {
             this.bytes = new byte[20];
             random.NextBytes(this.bytes);
         }
 
-        public Address(byte[] bytes)
+        public Hash(byte[] bytes)
         {
             this.bytes = bytes;
         }
@@ -31,10 +31,10 @@
             if (this == obj)
                 return true;
 
-            if (!(obj is Address))
+            if (!(obj is Hash))
                 return false;
 
-            Address h = (Address)obj;
+            Hash h = (Hash)obj;
 
             return this.bytes.SequenceEqual(h.bytes);
         }
@@ -50,19 +50,6 @@
             }
 
             return value;
-        }
-
-        public override string ToString() 
-        {
-            return ByteArrayToString(this.bytes);
-        }
-
-        private static string ByteArrayToString(byte[] bytes)
-        {
-            StringBuilder hex = new StringBuilder(bytes.Length * 2);
-            foreach (byte b in bytes)
-                hex.AppendFormat("{0:x2}", b);
-            return hex.ToString();
         }
     }
 }

@@ -3,6 +3,7 @@
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Core.Types;
     using BlockchainSharp.Encoding;
 
     [TestClass]

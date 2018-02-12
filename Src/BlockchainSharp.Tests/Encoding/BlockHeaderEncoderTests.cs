@@ -1,10 +1,11 @@
 ﻿namespace BlockchainSharp.Tests.Encoding
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using BlockchainSharp.Encoding;
-    using BlockchainSharp.Core;
     using System.Numerics;
+    using BlockchainSharp.Core;
+    using BlockchainSharp.Core.Types;
+    using BlockchainSharp.Encoding;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class BlockHeaderEncoderTests

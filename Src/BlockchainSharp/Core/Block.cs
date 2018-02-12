@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Text;
 
+    using BlockchainSharp.Core.Types;
     using BlockchainSharp.Encoding;
     using Org.BouncyCastle.Crypto.Digests;
 

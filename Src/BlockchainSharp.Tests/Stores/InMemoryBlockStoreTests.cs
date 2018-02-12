@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Core.Types;
     using BlockchainSharp.Stores;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

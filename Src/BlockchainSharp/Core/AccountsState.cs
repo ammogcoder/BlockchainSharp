@@ -6,6 +6,7 @@
     using System.Numerics;
     using System.Text;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Core.Types;
     using BlockchainSharp.Tries;
     using BlockchainSharp.Encoding;
 

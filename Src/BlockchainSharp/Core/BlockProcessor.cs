@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using BlockchainSharp.Core.Types;
     using BlockchainSharp.Stores;
 
     public class BlockProcessor

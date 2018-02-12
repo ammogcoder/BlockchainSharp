@@ -1,8 +1,9 @@
-﻿namespace BlockchainSharp.Tests.Core
+﻿namespace BlockchainSharp.Tests.Core.Types
 {
     using System;
     using System.Linq;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Core.Types;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

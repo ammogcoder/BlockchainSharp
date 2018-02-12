@@ -54,9 +54,9 @@
     <Compile Include="Core\BlockInfoTests.cs" />
     <Compile Include="Core\BlockProcessorTests.cs" />
     <Compile Include="Core\BlockTests.cs" />
-    <Compile Include="Core\AddressTests.cs" />
+    <Compile Include="Core\Types\AddressTests.cs" />
     <Compile Include="Core\BlockHeaderTests.cs" />
-    <Compile Include="Core\HashTests.cs" />
+    <Compile Include="Core\Types\HashTests.cs" />
     <Compile Include="Core\BlockProcessorDslTests.cs" />
     <Compile Include="Core\TransactionTests.cs" />
     <Compile Include="Core\AccountStateTests.cs" />

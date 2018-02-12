@@ -3,15 +3,15 @@
   <Class Name="BlockchainSharp.Core.Transaction">
     <Position X="0.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAEAAAABAAAAAAEAAABBABAAQAIAAA=</HashCode>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAEACABBAAgAQAIAAA=</HashCode>
       <FileName>Core\Transaction.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BlockchainSharp.Core.Address">
+  <Class Name="BlockchainSharp.Core.Types.Address">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAABAAAIgAAAQIAAAAAAA=</HashCode>
-      <FileName>Core\Address.cs</FileName>
+      <FileName>Core\Types\Address.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Tahoma" Size="8.25" />

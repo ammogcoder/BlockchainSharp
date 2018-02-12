@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Core.Types;
 
     public interface IBlockStore
     {

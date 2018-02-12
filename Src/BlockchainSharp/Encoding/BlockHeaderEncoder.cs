@@ -1,11 +1,12 @@
 ﻿namespace BlockchainSharp.Encoding
 {
-    using BlockchainSharp.Core;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Numerics;
     using System.Text;
+    using BlockchainSharp.Core;
+    using BlockchainSharp.Core.Types;
 
     public class BlockHeaderEncoder
     {

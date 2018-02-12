@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Numerics;
     using BlockchainSharp.Core;
+    using BlockchainSharp.Core.Types;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
